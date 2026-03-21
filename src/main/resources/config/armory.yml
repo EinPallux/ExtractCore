@@ -1,0 +1,1464 @@
+# ═══════════════════════════════════════════
+#      ExtractCore - Armory Configuration
+#
+# Tier color scheme:
+#   T1-T2  &7 Gray       Common
+#   T3-T4  &f White      Uncommon
+#   T5-T6  &e Yellow     Rare
+#   T7-T8  &6 Gold       Elite
+#   T9     &b Aqua       Legendary
+#   T10    &#B24BF3 Purple  Apex
+# ═══════════════════════════════════════════
+
+# PDC keys - do not change after deployment
+nbt-keys:
+  sword: "extractcore_sword"
+  pickaxe: "extractcore_pickaxe"
+  axe: "extractcore_axe"
+  helmet: "extractcore_helmet"
+  chestplate: "extractcore_chestplate"
+  leggings: "extractcore_leggings"
+  boots: "extractcore_boots"
+
+# ── Sword Upgrades ───────────────────────────────────
+sword:
+  max-tier: 10
+  tiers:
+    1:
+      material: WOODEN_SWORD
+      display-name: "&#8B8B8B⚔ Wooden Blade &8[&7T1&8]"
+      lore:
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&8✦ &7Weapon  &8|  &7Common"
+        - "&8✦ &7Tier &f1 &7of &f10"
+        - ""
+        - "&8◈ &7Material:  &#8B8B8BWood"
+        - "&8◈ &7Enchantments: &8None"
+        - ""
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&8&o(Starter gear — free)"
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      enchants: {}
+      unbreakable: true
+    2:
+      material: WOODEN_SWORD
+      display-name: "&#8B8B8B⚔ Wooden Blade &8[&7T2&8]"
+      lore:
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&8✦ &7Weapon  &8|  &7Common"
+        - "&8✦ &7Tier &f2 &7of &f10"
+        - ""
+        - "&8◈ &7Material:  &#8B8B8BWood"
+        - ""
+        - "&8◈ &7Enchantments:"
+        - "&8◈ &7Sharpness I"
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      enchants:
+        SHARPNESS: 1
+      unbreakable: true
+      cost:
+        scrap: 400
+    3:
+      material: STONE_SWORD
+      display-name: "&#AAAAAA⚔ Stone Blade &8[&fT3&8]"
+      lore:
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&8✦ &7Weapon  &8|  &fUncommon"
+        - "&8✦ &7Tier &f3 &7of &f10"
+        - ""
+        - "&8◈ &7Material:  &#AAAAAAStone"
+        - "&8◈ &7Enchantments: &8None"
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      enchants: {}
+      unbreakable: true
+      cost:
+        scrap: 1000
+    4:
+      material: STONE_SWORD
+      display-name: "&#AAAAAA⚔ Stone Blade &8[&fT4&8]"
+      lore:
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&8✦ &7Weapon  &8|  &fUncommon"
+        - "&8✦ &7Tier &f4 &7of &f10"
+        - ""
+        - "&8◈ &7Material:  &#AAAAAAStone"
+        - ""
+        - "&8◈ &7Enchantments:"
+        - "&8◈ &7Sharpness II"
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      enchants:
+        SHARPNESS: 2
+      unbreakable: true
+      cost:
+        scrap: 2500
+        screws: 5
+    5:
+      material: IRON_SWORD
+      display-name: "&#C0C0C0⚔ Iron Blade &8[&eT5&8]"
+      lore:
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&8✦ &7Weapon  &8|  &eRare"
+        - "&8✦ &7Tier &f5 &7of &f10"
+        - ""
+        - "&8◈ &7Material:  &#C0C0C0Iron"
+        - "&8◈ &7Enchantments: &8None"
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      enchants: {}
+      unbreakable: true
+      cost:
+        scrap: 6000
+        screws: 15
+    6:
+      material: IRON_SWORD
+      display-name: "&#C0C0C0⚔ Iron Blade &8[&eT6&8]"
+      lore:
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&8✦ &7Weapon  &8|  &eRare"
+        - "&8✦ &7Tier &f6 &7of &f10"
+        - ""
+        - "&8◈ &7Material:  &#C0C0C0Iron"
+        - ""
+        - "&8◈ &7Enchantments:"
+        - "&8◈ &7Sharpness III"
+        - "&8◈ &7Fire Aspect I"
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      enchants:
+        SHARPNESS: 3
+        FIRE_ASPECT: 1
+      unbreakable: true
+      cost:
+        scrap: 15000
+        screws: 40
+        energy-cells: 5
+    7:
+      material: GOLDEN_SWORD
+      display-name: "&#FFD700⚔ Golden Blade &8[&6T7&8]"
+      lore:
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&8✦ &7Weapon  &8|  &6Elite"
+        - "&8✦ &7Tier &f7 &7of &f10"
+        - ""
+        - "&8◈ &7Material:  &#FFD700Golden"
+        - ""
+        - "&8◈ &7Enchantments:"
+        - "&8◈ &7Sharpness III"
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      enchants:
+        SHARPNESS: 3
+      unbreakable: true
+      cost:
+        scrap: 35000
+        screws: 80
+        energy-cells: 20
+    8:
+      material: GOLDEN_SWORD
+      display-name: "&#FFD700⚔ Gilded Blade &8[&6T8&8]"
+      lore:
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&8✦ &7Weapon  &8|  &6Elite"
+        - "&8✦ &7Tier &f8 &7of &f10"
+        - ""
+        - "&8◈ &7Material:  &#FFD700Golden"
+        - ""
+        - "&8◈ &7Enchantments:"
+        - "&8◈ &7Sharpness IV"
+        - "&8◈ &7Fire Aspect II"
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      enchants:
+        SHARPNESS: 4
+        FIRE_ASPECT: 2
+      unbreakable: true
+      cost:
+        scrap: 80000
+        screws: 150
+        energy-cells: 50
+        bio-samples: 10
+    9:
+      material: DIAMOND_SWORD
+      display-name: "&#00BFFF⚔ Diamond Blade &8[&bT9&8]"
+      lore:
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&8✦ &7Weapon  &8|  &bLegendary"
+        - "&8✦ &7Tier &f9 &7of &f10"
+        - ""
+        - "&8◈ &7Material:  &#00BFFFDiamond"
+        - ""
+        - "&8◈ &7Enchantments:"
+        - "&8◈ &7Sharpness IV"
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      enchants:
+        SHARPNESS: 4
+      unbreakable: true
+      cost:
+        scrap: 200000
+        screws: 300
+        energy-cells: 100
+        bio-samples: 40
+        tech-shards: 10
+    10:
+      material: NETHERITE_SWORD
+      display-name: "&#B24BF3⚔ Netherite Blade &8[&#B24BF3T10&8]"
+      lore:
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&8✦ &7Weapon  &8|  &#B24BF3Apex"
+        - "&8✦ &7Tier &f10 &7of &f10"
+        - ""
+        - "&8◈ &7Material:  &#B24BF3Netherite"
+        - ""
+        - "&8◈ &7Enchantments:"
+        - "&8◈ &7Sharpness V"
+        - "&8◈ &7Fire Aspect II"
+        - "&8◈ &7Looting III"
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      enchants:
+        SHARPNESS: 5
+        FIRE_ASPECT: 2
+        LOOTING: 3
+      unbreakable: true
+      cost:
+        scrap: 500000
+        screws: 600
+        energy-cells: 250
+        bio-samples: 100
+        tech-shards: 50
+
+# ── Pickaxe Upgrades ─────────────────────────────────
+pickaxe:
+  max-tier: 10
+  tiers:
+    1:
+      material: WOODEN_PICKAXE
+      display-name: "&#8B8B8B⛏ Wooden Pickaxe &8[&7T1&8]"
+      lore:
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&8✦ &7Tool  &8|  &7Common"
+        - "&8✦ &7Tier &f1 &7of &f10"
+        - ""
+        - "&8◈ &7Material:  &#8B8B8BWood"
+        - "&8◈ &7Enchantments: &8None"
+        - ""
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&8&o(Starter gear — free)"
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      enchants: {}
+      unbreakable: true
+    2:
+      material: WOODEN_PICKAXE
+      display-name: "&#8B8B8B⛏ Wooden Pickaxe &8[&7T2&8]"
+      lore:
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&8✦ &7Tool  &8|  &7Common"
+        - "&8✦ &7Tier &f2 &7of &f10"
+        - ""
+        - "&8◈ &7Material:  &#8B8B8BWood"
+        - ""
+        - "&8◈ &7Enchantments:"
+        - "&8◈ &7Efficiency I"
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      enchants:
+        EFFICIENCY: 1
+      unbreakable: true
+      cost:
+        scrap: 350
+    3:
+      material: STONE_PICKAXE
+      display-name: "&#AAAAAA⛏ Stone Pickaxe &8[&fT3&8]"
+      lore:
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&8✦ &7Tool  &8|  &fUncommon"
+        - "&8✦ &7Tier &f3 &7of &f10"
+        - ""
+        - "&8◈ &7Material:  &#AAAAAAStone"
+        - "&8◈ &7Enchantments: &8None"
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      enchants: {}
+      unbreakable: true
+      cost:
+        scrap: 900
+    4:
+      material: STONE_PICKAXE
+      display-name: "&#AAAAAA⛏ Stone Pickaxe &8[&fT4&8]"
+      lore:
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&8✦ &7Tool  &8|  &fUncommon"
+        - "&8✦ &7Tier &f4 &7of &f10"
+        - ""
+        - "&8◈ &7Material:  &#AAAAAAStone"
+        - ""
+        - "&8◈ &7Enchantments:"
+        - "&8◈ &7Efficiency II"
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      enchants:
+        EFFICIENCY: 2
+      unbreakable: true
+      cost:
+        scrap: 2200
+        screws: 4
+    5:
+      material: IRON_PICKAXE
+      display-name: "&#C0C0C0⛏ Iron Pickaxe &8[&eT5&8]"
+      lore:
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&8✦ &7Tool  &8|  &eRare"
+        - "&8✦ &7Tier &f5 &7of &f10"
+        - ""
+        - "&8◈ &7Material:  &#C0C0C0Iron"
+        - ""
+        - "&8◈ &7Enchantments:"
+        - "&8◈ &7Efficiency II"
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      enchants:
+        EFFICIENCY: 2
+      unbreakable: true
+      cost:
+        scrap: 5500
+        screws: 12
+    6:
+      material: IRON_PICKAXE
+      display-name: "&#C0C0C0⛏ Iron Pickaxe &8[&eT6&8]"
+      lore:
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&8✦ &7Tool  &8|  &eRare"
+        - "&8✦ &7Tier &f6 &7of &f10"
+        - ""
+        - "&8◈ &7Material:  &#C0C0C0Iron"
+        - ""
+        - "&8◈ &7Enchantments:"
+        - "&8◈ &7Efficiency III"
+        - "&8◈ &7Fortune I"
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      enchants:
+        EFFICIENCY: 3
+        FORTUNE: 1
+      unbreakable: true
+      cost:
+        scrap: 13000
+        screws: 35
+        energy-cells: 4
+    7:
+      material: GOLDEN_PICKAXE
+      display-name: "&#FFD700⛏ Golden Pickaxe &8[&6T7&8]"
+      lore:
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&8✦ &7Tool  &8|  &6Elite"
+        - "&8✦ &7Tier &f7 &7of &f10"
+        - ""
+        - "&8◈ &7Material:  &#FFD700Golden"
+        - ""
+        - "&8◈ &7Enchantments:"
+        - "&8◈ &7Efficiency IV"
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      enchants:
+        EFFICIENCY: 4
+      unbreakable: true
+      cost:
+        scrap: 30000
+        screws: 70
+        energy-cells: 18
+    8:
+      material: GOLDEN_PICKAXE
+      display-name: "&#FFD700⛏ Gilded Pickaxe &8[&6T8&8]"
+      lore:
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&8✦ &7Tool  &8|  &6Elite"
+        - "&8✦ &7Tier &f8 &7of &f10"
+        - ""
+        - "&8◈ &7Material:  &#FFD700Golden"
+        - ""
+        - "&8◈ &7Enchantments:"
+        - "&8◈ &7Efficiency IV"
+        - "&8◈ &7Fortune II"
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      enchants:
+        EFFICIENCY: 4
+        FORTUNE: 2
+      unbreakable: true
+      cost:
+        scrap: 70000
+        screws: 130
+        energy-cells: 45
+        bio-samples: 8
+    9:
+      material: DIAMOND_PICKAXE
+      display-name: "&#00BFFF⛏ Diamond Pickaxe &8[&bT9&8]"
+      lore:
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&8✦ &7Tool  &8|  &bLegendary"
+        - "&8✦ &7Tier &f9 &7of &f10"
+        - ""
+        - "&8◈ &7Material:  &#00BFFFDiamond"
+        - ""
+        - "&8◈ &7Enchantments:"
+        - "&8◈ &7Efficiency V"
+        - "&8◈ &7Fortune II"
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      enchants:
+        EFFICIENCY: 5
+        FORTUNE: 2
+      unbreakable: true
+      cost:
+        scrap: 180000
+        screws: 270
+        energy-cells: 90
+        bio-samples: 35
+        tech-shards: 8
+    10:
+      material: NETHERITE_PICKAXE
+      display-name: "&#B24BF3⛏ Netherite Pickaxe &8[&#B24BF3T10&8]"
+      lore:
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&8✦ &7Tool  &8|  &#B24BF3Apex"
+        - "&8✦ &7Tier &f10 &7of &f10"
+        - ""
+        - "&8◈ &7Material:  &#B24BF3Netherite"
+        - ""
+        - "&8◈ &7Enchantments:"
+        - "&8◈ &7Efficiency V"
+        - "&8◈ &7Fortune III"
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      enchants:
+        EFFICIENCY: 5
+        FORTUNE: 3
+      unbreakable: true
+      cost:
+        scrap: 450000
+        screws: 550
+        energy-cells: 220
+        bio-samples: 90
+        tech-shards: 45
+
+# ── Axe Upgrades ─────────────────────────────────────
+axe:
+  max-tier: 10
+  tiers:
+    1:
+      material: WOODEN_AXE
+      display-name: "&#8B8B8B🪓 Wooden Axe &8[&7T1&8]"
+      lore:
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&8✦ &7Tool  &8|  &7Common"
+        - "&8✦ &7Tier &f1 &7of &f10"
+        - ""
+        - "&8◈ &7Material:  &#8B8B8BWood"
+        - "&8◈ &7Enchantments: &8None"
+        - ""
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&8&o(Starter gear — free)"
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      enchants: {}
+      unbreakable: true
+    2:
+      material: WOODEN_AXE
+      display-name: "&#8B8B8B🪓 Wooden Axe &8[&7T2&8]"
+      lore:
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&8✦ &7Tool  &8|  &7Common"
+        - "&8✦ &7Tier &f2 &7of &f10"
+        - ""
+        - "&8◈ &7Material:  &#8B8B8BWood"
+        - ""
+        - "&8◈ &7Enchantments:"
+        - "&8◈ &7Sharpness I"
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      enchants:
+        SHARPNESS: 1
+      unbreakable: true
+      cost:
+        scrap: 380
+    3:
+      material: STONE_AXE
+      display-name: "&#AAAAAA🪓 Stone Axe &8[&fT3&8]"
+      lore:
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&8✦ &7Tool  &8|  &fUncommon"
+        - "&8✦ &7Tier &f3 &7of &f10"
+        - ""
+        - "&8◈ &7Material:  &#AAAAAAStone"
+        - "&8◈ &7Enchantments: &8None"
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      enchants: {}
+      unbreakable: true
+      cost:
+        scrap: 950
+    4:
+      material: STONE_AXE
+      display-name: "&#AAAAAA🪓 Stone Axe &8[&fT4&8]"
+      lore:
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&8✦ &7Tool  &8|  &fUncommon"
+        - "&8✦ &7Tier &f4 &7of &f10"
+        - ""
+        - "&8◈ &7Material:  &#AAAAAAStone"
+        - ""
+        - "&8◈ &7Enchantments:"
+        - "&8◈ &7Sharpness II"
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      enchants:
+        SHARPNESS: 2
+      unbreakable: true
+      cost:
+        scrap: 2300
+        screws: 4
+    5:
+      material: IRON_AXE
+      display-name: "&#C0C0C0🪓 Iron Axe &8[&eT5&8]"
+      lore:
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&8✦ &7Tool  &8|  &eRare"
+        - "&8✦ &7Tier &f5 &7of &f10"
+        - ""
+        - "&8◈ &7Material:  &#C0C0C0Iron"
+        - ""
+        - "&8◈ &7Enchantments:"
+        - "&8◈ &7Sharpness II"
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      enchants:
+        SHARPNESS: 2
+      unbreakable: true
+      cost:
+        scrap: 5800
+        screws: 13
+    6:
+      material: IRON_AXE
+      display-name: "&#C0C0C0🪓 Iron Axe &8[&eT6&8]"
+      lore:
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&8✦ &7Tool  &8|  &eRare"
+        - "&8✦ &7Tier &f6 &7of &f10"
+        - ""
+        - "&8◈ &7Material:  &#C0C0C0Iron"
+        - ""
+        - "&8◈ &7Enchantments:"
+        - "&8◈ &7Sharpness III"
+        - "&8◈ &7Efficiency II"
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      enchants:
+        SHARPNESS: 3
+        EFFICIENCY: 2
+      unbreakable: true
+      cost:
+        scrap: 14000
+        screws: 38
+        energy-cells: 5
+    7:
+      material: GOLDEN_AXE
+      display-name: "&#FFD700🪓 Golden Axe &8[&6T7&8]"
+      lore:
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&8✦ &7Tool  &8|  &6Elite"
+        - "&8✦ &7Tier &f7 &7of &f10"
+        - ""
+        - "&8◈ &7Material:  &#FFD700Golden"
+        - ""
+        - "&8◈ &7Enchantments:"
+        - "&8◈ &7Sharpness III"
+        - "&8◈ &7Efficiency III"
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      enchants:
+        SHARPNESS: 3
+        EFFICIENCY: 3
+      unbreakable: true
+      cost:
+        scrap: 32000
+        screws: 75
+        energy-cells: 20
+    8:
+      material: GOLDEN_AXE
+      display-name: "&#FFD700🪓 Gilded Axe &8[&6T8&8]"
+      lore:
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&8✦ &7Tool  &8|  &6Elite"
+        - "&8✦ &7Tier &f8 &7of &f10"
+        - ""
+        - "&8◈ &7Material:  &#FFD700Golden"
+        - ""
+        - "&8◈ &7Enchantments:"
+        - "&8◈ &7Sharpness IV"
+        - "&8◈ &7Efficiency III"
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      enchants:
+        SHARPNESS: 4
+        EFFICIENCY: 3
+      unbreakable: true
+      cost:
+        scrap: 75000
+        screws: 140
+        energy-cells: 48
+        bio-samples: 9
+    9:
+      material: DIAMOND_AXE
+      display-name: "&#00BFFF🪓 Diamond Axe &8[&bT9&8]"
+      lore:
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&8✦ &7Tool  &8|  &bLegendary"
+        - "&8✦ &7Tier &f9 &7of &f10"
+        - ""
+        - "&8◈ &7Material:  &#00BFFFDiamond"
+        - ""
+        - "&8◈ &7Enchantments:"
+        - "&8◈ &7Sharpness IV"
+        - "&8◈ &7Efficiency IV"
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      enchants:
+        SHARPNESS: 4
+        EFFICIENCY: 4
+      unbreakable: true
+      cost:
+        scrap: 190000
+        screws: 280
+        energy-cells: 95
+        bio-samples: 38
+        tech-shards: 9
+    10:
+      material: NETHERITE_AXE
+      display-name: "&#B24BF3🪓 Netherite Axe &8[&#B24BF3T10&8]"
+      lore:
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&8✦ &7Tool  &8|  &#B24BF3Apex"
+        - "&8✦ &7Tier &f10 &7of &f10"
+        - ""
+        - "&8◈ &7Material:  &#B24BF3Netherite"
+        - ""
+        - "&8◈ &7Enchantments:"
+        - "&8◈ &7Sharpness V"
+        - "&8◈ &7Efficiency V"
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      enchants:
+        SHARPNESS: 5
+        EFFICIENCY: 5
+      unbreakable: true
+      cost:
+        scrap: 470000
+        screws: 560
+        energy-cells: 230
+        bio-samples: 95
+        tech-shards: 48
+
+# ── Helmet Upgrades ──────────────────────────────────
+helmet:
+  max-tier: 10
+  tiers:
+    1:
+      material: LEATHER_HELMET
+      display-name: "&#A0522D◈ Leather Helmet &8[&7T1&8]"
+      lore:
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&8✦ &7Helmet  &8|  &7Common"
+        - "&8✦ &7Tier &f1 &7of &f10"
+        - ""
+        - "&8◈ &7Material:  &#A0522DLeather"
+        - "&8◈ &7Enchantments: &8None"
+        - ""
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&8&o(Starter gear — free)"
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      enchants: {}
+      unbreakable: true
+    2:
+      material: LEATHER_HELMET
+      display-name: "&#A0522D◈ Leather Helmet &8[&7T2&8]"
+      lore:
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&8✦ &7Helmet  &8|  &7Common"
+        - "&8✦ &7Tier &f2 &7of &f10"
+        - ""
+        - "&8◈ &7Material:  &#A0522DLeather"
+        - ""
+        - "&8◈ &7Enchantments:"
+        - "&8◈ &7Protection II"
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      enchants:
+        PROTECTION: 2
+      unbreakable: true
+      cost:
+        scrap: 500
+    3:
+      material: CHAINMAIL_HELMET
+      display-name: "&#9E9E9E◈ Chainmail Helmet &8[&fT3&8]"
+      lore:
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&8✦ &7Helmet  &8|  &fUncommon"
+        - "&8✦ &7Tier &f3 &7of &f10"
+        - ""
+        - "&8◈ &7Material:  &#9E9E9EChainmail"
+        - "&8◈ &7Enchantments: &8None"
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      enchants: {}
+      unbreakable: true
+      cost:
+        scrap: 1200
+    4:
+      material: CHAINMAIL_HELMET
+      display-name: "&#9E9E9E◈ Chainmail Helmet &8[&fT4&8]"
+      lore:
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&8✦ &7Helmet  &8|  &fUncommon"
+        - "&8✦ &7Tier &f4 &7of &f10"
+        - ""
+        - "&8◈ &7Material:  &#9E9E9EChainmail"
+        - ""
+        - "&8◈ &7Enchantments:"
+        - "&8◈ &7Protection II"
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      enchants:
+        PROTECTION: 2
+      unbreakable: true
+      cost:
+        scrap: 2800
+        screws: 6
+    5:
+      material: GOLDEN_HELMET
+      display-name: "&#FFD700◈ Golden Helmet &8[&eT5&8]"
+      lore:
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&8✦ &7Helmet  &8|  &eRare"
+        - "&8✦ &7Tier &f5 &7of &f10"
+        - ""
+        - "&8◈ &7Material:  &#FFD700Golden"
+        - "&8◈ &7Enchantments: &8None"
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      enchants: {}
+      unbreakable: true
+      cost:
+        scrap: 6500
+        screws: 18
+    6:
+      material: GOLDEN_HELMET
+      display-name: "&#FFD700◈ Golden Helmet &8[&eT6&8]"
+      lore:
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&8✦ &7Helmet  &8|  &eRare"
+        - "&8✦ &7Tier &f6 &7of &f10"
+        - ""
+        - "&8◈ &7Material:  &#FFD700Golden"
+        - ""
+        - "&8◈ &7Enchantments:"
+        - "&8◈ &7Protection III"
+        - "&8◈ &7Respiration II"
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      enchants:
+        PROTECTION: 3
+        RESPIRATION: 2
+      unbreakable: true
+      cost:
+        scrap: 16000
+        screws: 45
+        energy-cells: 6
+    7:
+      material: IRON_HELMET
+      display-name: "&#C0C0C0◈ Iron Helmet &8[&6T7&8]"
+      lore:
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&8✦ &7Helmet  &8|  &6Elite"
+        - "&8✦ &7Tier &f7 &7of &f10"
+        - ""
+        - "&8◈ &7Material:  &#C0C0C0Iron"
+        - ""
+        - "&8◈ &7Enchantments:"
+        - "&8◈ &7Protection III"
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      enchants:
+        PROTECTION: 3
+      unbreakable: true
+      cost:
+        scrap: 38000
+        screws: 85
+        energy-cells: 22
+    8:
+      material: IRON_HELMET
+      display-name: "&#C0C0C0◈ Iron Helmet &8[&6T8&8]"
+      lore:
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&8✦ &7Helmet  &8|  &6Elite"
+        - "&8✦ &7Tier &f8 &7of &f10"
+        - ""
+        - "&8◈ &7Material:  &#C0C0C0Iron"
+        - ""
+        - "&8◈ &7Enchantments:"
+        - "&8◈ &7Protection IV"
+        - "&8◈ &7Respiration III"
+        - "&8◈ &7Aqua Affinity I"
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      enchants:
+        PROTECTION: 4
+        RESPIRATION: 3
+        AQUA_AFFINITY: 1
+      unbreakable: true
+      cost:
+        scrap: 85000
+        screws: 160
+        energy-cells: 55
+        bio-samples: 12
+    9:
+      material: DIAMOND_HELMET
+      display-name: "&#00BFFF◈ Diamond Helmet &8[&bT9&8]"
+      lore:
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&8✦ &7Helmet  &8|  &bLegendary"
+        - "&8✦ &7Tier &f9 &7of &f10"
+        - ""
+        - "&8◈ &7Material:  &#00BFFFDiamond"
+        - ""
+        - "&8◈ &7Enchantments:"
+        - "&8◈ &7Protection IV"
+        - "&8◈ &7Respiration III"
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      enchants:
+        PROTECTION: 4
+        RESPIRATION: 3
+      unbreakable: true
+      cost:
+        scrap: 210000
+        screws: 310
+        energy-cells: 105
+        bio-samples: 42
+        tech-shards: 11
+    10:
+      material: NETHERITE_HELMET
+      display-name: "&#B24BF3◈ Netherite Helmet &8[&#B24BF3T10&8]"
+      lore:
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&8✦ &7Helmet  &8|  &#B24BF3Apex"
+        - "&8✦ &7Tier &f10 &7of &f10"
+        - ""
+        - "&8◈ &7Material:  &#B24BF3Netherite"
+        - ""
+        - "&8◈ &7Enchantments:"
+        - "&8◈ &7Protection V"
+        - "&8◈ &7Respiration III"
+        - "&8◈ &7Aqua Affinity I"
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      enchants:
+        PROTECTION: 5
+        RESPIRATION: 3
+        AQUA_AFFINITY: 1
+      unbreakable: true
+      cost:
+        scrap: 520000
+        screws: 620
+        energy-cells: 260
+        bio-samples: 105
+        tech-shards: 55
+
+# ── Chestplate Upgrades ──────────────────────────────
+chestplate:
+  max-tier: 10
+  tiers:
+    1:
+      material: LEATHER_CHESTPLATE
+      display-name: "&#A0522D◈ Leather Chestplate &8[&7T1&8]"
+      lore:
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&8✦ &7Chestplate  &8|  &7Common"
+        - "&8✦ &7Tier &f1 &7of &f10"
+        - ""
+        - "&8◈ &7Material:  &#A0522DLeather"
+        - "&8◈ &7Enchantments: &8None"
+        - ""
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&8&o(Starter gear — free)"
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      enchants: {}
+      unbreakable: true
+    2:
+      material: LEATHER_CHESTPLATE
+      display-name: "&#A0522D◈ Leather Chestplate &8[&7T2&8]"
+      lore:
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&8✦ &7Chestplate  &8|  &7Common"
+        - "&8✦ &7Tier &f2 &7of &f10"
+        - ""
+        - "&8◈ &7Material:  &#A0522DLeather"
+        - ""
+        - "&8◈ &7Enchantments:"
+        - "&8◈ &7Protection II"
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      enchants:
+        PROTECTION: 2
+      unbreakable: true
+      cost:
+        scrap: 550
+    3:
+      material: CHAINMAIL_CHESTPLATE
+      display-name: "&#9E9E9E◈ Chainmail Chestplate &8[&fT3&8]"
+      lore:
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&8✦ &7Chestplate  &8|  &fUncommon"
+        - "&8✦ &7Tier &f3 &7of &f10"
+        - ""
+        - "&8◈ &7Material:  &#9E9E9EChainmail"
+        - "&8◈ &7Enchantments: &8None"
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      enchants: {}
+      unbreakable: true
+      cost:
+        scrap: 1400
+    4:
+      material: CHAINMAIL_CHESTPLATE
+      display-name: "&#9E9E9E◈ Chainmail Chestplate &8[&fT4&8]"
+      lore:
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&8✦ &7Chestplate  &8|  &fUncommon"
+        - "&8✦ &7Tier &f4 &7of &f10"
+        - ""
+        - "&8◈ &7Material:  &#9E9E9EChainmail"
+        - ""
+        - "&8◈ &7Enchantments:"
+        - "&8◈ &7Protection II"
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      enchants:
+        PROTECTION: 2
+      unbreakable: true
+      cost:
+        scrap: 3200
+        screws: 7
+    5:
+      material: GOLDEN_CHESTPLATE
+      display-name: "&#FFD700◈ Golden Chestplate &8[&eT5&8]"
+      lore:
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&8✦ &7Chestplate  &8|  &eRare"
+        - "&8✦ &7Tier &f5 &7of &f10"
+        - ""
+        - "&8◈ &7Material:  &#FFD700Golden"
+        - "&8◈ &7Enchantments: &8None"
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      enchants: {}
+      unbreakable: true
+      cost:
+        scrap: 7500
+        screws: 20
+    6:
+      material: GOLDEN_CHESTPLATE
+      display-name: "&#FFD700◈ Golden Chestplate &8[&eT6&8]"
+      lore:
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&8✦ &7Chestplate  &8|  &eRare"
+        - "&8✦ &7Tier &f6 &7of &f10"
+        - ""
+        - "&8◈ &7Material:  &#FFD700Golden"
+        - ""
+        - "&8◈ &7Enchantments:"
+        - "&8◈ &7Protection III"
+        - "&8◈ &7Thorns I"
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      enchants:
+        PROTECTION: 3
+        THORNS: 1
+      unbreakable: true
+      cost:
+        scrap: 18000
+        screws: 50
+        energy-cells: 7
+    7:
+      material: IRON_CHESTPLATE
+      display-name: "&#C0C0C0◈ Iron Chestplate &8[&6T7&8]"
+      lore:
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&8✦ &7Chestplate  &8|  &6Elite"
+        - "&8✦ &7Tier &f7 &7of &f10"
+        - ""
+        - "&8◈ &7Material:  &#C0C0C0Iron"
+        - ""
+        - "&8◈ &7Enchantments:"
+        - "&8◈ &7Protection III"
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      enchants:
+        PROTECTION: 3
+      unbreakable: true
+      cost:
+        scrap: 42000
+        screws: 90
+        energy-cells: 25
+    8:
+      material: IRON_CHESTPLATE
+      display-name: "&#C0C0C0◈ Iron Chestplate &8[&6T8&8]"
+      lore:
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&8✦ &7Chestplate  &8|  &6Elite"
+        - "&8✦ &7Tier &f8 &7of &f10"
+        - ""
+        - "&8◈ &7Material:  &#C0C0C0Iron"
+        - ""
+        - "&8◈ &7Enchantments:"
+        - "&8◈ &7Protection IV"
+        - "&8◈ &7Thorns II"
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      enchants:
+        PROTECTION: 4
+        THORNS: 2
+      unbreakable: true
+      cost:
+        scrap: 95000
+        screws: 175
+        energy-cells: 60
+        bio-samples: 14
+    9:
+      material: DIAMOND_CHESTPLATE
+      display-name: "&#00BFFF◈ Diamond Chestplate &8[&bT9&8]"
+      lore:
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&8✦ &7Chestplate  &8|  &bLegendary"
+        - "&8✦ &7Tier &f9 &7of &f10"
+        - ""
+        - "&8◈ &7Material:  &#00BFFFDiamond"
+        - ""
+        - "&8◈ &7Enchantments:"
+        - "&8◈ &7Protection IV"
+        - "&8◈ &7Thorns II"
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      enchants:
+        PROTECTION: 4
+        THORNS: 2
+      unbreakable: true
+      cost:
+        scrap: 230000
+        screws: 330
+        energy-cells: 115
+        bio-samples: 46
+        tech-shards: 12
+    10:
+      material: NETHERITE_CHESTPLATE
+      display-name: "&#B24BF3◈ Netherite Chestplate &8[&#B24BF3T10&8]"
+      lore:
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&8✦ &7Chestplate  &8|  &#B24BF3Apex"
+        - "&8✦ &7Tier &f10 &7of &f10"
+        - ""
+        - "&8◈ &7Material:  &#B24BF3Netherite"
+        - ""
+        - "&8◈ &7Enchantments:"
+        - "&8◈ &7Protection V"
+        - "&8◈ &7Thorns III"
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      enchants:
+        PROTECTION: 5
+        THORNS: 3
+      unbreakable: true
+      cost:
+        scrap: 580000
+        screws: 660
+        energy-cells: 280
+        bio-samples: 115
+        tech-shards: 60
+
+# ── Leggings Upgrades ────────────────────────────────
+leggings:
+  max-tier: 10
+  tiers:
+    1:
+      material: LEATHER_LEGGINGS
+      display-name: "&#A0522D◈ Leather Leggings &8[&7T1&8]"
+      lore:
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&8✦ &7Leggings  &8|  &7Common"
+        - "&8✦ &7Tier &f1 &7of &f10"
+        - ""
+        - "&8◈ &7Material:  &#A0522DLeather"
+        - "&8◈ &7Enchantments: &8None"
+        - ""
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&8&o(Starter gear — free)"
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      enchants: {}
+      unbreakable: true
+    2:
+      material: LEATHER_LEGGINGS
+      display-name: "&#A0522D◈ Leather Leggings &8[&7T2&8]"
+      lore:
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&8✦ &7Leggings  &8|  &7Common"
+        - "&8✦ &7Tier &f2 &7of &f10"
+        - ""
+        - "&8◈ &7Material:  &#A0522DLeather"
+        - ""
+        - "&8◈ &7Enchantments:"
+        - "&8◈ &7Protection II"
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      enchants:
+        PROTECTION: 2
+      unbreakable: true
+      cost:
+        scrap: 480
+    3:
+      material: CHAINMAIL_LEGGINGS
+      display-name: "&#9E9E9E◈ Chainmail Leggings &8[&fT3&8]"
+      lore:
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&8✦ &7Leggings  &8|  &fUncommon"
+        - "&8✦ &7Tier &f3 &7of &f10"
+        - ""
+        - "&8◈ &7Material:  &#9E9E9EChainmail"
+        - "&8◈ &7Enchantments: &8None"
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      enchants: {}
+      unbreakable: true
+      cost:
+        scrap: 1100
+    4:
+      material: CHAINMAIL_LEGGINGS
+      display-name: "&#9E9E9E◈ Chainmail Leggings &8[&fT4&8]"
+      lore:
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&8✦ &7Leggings  &8|  &fUncommon"
+        - "&8✦ &7Tier &f4 &7of &f10"
+        - ""
+        - "&8◈ &7Material:  &#9E9E9EChainmail"
+        - ""
+        - "&8◈ &7Enchantments:"
+        - "&8◈ &7Protection II"
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      enchants:
+        PROTECTION: 2
+      unbreakable: true
+      cost:
+        scrap: 2600
+        screws: 5
+    5:
+      material: GOLDEN_LEGGINGS
+      display-name: "&#FFD700◈ Golden Leggings &8[&eT5&8]"
+      lore:
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&8✦ &7Leggings  &8|  &eRare"
+        - "&8✦ &7Tier &f5 &7of &f10"
+        - ""
+        - "&8◈ &7Material:  &#FFD700Golden"
+        - "&8◈ &7Enchantments: &8None"
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      enchants: {}
+      unbreakable: true
+      cost:
+        scrap: 6000
+        screws: 16
+    6:
+      material: GOLDEN_LEGGINGS
+      display-name: "&#FFD700◈ Golden Leggings &8[&eT6&8]"
+      lore:
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&8✦ &7Leggings  &8|  &eRare"
+        - "&8✦ &7Tier &f6 &7of &f10"
+        - ""
+        - "&8◈ &7Material:  &#FFD700Golden"
+        - ""
+        - "&8◈ &7Enchantments:"
+        - "&8◈ &7Protection III"
+        - "&8◈ &7Swift Sneak I"
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      enchants:
+        PROTECTION: 3
+        SWIFT_SNEAK: 1
+      unbreakable: true
+      cost:
+        scrap: 15000
+        screws: 42
+        energy-cells: 6
+    7:
+      material: IRON_LEGGINGS
+      display-name: "&#C0C0C0◈ Iron Leggings &8[&6T7&8]"
+      lore:
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&8✦ &7Leggings  &8|  &6Elite"
+        - "&8✦ &7Tier &f7 &7of &f10"
+        - ""
+        - "&8◈ &7Material:  &#C0C0C0Iron"
+        - ""
+        - "&8◈ &7Enchantments:"
+        - "&8◈ &7Protection III"
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      enchants:
+        PROTECTION: 3
+      unbreakable: true
+      cost:
+        scrap: 36000
+        screws: 82
+        energy-cells: 21
+    8:
+      material: IRON_LEGGINGS
+      display-name: "&#C0C0C0◈ Iron Leggings &8[&6T8&8]"
+      lore:
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&8✦ &7Leggings  &8|  &6Elite"
+        - "&8✦ &7Tier &f8 &7of &f10"
+        - ""
+        - "&8◈ &7Material:  &#C0C0C0Iron"
+        - ""
+        - "&8◈ &7Enchantments:"
+        - "&8◈ &7Protection IV"
+        - "&8◈ &7Swift Sneak II"
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      enchants:
+        PROTECTION: 4
+        SWIFT_SNEAK: 2
+      unbreakable: true
+      cost:
+        scrap: 82000
+        screws: 155
+        energy-cells: 52
+        bio-samples: 11
+    9:
+      material: DIAMOND_LEGGINGS
+      display-name: "&#00BFFF◈ Diamond Leggings &8[&bT9&8]"
+      lore:
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&8✦ &7Leggings  &8|  &bLegendary"
+        - "&8✦ &7Tier &f9 &7of &f10"
+        - ""
+        - "&8◈ &7Material:  &#00BFFFDiamond"
+        - ""
+        - "&8◈ &7Enchantments:"
+        - "&8◈ &7Protection IV"
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      enchants:
+        PROTECTION: 4
+      unbreakable: true
+      cost:
+        scrap: 200000
+        screws: 290
+        energy-cells: 98
+        bio-samples: 39
+        tech-shards: 10
+    10:
+      material: NETHERITE_LEGGINGS
+      display-name: "&#B24BF3◈ Netherite Leggings &8[&#B24BF3T10&8]"
+      lore:
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&8✦ &7Leggings  &8|  &#B24BF3Apex"
+        - "&8✦ &7Tier &f10 &7of &f10"
+        - ""
+        - "&8◈ &7Material:  &#B24BF3Netherite"
+        - ""
+        - "&8◈ &7Enchantments:"
+        - "&8◈ &7Protection V"
+        - "&8◈ &7Swift Sneak III"
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      enchants:
+        PROTECTION: 5
+        SWIFT_SNEAK: 3
+      unbreakable: true
+      cost:
+        scrap: 500000
+        screws: 580
+        energy-cells: 240
+        bio-samples: 98
+        tech-shards: 50
+
+# ── Boots Upgrades ───────────────────────────────────
+boots:
+  max-tier: 10
+  tiers:
+    1:
+      material: LEATHER_BOOTS
+      display-name: "&#A0522D◈ Leather Boots &8[&7T1&8]"
+      lore:
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&8✦ &7Boots  &8|  &7Common"
+        - "&8✦ &7Tier &f1 &7of &f10"
+        - ""
+        - "&8◈ &7Material:  &#A0522DLeather"
+        - "&8◈ &7Enchantments: &8None"
+        - ""
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&8&o(Starter gear — free)"
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      enchants: {}
+      unbreakable: true
+    2:
+      material: LEATHER_BOOTS
+      display-name: "&#A0522D◈ Leather Boots &8[&7T2&8]"
+      lore:
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&8✦ &7Boots  &8|  &7Common"
+        - "&8✦ &7Tier &f2 &7of &f10"
+        - ""
+        - "&8◈ &7Material:  &#A0522DLeather"
+        - ""
+        - "&8◈ &7Enchantments:"
+        - "&8◈ &7Protection II"
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      enchants:
+        PROTECTION: 2
+      unbreakable: true
+      cost:
+        scrap: 420
+    3:
+      material: CHAINMAIL_BOOTS
+      display-name: "&#9E9E9E◈ Chainmail Boots &8[&fT3&8]"
+      lore:
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&8✦ &7Boots  &8|  &fUncommon"
+        - "&8✦ &7Tier &f3 &7of &f10"
+        - ""
+        - "&8◈ &7Material:  &#9E9E9EChainmail"
+        - "&8◈ &7Enchantments: &8None"
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      enchants: {}
+      unbreakable: true
+      cost:
+        scrap: 950
+    4:
+      material: CHAINMAIL_BOOTS
+      display-name: "&#9E9E9E◈ Chainmail Boots &8[&fT4&8]"
+      lore:
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&8✦ &7Boots  &8|  &fUncommon"
+        - "&8✦ &7Tier &f4 &7of &f10"
+        - ""
+        - "&8◈ &7Material:  &#9E9E9EChainmail"
+        - ""
+        - "&8◈ &7Enchantments:"
+        - "&8◈ &7Protection II"
+        - "&8◈ &7Feather Falling II"
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      enchants:
+        PROTECTION: 2
+        FEATHER_FALLING: 2
+      unbreakable: true
+      cost:
+        scrap: 2200
+        screws: 4
+    5:
+      material: GOLDEN_BOOTS
+      display-name: "&#FFD700◈ Golden Boots &8[&eT5&8]"
+      lore:
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&8✦ &7Boots  &8|  &eRare"
+        - "&8✦ &7Tier &f5 &7of &f10"
+        - ""
+        - "&8◈ &7Material:  &#FFD700Golden"
+        - ""
+        - "&8◈ &7Enchantments:"
+        - "&8◈ &7Feather Falling III"
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      enchants:
+        FEATHER_FALLING: 3
+      unbreakable: true
+      cost:
+        scrap: 5200
+        screws: 14
+    6:
+      material: GOLDEN_BOOTS
+      display-name: "&#FFD700◈ Golden Boots &8[&eT6&8]"
+      lore:
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&8✦ &7Boots  &8|  &eRare"
+        - "&8✦ &7Tier &f6 &7of &f10"
+        - ""
+        - "&8◈ &7Material:  &#FFD700Golden"
+        - ""
+        - "&8◈ &7Enchantments:"
+        - "&8◈ &7Protection III"
+        - "&8◈ &7Feather Falling IV"
+        - "&8◈ &7Depth Strider I"
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      enchants:
+        PROTECTION: 3
+        FEATHER_FALLING: 4
+        DEPTH_STRIDER: 1
+      unbreakable: true
+      cost:
+        scrap: 13000
+        screws: 38
+        energy-cells: 5
+    7:
+      material: IRON_BOOTS
+      display-name: "&#C0C0C0◈ Iron Boots &8[&6T7&8]"
+      lore:
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&8✦ &7Boots  &8|  &6Elite"
+        - "&8✦ &7Tier &f7 &7of &f10"
+        - ""
+        - "&8◈ &7Material:  &#C0C0C0Iron"
+        - ""
+        - "&8◈ &7Enchantments:"
+        - "&8◈ &7Protection III"
+        - "&8◈ &7Feather Falling IV"
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      enchants:
+        PROTECTION: 3
+        FEATHER_FALLING: 4
+      unbreakable: true
+      cost:
+        scrap: 32000
+        screws: 72
+        energy-cells: 18
+    8:
+      material: IRON_BOOTS
+      display-name: "&#C0C0C0◈ Iron Boots &8[&6T8&8]"
+      lore:
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&8✦ &7Boots  &8|  &6Elite"
+        - "&8✦ &7Tier &f8 &7of &f10"
+        - ""
+        - "&8◈ &7Material:  &#C0C0C0Iron"
+        - ""
+        - "&8◈ &7Enchantments:"
+        - "&8◈ &7Protection IV"
+        - "&8◈ &7Feather Falling IV"
+        - "&8◈ &7Depth Strider II"
+        - "&8◈ &7Soul Speed II"
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      enchants:
+        PROTECTION: 4
+        FEATHER_FALLING: 4
+        DEPTH_STRIDER: 2
+        SOUL_SPEED: 2
+      unbreakable: true
+      cost:
+        scrap: 72000
+        screws: 135
+        energy-cells: 45
+        bio-samples: 10
+    9:
+      material: DIAMOND_BOOTS
+      display-name: "&#00BFFF◈ Diamond Boots &8[&bT9&8]"
+      lore:
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&8✦ &7Boots  &8|  &bLegendary"
+        - "&8✦ &7Tier &f9 &7of &f10"
+        - ""
+        - "&8◈ &7Material:  &#00BFFFDiamond"
+        - ""
+        - "&8◈ &7Enchantments:"
+        - "&8◈ &7Protection IV"
+        - "&8◈ &7Feather Falling IV"
+        - "&8◈ &7Depth Strider III"
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      enchants:
+        PROTECTION: 4
+        FEATHER_FALLING: 4
+        DEPTH_STRIDER: 3
+      unbreakable: true
+      cost:
+        scrap: 180000
+        screws: 260
+        energy-cells: 88
+        bio-samples: 35
+        tech-shards: 9
+    10:
+      material: NETHERITE_BOOTS
+      display-name: "&#B24BF3◈ Netherite Boots &8[&#B24BF3T10&8]"
+      lore:
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&8✦ &7Boots  &8|  &#B24BF3Apex"
+        - "&8✦ &7Tier &f10 &7of &f10"
+        - ""
+        - "&8◈ &7Material:  &#B24BF3Netherite"
+        - ""
+        - "&8◈ &7Enchantments:"
+        - "&8◈ &7Protection V"
+        - "&8◈ &7Feather Falling IV"
+        - "&8◈ &7Depth Strider III"
+        - "&8◈ &7Soul Speed III"
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      enchants:
+        PROTECTION: 5
+        FEATHER_FALLING: 4
+        DEPTH_STRIDER: 3
+        SOUL_SPEED: 3
+      unbreakable: true
+      cost:
+        scrap: 460000
+        screws: 540
+        energy-cells: 220
+        bio-samples: 90
+        tech-shards: 46

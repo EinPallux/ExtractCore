@@ -1,0 +1,58 @@
+# ═══════════════════════════════════════════
+#         ExtractCore - Main Configuration
+#              by Pallux  |  v1.0.0
+# ═══════════════════════════════════════════
+
+# General Settings
+settings:
+  debug: false
+  # How often player data is auto-saved (in seconds)
+  autosave-interval: 300
+  # Date format used in GUIs and messages
+  date-format: "dd/MM/yyyy HH:mm"
+  # Server spawn location (set automatically on first run, or configure manually)
+  spawn:
+    world: "world"
+    x: 0.5
+    y: 64.0
+    z: 0.5
+    yaw: 0.0
+    pitch: 0.0
+
+# Death Settings
+death:
+  # Teleport player to their core on death
+  teleport-to-core: true
+  # Material loss on death (random between min and max percent)
+  material-loss-min: 5
+  material-loss-max: 30
+  # Percent of lost materials that the killer receives
+  killer-reward-percent: 10
+
+# Kill Loss - which materials are affected
+kill-loss:
+  scrap: true
+  screws: true
+  energy-cells: true
+  bio-samples: true
+  tech-shards: true
+
+# Exchange rates (how much Scrap 1 unit of each material costs)
+exchange:
+  # Base costs in Scrap for each material
+  screws-cost: 500
+  energy-cells-cost: 1200
+  bio-samples-cost: 800
+  tech-shards-cost: 2000
+  # Minimum purchase amount
+  min-purchase: 1
+  # Maximum purchase amount per transaction
+  max-purchase: 64
+
+# PlayerPoints rewards per level-up
+playerpoints:
+  enabled: true
+  points-per-level: 5
+  # Bonus points at milestone levels (every X levels)
+  milestone-bonus-every: 100
+  milestone-bonus-points: 50

@@ -1,0 +1,112 @@
+# ═══════════════════════════════════════════
+#       ExtractCore - Messages Configuration
+# Supports: &#RRGGBB hex and &c legacy colors
+# ═══════════════════════════════════════════
+
+prefix: "&#5B8DD9◈ &#E0E0E0ExtractCore &8│ "
+
+# ── General ──────────────────────────────
+general:
+  no-permission: "&cYou don't have permission to do that."
+  player-only: "&cThis command can only be used by players."
+  player-not-found: "&cPlayer &e{player} &cwas not found."
+  invalid-amount: "&cInvalid amount. Please enter a positive number."
+  reload-success: "&#5B8DD9Plugin reloaded &asuccessfully&8."
+  not-enough-materials: "&cYou don't have enough &e{material}&c."
+  config-error: "&cA configuration error occurred. Please contact an admin."
+
+# ── Core ─────────────────────────────────
+core:
+  no-core: "&cYou do not have a Core in your inventory or placed down."
+  core-placed: "&#5B8DD9Your Core has been placed! &7It will now generate Scrap."
+  core-picked-up: "&#5B8DD9Core picked up &7and returned to your inventory."
+  core-pickup-started: "&#FFD700Picking up your Core... &8(&e10s&8)"
+  core-pickup-cancelled: "&cPickup cancelled &7— you moved or were interrupted."
+  core-pickup-progress: "&#FFD700Picking up Core: &e{seconds}s &7remaining..."
+  core-destroyed: "&c&#FF4444Your Core was destroyed! &7You lost &e20%% &7of your upgrade progress."
+  core-destroyed-attacker: "&#5B8DD9You destroyed &e{player}'s &7Core!"
+  core-raid-broadcast: "&#FF4444⚔ &e{attacker} &7raided &e{owner}'s &7Core!"
+  core-destroyed-attacker-offline: "&#5B8DD9You destroyed &e{player}'s &7Core! &8(offline player)"
+  raid-reward: "&#FFD700⚔ Raid Reward: &e+{amount} Scrap &7from the Core storage!"
+  nothing-to-collect: "&7There is no Scrap stored in your Core yet."
+  scrap-collected: "&#5B8DD9Collected &e+{amount} Scrap &7from your Core."
+  scrap-collected-on-pickup: "&#5B8DD9Auto-collected &e{amount} Scrap &7stored in your Core."
+  coordinates: "&#5B8DD9Your Core is located at &eX: {x} &8| &eY: {y} &8| &eZ: {z} &8(&7{world}&8)"
+  no-core-placed: "&7You haven't placed your Core yet."
+  teleported-to-core: "&#5B8DD9Teleported to your Core."
+  spawn-given: "&#5B8DD9You have been given your &eStarting Gear&7."
+  already-placed: "&cYou already have a Core placed down. Pick it up first."
+
+# ── Extraction ───────────────────────────
+extraction:
+  zone-defined: "&#5B8DD9Extraction Zone &e{name} &7has been defined."
+  zone-define-fail: "&cFailed to define extraction zone. Make sure you have a WorldEdit selection."
+  zone-not-found: "&cExtraction zone &e{name} &cwas not found."
+  started: |
+    &#5B8DD9&l⚡ EXTRACTION STARTED ⚡
+    &#E0E0E0Zone: &e{name}
+    &#E0E0E0Center: &7X: {x} | Z: {z}
+    &#E0E0E0Active for: &e{duration} minutes
+    &#5B8DD9Head to the zone to earn rewards!
+  ended-header: "&#5B8DD9&l⚡ EXTRACTION ENDED &8— &e{name}"
+  ended-participants: "&#E0E0E0Participants: &7{players}"
+  ended-no-participants: "&#8888AANo players participated in this extraction."
+  reward-received: |
+    &#5B8DD9✔ Extraction Rewards Received!
+    &7Scrap: &e+{scrap}  &8| &7Screws: &b+{screws}
+    &7Energy Cells: &a+{energy}  &8| &7Bio Samples: &d+{bio}
+    &7Tech Shards: &6+{tech}
+  bossbar-loading: "&#5B8DD9⚡ Loading extraction info..."
+  bossbar-next: "&#5B8DD9⚡ Next Extraction in: &e{time}"
+  bossbar-active: "&#FF6B35⚡ Extraction Active: &e{name} &8— &7Ends in: &e{time}"
+
+# ── Kill / Death ─────────────────────────
+kill:
+  killer-reward: |
+    &#5B8DD9⚔ Kill Reward from &e{victim}&8:
+    &7Scrap: &e+{scrap}  &8| &7Screws: &b+{screws}
+    &7Energy Cells: &a+{energy}  &8| &7Bio Samples: &d+{bio}
+    &7Tech Shards: &6+{tech}
+  victim-loss: |
+    &c✘ You lost materials on death:
+    &7Scrap: &c-{scrap}  &8| &7Screws: &c-{screws}
+    &7Energy Cells: &c-{energy}  &8| &7Bio Samples: &c-{bio}
+    &7Tech Shards: &c-{tech}
+
+# ── Leveling ─────────────────────────────
+level:
+  level-up: |
+    &#FFD700&l✦ LEVEL UP! &#FFD700Level {level}
+    &#E0E0E0You earned: &e+{points} Points &8| &7{materials}
+  xp-gained: "&#5B8DD9+{xp} XP &8({source})"
+
+# ── Armory ───────────────────────────────
+armory:
+  upgraded: "&#5B8DD9Upgraded &e{item} &7to &e{tier}&8."
+  not-enough-resources: "&cNot enough resources to upgrade."
+  max-tier: "&7This item is already at &emax tier&7."
+
+# ── Milestones ───────────────────────────
+milestones:
+  claimable-notify: "&#FFD700★ &eA Milestone is ready to claim! &7Use &e/milestones &7to collect."
+  completed: |
+    &#FFD700&l★ MILESTONE COMPLETED!
+    &#E0E0E0{milestone}
+    &#5B8DD9Rewards: &7{rewards}
+  already-completed: "&7You have already completed this milestone."
+
+# ── Exchange ─────────────────────────────
+exchange:
+  purchased: "&#5B8DD9Purchased &e{amount}x {material} &7for &e{cost} Scrap&8."
+  not-enough-scrap: "&cNot enough Scrap. You need &e{cost} Scrap&c."
+
+# ── Admin ────────────────────────────────
+admin:
+  set-currency: "&#5B8DD9Set &e{player}'s &7{currency} to &e{amount}&8."
+  give-currency: "&#5B8DD9Gave &e{player} &e{amount} &7{currency}&8."
+  take-currency: "&#5B8DD9Took &e{amount} &7{currency} from &e{player}&8."
+  reset-confirm-title: "&#FF4444Confirm Reset"
+  reset-success: "&#5B8DD9Reset &e{type} &7for &e{player}&8."
+  reset-cancel: "&7Reset cancelled."
+  invalid-currency: "&cInvalid currency. Valid: scrap, screws, energycells, biosamples, techshards"
+  invalid-reset-type: "&cInvalid reset type."

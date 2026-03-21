@@ -1,0 +1,36 @@
+# ═══════════════════════════════════════════
+#    ExtractCore - Extraction Configuration
+# ═══════════════════════════════════════════
+
+# How often an extraction cycle starts (in minutes)
+cycle-interval-minutes: 15
+
+# How long each active extraction lasts (in minutes)
+active-duration-minutes: 5
+
+# Boss bar settings
+bossbar:
+  enabled: true
+  color-waiting: BLUE
+  color-active: RED
+
+# Defined extraction zones (populated via /ex define extract <name>)
+# These are auto-saved when defined via command
+zones: {}
+
+# Default rewards per zone (overridden per-zone if set below)
+default-rewards:
+  scrap: 5000
+  screws: 25
+  energy-cells: 10
+  bio-samples: 8
+  tech-shards: 5
+
+# Zone-specific reward overrides
+# zone-rewards:
+#   spawn_zone:
+#     scrap: 8000
+#     screws: 40
+#     energy-cells: 20
+#     bio-samples: 15
+#     tech-shards: 10

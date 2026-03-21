@@ -1,0 +1,73 @@
+# ═══════════════════════════════════════════
+#      ExtractCore - Level Configuration
+# ═══════════════════════════════════════════
+
+# Maximum achievable level
+max-level: 5000
+
+# XP required for level 1 (base)
+base-xp: 1000
+# Growth factor per level (exponential, tweak for grind feel)
+# Formula: XP_needed(level) = base-xp * (growth-factor ^ (level - 1))
+growth-factor: 1.085
+
+# XP Sources
+xp-sources:
+  player-kill: 150
+  extraction-participate: 80
+  core-destroy: 500
+  # Per minute spent on server (passive)
+  playtime-per-minute: 2
+
+# Level color stages (every 100 levels changes color)
+# Uses legacy (&c) or hex (&#RRGGBB) format
+color-stages:
+  0: "&7"       # 1-99: Gray
+  100: "&a"     # 100-199: Green
+  200: "&e"     # 200-299: Yellow
+  300: "&6"     # 300-399: Gold
+  400: "&c"     # 400-499: Red
+  500: "&b"     # 500-599: Aqua
+  600: "&d"     # 600-699: Light Purple
+  700: "&#FF8C00"  # 700-799: Dark Orange
+  800: "&#00FF7F"  # 800-899: Spring Green
+  900: "&#FF69B4"  # 900-999: Hot Pink
+  1000: "&#FF4500" # 1000-1099: Orange Red
+  1100: "&#1E90FF" # 1100-1199: Dodger Blue
+  1200: "&#9400D3" # 1200-1299: Dark Violet
+  1300: "&#00CED1" # 1300-1399: Dark Turquoise
+  1400: "&#DC143C" # 1400-1499: Crimson
+  1500: "&#FFD700" # 1500-1599: Gold
+  1600: "&#ADFF2F" # 1600-1699: Green Yellow
+  1700: "&#FF1493" # 1700-1799: Deep Pink
+  1800: "&#00FA9A" # 1800-1899: Medium Spring Green
+  1900: "&#FF6347" # 1900-1999: Tomato
+  2000: "&#4169E1" # 2000-2099: Royal Blue
+  2100: "&#7B68EE" # 2100-2199: Medium Slate Blue
+  2200: "&#32CD32" # 2200-2299: Lime Green
+  2300: "&#FF7F50" # 2300-2399: Coral
+  2400: "&#40E0D0" # 2400-2499: Turquoise
+  2500: "&#DA70D6" # 2500-2599: Orchid
+  2600: "&#F0E68C" # 2600-2699: Khaki
+  2700: "&#87CEEB" # 2700-2799: Sky Blue
+  2800: "&#FFA07A" # 2800-2899: Light Salmon
+  2900: "&#98FB98" # 2900-2999: Pale Green
+  3000: "&#FF0000" # 3000+: Pure Red
+  3500: "&#FFFFFF" # 3500+: White
+  4000: "&#FFD700" # 4000+: Gold
+  4500: "&#B24BF3" # 4500+: Legendary Purple
+  4900: "&#FF69B4" # Level 4900-4999
+  5000: "&#FF69B4" # Level 5000 special (handled in code)
+
+# Material reward per level-up
+level-up-materials:
+  scrap: 100
+  # Additional materials unlock at higher level thresholds
+  screws-threshold: 10       # starts giving screws at level 10
+  screws-amount: 2
+  energy-threshold: 50
+  energy-amount: 1
+  bio-threshold: 100
+  bio-amount: 1
+  tech-threshold: 200
+  tech-amount: 1

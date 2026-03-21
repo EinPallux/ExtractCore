@@ -1,0 +1,574 @@
+# ═══════════════════════════════════════════════════════════════════
+#           ExtractCore - GUI & Display Configuration
+#  Every title, item name, lore line, button label and dynamic text
+#  is defined here. Supports &#RRGGBB hex and &c legacy colors.
+#
+#  Placeholders usable in lore/name fields:
+#    {player}        player name
+#    {level}         colored level
+#    {level_raw}     raw level number
+#    {progress}      XP progress % (e.g. 80.0)
+#    {scrap}         formatted scrap
+#    {screws}        formatted screws
+#    {energy}        formatted energy cells
+#    {bio}           formatted bio samples
+#    {tech}          formatted tech shards
+#    {tier}          current gear tier number
+#    {max_tier}      max gear tier number
+#    {speed_lvl}     core speed upgrade level
+#    {prod_lvl}      core production upgrade level
+#    {core_x/y/z}    core coordinates
+#    {scrap_rate}    scrap per interval
+#    {interval}      generation interval in seconds
+#    {kills} {deaths} {kd} {extractions} {cores_destroyed}
+#    {playtime_h} {playtime_m}
+#    {milestones_done} {milestones_total}
+#    {next_extraction} {current_extraction}
+#    {cost_scrap} {cost_screws} {cost_energy} {cost_bio} {cost_tech}
+#    {next_display}  display name of the next upgrade tier
+#    {sword_t} {pickaxe_t} {axe_t} {helmet_t} {chest_t} {legs_t} {boots_t}
+# ═══════════════════════════════════════════════════════════════════
+
+# ─────────────────────────────────────────────────────────────────
+# MAIN MENU  (/extract, /menu)
+# ─────────────────────────────────────────────────────────────────
+main-menu:
+  title: "&#5B8DD9◈ &fExtract &8— &7Main Menu"
+  rows: 6
+
+  player-overview:
+    slot: 13
+    material: PLAYER_HEAD
+    name: "&#5B8DD9◈ &f{player}"
+    lore:
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&7Level:    {level}"
+      - "&7Progress: &e{progress}%"
+      - ""
+      - "&7Scrap:        &e{scrap}"
+      - "&7Screws:       &b{screws}"
+      - "&7Energy Cells: &a{energy}"
+      - "&7Bio Samples:  &d{bio}"
+      - "&7Tech Shards:  &6{tech}"
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+
+  armory-button:
+    slot: 28
+    material: DIAMOND_SWORD
+    name: "&#5B8DD9⚔ &fArmory"
+    lore:
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&7Upgrade your &eGear&7."
+      - ""
+      - "&7Sword:      &eT{sword_t}"
+      - "&7Pickaxe:    &eT{pickaxe_t}"
+      - "&7Axe:        &eT{axe_t}"
+      - "&7Armor:      &eT{helmet_t}"
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&#5B8DD9→ &7Click to open."
+
+  core-button:
+    slot: 30
+    material: BEACON
+    name: "&#5B8DD9◈ &fCore"
+    lore:
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&7Core placed at: &eX{core_x} Y{core_y} Z{core_z}"
+      - "&cCore not placed."
+      - ""
+      - "&7Speed Lvl:  &e{speed_lvl}"
+      - "&7Prod. Lvl:  &e{prod_lvl}"
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&#5B8DD9→ &7Click to manage."
+    # Line shown when core IS placed (replaces "Core not placed." line)
+    core-placed-line: "&aCore placed at: &eX{core_x} Y{core_y} Z{core_z}"
+    core-not-placed-line: "&cCore not placed."
+
+  stats-button:
+    slot: 32
+    material: PAPER
+    name: "&#5B8DD9📊 &fStats"
+    lore:
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&7View all your statistics."
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&#5B8DD9→ &7Click to view."
+
+  exchange-button:
+    slot: 34
+    material: EMERALD
+    name: "&#5B8DD9💱 &fExchange"
+    lore:
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&7Buy materials with Scrap."
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&#5B8DD9→ &7Click to open."
+
+  milestones-button:
+    slot: 40
+    material: NETHER_STAR
+    name: "&#FFD700★ &fMilestones"
+    lore:
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&7Track your achievements."
+      - "&7Completed: &e{milestones_done}"
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&#5B8DD9→ &7Click to view."
+
+  extraction-status:
+    slot: 22
+    material: ENDER_CHEST
+    name: "&#5B8DD9⚡ &fExtraction Status"
+    lore:
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "{extraction_status}"
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+    status-active:   "&#FF6B35⚡ ACTIVE: &e{zone_name} &8— &7{current_extraction} left"
+    status-waiting:  "&#5B8DD9⚡ Next in: &e{next_extraction}"
+
+  close-button:
+    slot: 49
+    material: BARRIER
+    name: "&cClose"
+    lore:
+      - "&7Click to close."
+
+  no-core-message: "&cYou need to place your Core first!"
+
+# ─────────────────────────────────────────────────────────────────
+# ARMORY GUI  (/armory)
+# ─────────────────────────────────────────────────────────────────
+armory:
+  title: "&#5B8DD9◈ &fArmory &8— &7Upgrade your Gear"
+  rows: 6
+
+  info-item:
+    slot: 4
+    material: NETHER_STAR
+    name: "&#5B8DD9◈ &fArmory"
+    lore:
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&7Upgrade your &eGear &7using"
+      - "&7materials gathered from"
+      - "&eExtractions &7and &eCores&7."
+      - ""
+      - "&8→ &7Click any item to upgrade"
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+
+  # Gear slot positions [sword, pickaxe, axe, helmet, chestplate, leggings, boots]
+  gear-slots: [10, 12, 14, 28, 30, 32, 34]
+
+  # Display labels for each gear type (used in lore header)
+  gear-labels:
+    sword:      "⚔ Sword"
+    pickaxe:    "⛏ Pickaxe"
+    axe:        "🪓 Axe"
+    helmet:     "◈ Helmet"
+    chestplate: "◈ Chestplate"
+    leggings:   "◈ Leggings"
+    boots:      "◈ Boots"
+
+  # Gear item lore template — {gear_label}, {tier}, {max_tier}, cost placeholders, etc.
+  gear-lore-header:
+    - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+    - "&7Current Tier: &f{tier} &8/ &f{max_tier}"
+    - ""
+  gear-lore-cost-header: "&7Upgrade Cost:"
+  gear-lore-cost-scrap:  "  &8◆ &eScrap: &f{cost_scrap}"
+  gear-lore-cost-screws: "  &8◆ &bScrews: &f{cost_screws}"
+  gear-lore-cost-energy: "  &8◆ &aEnergy Cells: &f{cost_energy}"
+  gear-lore-cost-bio:    "  &8◆ &dBio Samples: &f{cost_bio}"
+  gear-lore-cost-tech:   "  &8◆ &6Tech Shards: &f{cost_tech}"
+  gear-lore-can-afford:    "&#5B8DD9→ &aClick to upgrade!"
+  gear-lore-cant-afford:   "&c✘ Not enough resources."
+  gear-lore-max-tier:      "&#FFD700★ &eMax Tier Reached!"
+  gear-lore-footer:
+    - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+
+  # Name format for gear item in GUI: {color_prefix}{gear_label} [T{tier}]
+  gear-name-format: "&#5B8DD9{gear_label} &8[&fT{tier}&8]"
+
+  close-button:
+    slot: 49
+    material: BARRIER
+    name: "&cClose"
+    lore:
+      - "&7Click to close this menu."
+
+# ─────────────────────────────────────────────────────────────────
+# CORE GUI  (right-click core)
+# ─────────────────────────────────────────────────────────────────
+core-gui:
+  title: "&#5B8DD9◈ &fCore Management"
+  rows: 6
+
+  info-item:
+    slot: 4
+    material: BEACON
+    name: "&#5B8DD9◈ &fYour Core"
+    lore:
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&7Generation: &e+{scrap_rate} Scrap &8/ &e{interval}s"
+      - "&7Location: &eX{core_x} &8| &eY{core_y} &8| &eZ{core_z}"
+      - ""
+      - "&7Speed Tier:      &f{speed_lvl} &8/ &f{speed_max}"
+      - "&7Production Tier: &f{prod_lvl} &8/ &f{prod_max}"
+      - ""
+      - "&7Stored Scrap: &#FFD700{stored_scrap}"
+      - "&8&o(Collect to transfer to your balance)"
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+
+  collect-button:
+    slot: 13
+    material: SUNFLOWER
+    name: "&#FFD700⬇ &eCollect Stored Scrap"
+    lore:
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&7Stored in Core: &#FFD700{stored_scrap} Scrap"
+      - ""
+      - "&7Click to transfer all stored Scrap"
+      - "&7directly to your balance."
+      - ""
+      - "&c⚠ Enemies can raid your Core!"
+      - "&7The more Scrap stored, the more"
+      - "&7they can steal on raid."
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&#5B8DD9→ &aClick to collect."
+
+  speed-upgrade:
+    slot: 20
+    material: FEATHER
+    name: "&#5B8DD9⚡ Generation Speed"
+    lore-header:
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&7Current Level: &f{speed_lvl} &8/ &f{speed_max}"
+      - "&7Next: &f{next_display}"
+      - ""
+      - "&7Upgrade Cost:"
+    lore-cost-scrap:  "  &8◆ &eScrap: &f{cost_scrap}"
+    lore-cost-screws: "  &8◆ &bScrews: &f{cost_screws}"
+    lore-cost-energy: "  &8◆ &aEnergy Cells: &f{cost_energy}"
+    lore-cost-bio:    "  &8◆ &dBio Samples: &f{cost_bio}"
+    lore-cost-tech:   "  &8◆ &6Tech Shards: &f{cost_tech}"
+    lore-can-afford:   "&#5B8DD9→ &aClick to upgrade!"
+    lore-cant-afford:  "&c✘ Not enough resources."
+    lore-max-level:    "&#FFD700★ &eMax Level Reached!"
+    lore-footer:
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+
+  production-upgrade:
+    slot: 24
+    material: FURNACE
+    name: "&#FFD700⚙ Scrap Production"
+    lore-header:
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&7Current Level: &f{prod_lvl} &8/ &f{prod_max}"
+      - "&7Next: &f{next_display}"
+      - ""
+      - "&7Upgrade Cost:"
+    lore-cost-scrap:  "  &8◆ &eScrap: &f{cost_scrap}"
+    lore-cost-screws: "  &8◆ &bScrews: &f{cost_screws}"
+    lore-cost-energy: "  &8◆ &aEnergy Cells: &f{cost_energy}"
+    lore-cost-bio:    "  &8◆ &dBio Samples: &f{cost_bio}"
+    lore-cost-tech:   "  &8◆ &6Tech Shards: &f{cost_tech}"
+    lore-can-afford:   "&#5B8DD9→ &aClick to upgrade!"
+    lore-cant-afford:  "&c✘ Not enough resources."
+    lore-max-level:    "&#FFD700★ &eMax Level Reached!"
+    lore-footer:
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+
+  pickup-button:
+    slot: 40
+    material: MINECART
+    name: "&#FFD700⤴ &ePickup Core"
+    lore:
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&7Hold still for &e{pickup_seconds}s"
+      - "&7to pick up your Core."
+      - ""
+      - "&c⚠ Moving will cancel pickup!"
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&#5B8DD9→ &7Click to begin pickup."
+
+  close-button:
+    slot: 49
+    material: BARRIER
+    name: "&cClose"
+    lore:
+      - "&7Click to close this menu."
+
+  upgrade-messages:
+    max-level:         "&7This upgrade is already at &emax level&7."
+    not-enough:        "&cNot enough resources for this upgrade."
+    success-speed:     "&#5B8DD9Core Speed upgraded to level &e{level}&8."
+    success-production: "&#5B8DD9Core Production upgraded to level &e{level}&8."
+
+  not-your-core: "&cThis is not your Core."
+  not-your-core-right-click: "&7This is not your Core. &8| &cMine it &7to raid it."
+  redirect-to-gui: "&7To pick up your Core, &eright-click &7it and use the Pickup button."
+
+# ─────────────────────────────────────────────────────────────────
+# STATS GUI  (/stats)
+# ─────────────────────────────────────────────────────────────────
+stats:
+  title: "&#5B8DD9◈ &f{player} &8— &7Stats"
+  rows: 5
+
+  level-item:
+    slot: 11
+    material: EXPERIENCE_BOTTLE
+    name: "&#5B8DD9◈ &fLevel & XP"
+    lore:
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&7Level:    {level}"
+      - "&7XP:       &e{xp_raw} &8/ &e{xp_needed}"
+      - "&7Progress: &e{progress}%"
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+
+  materials-item:
+    slot: 13
+    material: GOLD_INGOT
+    name: "&#5B8DD9◈ &fMaterials"
+    lore:
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&7Scrap:         &e{scrap}"
+      - "&7Screws:        &b{screws}"
+      - "&7Energy Cells:  &a{energy}"
+      - "&7Bio Samples:   &d{bio}"
+      - "&7Tech Shards:   &6{tech}"
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+
+  combat-item:
+    slot: 15
+    material: DIAMOND_SWORD
+    name: "&#5B8DD9◈ &fCombat Stats"
+    lore:
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&7Kills:           &e{kills}"
+      - "&7Deaths:          &c{deaths}"
+      - "&7K/D Ratio:       &f{kd}"
+      - "&7Cores Destroyed: &e{cores_destroyed}"
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+
+  extraction-item:
+    slot: 29
+    material: ENDER_CHEST
+    name: "&#5B8DD9◈ &fExtraction Stats"
+    lore:
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&7Extractions Done: &e{extractions}"
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+
+  playtime-item:
+    slot: 31
+    material: CLOCK
+    name: "&#5B8DD9◈ &fPlaytime"
+    lore:
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&7Total:      &e{playtime_h}h {playtime_m}m"
+      - "&7Milestones: &e{milestones_done}"
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+
+  gear-item:
+    slot: 33
+    material: CHAINMAIL_CHESTPLATE
+    name: "&#5B8DD9◈ &fGear Tiers"
+    lore:
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&7Sword:      &eT{sword_t}"
+      - "&7Pickaxe:    &eT{pickaxe_t}"
+      - "&7Axe:        &eT{axe_t}"
+      - "&7Helmet:     &eT{helmet_t}"
+      - "&7Chestplate: &eT{chest_t}"
+      - "&7Leggings:   &eT{legs_t}"
+      - "&7Boots:      &eT{boots_t}"
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+
+  close-button:
+    slot: 40
+    material: BARRIER
+    name: "&cClose"
+    lore:
+      - "&7Click to close."
+
+# ─────────────────────────────────────────────────────────────────
+# EXCHANGE GUI  (/exchange)
+# ─────────────────────────────────────────────────────────────────
+exchange:
+  title: "&#5B8DD9◈ &fExchange &8— &7Buy with Scrap"
+  rows: 5
+
+  info-item:
+    slot: 13
+    material: EMERALD
+    name: "&#5B8DD9◈ &fExchange Info"
+    lore:
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&7Your Scrap: &e{scrap}"
+      - ""
+      - "&7Buy materials with Scrap."
+      - "&7Materials are &emore valuable"
+      - "&7than Scrap &8— &7prices reflect this."
+      - ""
+      - "&8→ &7Left Click:   &f×1"
+      - "&8→ &7Right Click:  &f×10"
+      - "&8→ &7Shift+Click:  &f×64"
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+
+  # Each material entry: slot, key, display-name, material icon
+  materials:
+    screws:
+      slot: 20
+      material: IRON_NUGGET
+      name: "&b◈ Screws"
+      lore:
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&7Cost ×1:   &e{cost_1} Scrap"
+        - "&7Cost ×10:  &e{cost_10} Scrap"
+        - "&7Cost ×64:  &e{cost_64} Scrap"
+        - ""
+        - "&8→ &7Left Click:  &aBuy ×1"
+        - "&8→ &7Right Click: &aBuy ×10"
+        - "&8→ &7Shift+Click: &aBuy ×64"
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+    energy-cells:
+      slot: 22
+      material: GLOWSTONE_DUST
+      name: "&a◈ Energy Cells"
+      lore:
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&7Cost ×1:   &e{cost_1} Scrap"
+        - "&7Cost ×10:  &e{cost_10} Scrap"
+        - "&7Cost ×64:  &e{cost_64} Scrap"
+        - ""
+        - "&8→ &7Left Click:  &aBuy ×1"
+        - "&8→ &7Right Click: &aBuy ×10"
+        - "&8→ &7Shift+Click: &aBuy ×64"
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+    bio-samples:
+      slot: 24
+      material: SLIME_BALL
+      name: "&d◈ Bio Samples"
+      lore:
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&7Cost ×1:   &e{cost_1} Scrap"
+        - "&7Cost ×10:  &e{cost_10} Scrap"
+        - "&7Cost ×64:  &e{cost_64} Scrap"
+        - ""
+        - "&8→ &7Left Click:  &aBuy ×1"
+        - "&8→ &7Right Click: &aBuy ×10"
+        - "&8→ &7Shift+Click: &aBuy ×64"
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+    tech-shards:
+      slot: 31
+      material: BLAZE_POWDER
+      name: "&6◈ Tech Shards"
+      lore:
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&7Cost ×1:   &e{cost_1} Scrap"
+        - "&7Cost ×10:  &e{cost_10} Scrap"
+        - "&7Cost ×64:  &e{cost_64} Scrap"
+        - ""
+        - "&8→ &7Left Click:  &aBuy ×1"
+        - "&8→ &7Right Click: &aBuy ×10"
+        - "&8→ &7Shift+Click: &aBuy ×64"
+        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+
+  close-button:
+    slot: 40
+    material: BARRIER
+    name: "&cClose"
+    lore:
+      - "&7Click to close."
+
+# ─────────────────────────────────────────────────────────────────
+# MILESTONES GUI  (/milestones)
+# ─────────────────────────────────────────────────────────────────
+milestones:
+  title: "&#FFD700★ &fMilestones"
+  rows: 3
+
+  header-item:
+    slot: 17
+    material: NETHER_STAR
+    name: "&#FFD700★ &fMilestone Progress"
+    lore:
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&7Completed: &e{milestones_done} &8/ &e{milestones_total}"
+      - "&7Claimable: &#FFD700{claimable_count}"
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+
+  # Prefix on claimable slots (enchant glint active)
+  milestone-claimable-prefix: "&#FFD700★ "
+  # Prefix on locked/in-progress slots
+  milestone-incomplete-prefix: "&8◈ "
+
+  category-complete:
+    name: "&#5B8DD9✔ &a{category} Complete"
+
+  close-button:
+    slot: 26
+    material: BARRIER
+    name: "&cClose"
+    lore:
+      - "&7Click to close."
+
+reset-confirm:
+  title: "&#FF4444⚠ Confirm Reset — {player}"
+  rows: 3
+  filler-material: RED_STAINED_GLASS_PANE
+
+  confirm-button:
+    slot: 11
+    material: LIME_DYE
+    name: "&a✔ Confirm Reset"
+    lore:
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&7Player: &e{player}"
+      - "&7Type:   &c{reset_type}"
+      - ""
+      - "&cThis action is irreversible!"
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&a→ Click to confirm."
+
+  cancel-button:
+    slot: 15
+    material: RED_DYE
+    name: "&c✘ Cancel"
+    lore:
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&7Click to cancel the reset."
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+
+# ─────────────────────────────────────────────────────────────────
+# ADMIN COMMAND  (/ex)
+# ─────────────────────────────────────────────────────────────────
+admin:
+  help:
+    header: "&#5B8DD9ExtractCore Admin Commands:"
+    reload: "&8/ex &7reload"
+    define: "&8/ex &7define extract <n>"
+    currency: "&8/ex &7set|give|take <currency> <player> <amount>"
+    reset: "&8/ex &7reset <type> <player>"
+  errors:
+    no-permission:       "&cNo permission."
+    players-only:        "&cOnly players can use this command."
+    define-players-only: "&cOnly players can define zones."
+    define-usage:        "&cUsage: /ex define extract <n>"
+    worldedit-no-sel:    "&cMake a WorldEdit selection first!"
+    currency-usage:      "&cUsage: /ex {action} <currency> <player> <amount>"
+    amount-positive:     "&cAmount must be positive."
+    reset-usage:         "&cUsage: /ex reset <type> <player>"
+    zone-offline-destroyed: "&#5B8DD9You destroyed &e{player}'s &7Core! &8(offline player)"
+
+# ─────────────────────────────────────────────────────────────────
+# PLAYER JOIN
+# ─────────────────────────────────────────────────────────────────
+join:
+  first-join-message:
+    - ""
+    - "&#5B8DD9&lWelcome to Extract!"
+    - "&7You've been given your &eStarting Gear&7."
+    - "&7Place your &eCore &7to start generating &eScrap&7."
+    - "&7Use &e/extract &7to open the main menu."
+    - ""

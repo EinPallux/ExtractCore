@@ -1,0 +1,51 @@
+name: ExtractCore
+version: '${project.version}'
+main: com.pallux.extractcore.ExtractCore
+api-version: '1.21'
+author: Pallux
+description: The Extract Gamemode Plugin
+
+softdepend:
+  - PlaceholderAPI
+  - PlayerPoints
+  - WorldEdit
+  - FastAsyncWorldEdit
+
+commands:
+  armory:
+    description: Opens the Armory GUI
+    usage: /armory
+    permission: ex.player
+  stats:
+    description: Shows your current stats
+    usage: /stats
+    permission: ex.player
+  extract:
+    description: Opens the main extract menu
+    usage: /extract
+    permission: ex.player
+    aliases: [menu]
+  core:
+    description: Shows your core coordinates
+    usage: /core
+    permission: ex.player
+  exchange:
+    description: Opens the exchange GUI
+    usage: /exchange
+    permission: ex.player
+  milestones:
+    description: Opens the milestones GUI
+    usage: /milestones
+    permission: ex.player
+  ex:
+    description: Admin command for ExtractCore
+    usage: /ex <subcommand>
+    permission: ex.admin
+
+permissions:
+  ex.player:
+    description: Default player permission
+    default: true
+  ex.admin:
+    description: Admin permission
+    default: op

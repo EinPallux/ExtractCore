@@ -1,0 +1,271 @@
+# ═══════════════════════════════════════════
+#    ExtractCore - Milestones Configuration
+# ═══════════════════════════════════════════
+
+milestones:
+
+  # ── Extraction Milestones ────────────────
+  extractions_1:
+    type: EXTRACTIONS
+    target: 1
+    display-name: "&7First Extract"
+    description:
+      - "&7Complete your first extraction."
+    icon: ENDER_CHEST
+    rewards:
+      scrap: 500
+      points: 10
+      message: "&7First blood in the extraction zone!"
+
+  extractions_5:
+    type: EXTRACTIONS
+    target: 5
+    display-name: "&7Extraction Rookie"
+    description:
+      - "&7Complete &e5 &7extractions."
+    icon: ENDER_CHEST
+    rewards:
+      scrap: 2000
+      screws: 5
+      points: 25
+
+  extractions_25:
+    type: EXTRACTIONS
+    target: 25
+    display-name: "&aExtraction Veteran"
+    description:
+      - "&7Complete &e25 &7extractions."
+    icon: ENDER_CHEST
+    rewards:
+      scrap: 10000
+      screws: 30
+      energy-cells: 5
+      points: 75
+
+  extractions_100:
+    type: EXTRACTIONS
+    target: 100
+    display-name: "&6Extraction Expert"
+    description:
+      - "&7Complete &e100 &7extractions."
+    icon: ENDER_CHEST
+    rewards:
+      scrap: 50000
+      screws: 120
+      energy-cells: 30
+      bio-samples: 10
+      points: 200
+
+  extractions_500:
+    type: EXTRACTIONS
+    target: 500
+    display-name: "&#FF4500Extraction Master"
+    description:
+      - "&7Complete &e500 &7extractions."
+    icon: ENDER_CHEST
+    rewards:
+      scrap: 250000
+      screws: 500
+      energy-cells: 150
+      bio-samples: 60
+      tech-shards: 20
+      points: 1000
+
+  # ── Kill Milestones ──────────────────────
+  kills_1:
+    type: KILLS
+    target: 1
+    display-name: "&7First Blood"
+    description:
+      - "&7Kill your first player."
+    icon: DIAMOND_SWORD
+    rewards:
+      scrap: 300
+      points: 10
+
+  kills_10:
+    type: KILLS
+    target: 10
+    display-name: "&7Skirmisher"
+    description:
+      - "&7Kill &e10 &7players."
+    icon: DIAMOND_SWORD
+    rewards:
+      scrap: 3000
+      screws: 8
+      points: 30
+
+  kills_50:
+    type: KILLS
+    target: 50
+    display-name: "&aHunter"
+    description:
+      - "&7Kill &e50 &7players."
+    icon: DIAMOND_SWORD
+    rewards:
+      scrap: 15000
+      screws: 40
+      energy-cells: 8
+      points: 100
+
+  kills_200:
+    type: KILLS
+    target: 200
+    display-name: "&6Predator"
+    description:
+      - "&7Kill &e200 &7players."
+    icon: DIAMOND_SWORD
+    rewards:
+      scrap: 75000
+      screws: 180
+      energy-cells: 50
+      bio-samples: 20
+      points: 350
+
+  kills_1000:
+    type: KILLS
+    target: 1000
+    display-name: "&#B24BF3Apex Predator"
+    description:
+      - "&7Kill &e1000 &7players."
+    icon: NETHERITE_SWORD
+    rewards:
+      scrap: 400000
+      screws: 800
+      energy-cells: 250
+      bio-samples: 100
+      tech-shards: 40
+      points: 2000
+
+  # ── Playtime Milestones ──────────────────
+  playtime_60:
+    type: PLAYTIME_MINUTES
+    target: 60
+    display-name: "&7First Hour"
+    description:
+      - "&7Play for &e1 hour&7."
+    icon: CLOCK
+    rewards:
+      scrap: 1000
+      points: 15
+
+  playtime_600:
+    type: PLAYTIME_MINUTES
+    target: 600
+    display-name: "&aDedicated"
+    description:
+      - "&7Play for &e10 hours&7."
+    icon: CLOCK
+    rewards:
+      scrap: 10000
+      screws: 20
+      points: 50
+
+  playtime_3000:
+    type: PLAYTIME_MINUTES
+    target: 3000
+    display-name: "&6Veteran"
+    description:
+      - "&7Play for &e50 hours&7."
+    icon: CLOCK
+    rewards:
+      scrap: 60000
+      screws: 100
+      energy-cells: 25
+      points: 150
+
+  # ── Core Destroy Milestones ──────────────
+  cores_destroyed_1:
+    type: CORES_DESTROYED
+    target: 1
+    display-name: "&7Core Breaker"
+    description:
+      - "&7Destroy your first enemy Core."
+    icon: BEACON
+    rewards:
+      scrap: 2000
+      points: 20
+
+  cores_destroyed_10:
+    type: CORES_DESTROYED
+    target: 10
+    display-name: "&aSaboteur"
+    description:
+      - "&7Destroy &e10 &7enemy Cores."
+    icon: BEACON
+    rewards:
+      scrap: 20000
+      screws: 50
+      energy-cells: 10
+      points: 100
+
+  # ── Level Milestones ─────────────────────
+  level_10:
+    type: LEVEL
+    target: 10
+    display-name: "&7Getting Started"
+    description:
+      - "&7Reach &eLevel 10&7."
+    icon: EXPERIENCE_BOTTLE
+    rewards:
+      scrap: 5000
+      points: 30
+
+  level_100:
+    type: LEVEL
+    target: 100
+    display-name: "&aLevel 100"
+    description:
+      - "&7Reach &eLevel 100&7."
+    icon: EXPERIENCE_BOTTLE
+    rewards:
+      scrap: 50000
+      screws: 100
+      energy-cells: 20
+      points: 200
+
+  level_500:
+    type: LEVEL
+    target: 500
+    display-name: "&6Level 500"
+    description:
+      - "&7Reach &eLevel 500&7."
+    icon: NETHER_STAR
+    rewards:
+      scrap: 300000
+      screws: 500
+      energy-cells: 100
+      bio-samples: 50
+      tech-shards: 25
+      points: 1500
+
+  level_1000:
+    type: LEVEL
+    target: 1000
+    display-name: "&#B24BF3Level 1000 — Legend"
+    description:
+      - "&7Reach the legendary &eLevel 1000&7."
+    icon: NETHER_STAR
+    rewards:
+      scrap: 1000000
+      screws: 1500
+      energy-cells: 400
+      bio-samples: 200
+      tech-shards: 100
+      points: 5000
+
+  level_5000:
+    type: LEVEL
+    target: 5000
+    display-name: "&#FFD700&lLevel 5000 — ASCENDED"
+    description:
+      - "&#FFD700The pinnacle of Extract."
+      - "&7You have truly mastered the game."
+    icon: DRAGON_EGG
+    rewards:
+      scrap: 10000000
+      screws: 10000
+      energy-cells: 5000
+      bio-samples: 2000
+      tech-shards: 1000
+      points: 50000

@@ -1,0 +1,1553 @@
+# ═══════════════════════════════════════════
+#        ExtractCore - Core Configuration
+# ═══════════════════════════════════════════
+
+core:
+  # Base scrap generated per tick interval (before any upgrades)
+  base-scrap-per-interval: 10
+  # Base interval in seconds between scrap generation ticks
+  base-interval-seconds: 10
+  # Seconds it takes to pick up the core
+  pickup-duration-seconds: 10
+  # Percent of upgrade progress lost when core is destroyed by another player
+  destroy-loss-percent: 20
+  # Percent of scrap STORED IN THE CORE that the raider receives on destroy
+  raid-reward-percent: 10
+
+  # The display name of the Core item
+  item-name: "&#5B8DD9◈ &fExtract Core"
+  item-lore:
+    - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+    - "&7Place this down to begin"
+    - "&7generating &eScrap&7."
+    - ""
+    - "&#5B8DD9◆ &7Your base&8, &7your power."
+    - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+
+  # PDC key used to mark the core item (do not change after deployment)
+  nbt-key: "extractcore_beacon"
+
+
+  # ── Hologram above placed Core ───────────────────────────────────────────
+  hologram:
+    # Enable or disable the hologram entirely
+    enabled: true
+    # How many ticks between hologram text refreshes (20 = 1s, 40 = 2s)
+    refresh-ticks: 40
+    # Y offset above the beacon block (beacon is 1 block tall)
+    y-offset: 2.6
+    # Scale of the text (1.0 = default MC text size)
+    scale: 1.0
+    # Drop shadow behind text
+    shadow: true
+    # Semi-transparent dark background panel (false = no background)
+    background: false
+
+    # Lines displayed top to bottom.
+    # Supports &#RRGGBB hex and &c legacy colors.
+    # Available placeholders:
+    #   {owner}      — owner's player name
+    #   {stored}     — stored scrap (formatted, e.g. 7.4K)
+    #   {stored_raw} — stored scrap (raw number)
+    #   {rate}       — scrap generated per interval (formatted)
+    #   {interval}   — generation interval in seconds
+    #   {speed_lvl}  — current speed upgrade level
+    #   {prod_lvl}   — current production upgrade level
+    #   {speed_max}  — max speed upgrade level
+    #   {prod_max}   — max production upgrade level
+    lines:
+      - "&#5B8DD9&l{owner}'s Core"
+      - "&8▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔"
+      - "&#FFD700⬡ &7Stored:  &#FFD700{stored} Scrap"
+      - "&#5B8DD9⚡ &7Output:  &e+{rate} &7/ &e{interval}s"
+      - "&8◈ &7Speed &fLvl {speed_lvl}&8/{speed_max}  &8◈ &7Prod &fLvl {prod_lvl}&8/{prod_max}"
+
+  # ── Core Upgrade Levels (100 levels each) ────────────────────────────
+  # Speed: reduces the generation interval (how often Scrap is produced)
+  # Production: increases the amount of Scrap produced per interval
+  #
+  # Material unlock thresholds:
+  #   Levels  1-15:  Scrap only
+  #   Levels 16-30:  + Screws
+  #   Levels 31-50:  + Energy Cells
+  #   Levels 51-70:  + Bio Samples
+  #   Levels 71-100: + Tech Shards
+
+  upgrades:
+    speed:
+      max-level: 100
+      levels:
+        1:
+          cost:
+            scrap: 500
+          interval-seconds: 10
+          display: "&7Speed &fLvl 1"
+        2:
+          cost:
+            scrap: 600
+          interval-seconds: 9
+          display: "&7Speed &fLvl 2"
+        3:
+          cost:
+            scrap: 600
+          interval-seconds: 9
+          display: "&7Speed &fLvl 3"
+        4:
+          cost:
+            scrap: 700
+          interval-seconds: 8
+          display: "&7Speed &fLvl 4"
+        5:
+          cost:
+            scrap: 800
+          interval-seconds: 8
+          display: "&7Speed &fLvl 5"
+        6:
+          cost:
+            scrap: 900
+          interval-seconds: 8
+          display: "&7Speed &fLvl 6"
+        7:
+          cost:
+            scrap: 1100
+          interval-seconds: 8
+          display: "&7Speed &fLvl 7"
+        8:
+          cost:
+            scrap: 1200
+          interval-seconds: 7
+          display: "&7Speed &fLvl 8"
+        9:
+          cost:
+            scrap: 1400
+          interval-seconds: 7
+          display: "&7Speed &fLvl 9"
+        10:
+          cost:
+            scrap: 1600
+          interval-seconds: 7
+          display: "&7Speed &fLvl 10"
+        11:
+          cost:
+            scrap: 1800
+          interval-seconds: 6
+          display: "&7Speed &fLvl 11"
+        12:
+          cost:
+            scrap: 2000
+          interval-seconds: 6
+          display: "&7Speed &fLvl 12"
+        13:
+          cost:
+            scrap: 2300
+          interval-seconds: 6
+          display: "&7Speed &fLvl 13"
+        14:
+          cost:
+            scrap: 2600
+          interval-seconds: 6
+          display: "&7Speed &fLvl 14"
+        15:
+          cost:
+            scrap: 2900
+          interval-seconds: 6
+          display: "&7Speed &fLvl 15"
+        16:
+          cost:
+            scrap: 3300
+            screws: 3
+          interval-seconds: 5
+          display: "&7Speed &fLvl 16"
+        17:
+          cost:
+            scrap: 3800
+            screws: 3
+          interval-seconds: 5
+          display: "&7Speed &fLvl 17"
+        18:
+          cost:
+            scrap: 4300
+            screws: 4
+          interval-seconds: 5
+          display: "&7Speed &fLvl 18"
+        19:
+          cost:
+            scrap: 4900
+            screws: 4
+          interval-seconds: 5
+          display: "&7Speed &fLvl 19"
+        20:
+          cost:
+            scrap: 5500
+            screws: 4
+          interval-seconds: 5
+          display: "&7Speed &fLvl 20"
+        21:
+          cost:
+            scrap: 6300
+            screws: 5
+          interval-seconds: 4
+          display: "&aSpeed &fLvl 21"
+        22:
+          cost:
+            scrap: 7100
+            screws: 5
+          interval-seconds: 4
+          display: "&aSpeed &fLvl 22"
+        23:
+          cost:
+            scrap: 8100
+            screws: 6
+          interval-seconds: 4
+          display: "&aSpeed &fLvl 23"
+        24:
+          cost:
+            scrap: 9200
+            screws: 6
+          interval-seconds: 4
+          display: "&aSpeed &fLvl 24"
+        25:
+          cost:
+            scrap: 10000
+            screws: 7
+          interval-seconds: 4
+          display: "&aSpeed &fLvl 25"
+        26:
+          cost:
+            scrap: 12000
+            screws: 8
+          interval-seconds: 4
+          display: "&aSpeed &fLvl 26"
+        27:
+          cost:
+            scrap: 13000
+            screws: 9
+          interval-seconds: 4
+          display: "&aSpeed &fLvl 27"
+        28:
+          cost:
+            scrap: 15000
+            screws: 9
+          interval-seconds: 3
+          display: "&aSpeed &fLvl 28"
+        29:
+          cost:
+            scrap: 17000
+            screws: 10
+          interval-seconds: 3
+          display: "&aSpeed &fLvl 29"
+        30:
+          cost:
+            scrap: 20000
+            screws: 11
+          interval-seconds: 3
+          display: "&aSpeed &fLvl 30"
+        31:
+          cost:
+            scrap: 22000
+            screws: 13
+            energy-cells: 2
+          interval-seconds: 3
+          display: "&aSpeed &fLvl 31"
+        32:
+          cost:
+            scrap: 25000
+            screws: 14
+            energy-cells: 2
+          interval-seconds: 3
+          display: "&aSpeed &fLvl 32"
+        33:
+          cost:
+            scrap: 29000
+            screws: 15
+            energy-cells: 2
+          interval-seconds: 3
+          display: "&aSpeed &fLvl 33"
+        34:
+          cost:
+            scrap: 33000
+            screws: 17
+            energy-cells: 3
+          interval-seconds: 3
+          display: "&aSpeed &fLvl 34"
+        35:
+          cost:
+            scrap: 37000
+            screws: 18
+            energy-cells: 3
+          interval-seconds: 3
+          display: "&aSpeed &fLvl 35"
+        36:
+          cost:
+            scrap: 42000
+            screws: 20
+            energy-cells: 3
+          interval-seconds: 3
+          display: "&aSpeed &fLvl 36"
+        37:
+          cost:
+            scrap: 48000
+            screws: 22
+            energy-cells: 3
+          interval-seconds: 3
+          display: "&aSpeed &fLvl 37"
+        38:
+          cost:
+            scrap: 54000
+            screws: 24
+            energy-cells: 4
+          interval-seconds: 3
+          display: "&aSpeed &fLvl 38"
+        39:
+          cost:
+            scrap: 61000
+            screws: 27
+            energy-cells: 4
+          interval-seconds: 2
+          display: "&aSpeed &fLvl 39"
+        40:
+          cost:
+            scrap: 70000
+            screws: 30
+            energy-cells: 4
+          interval-seconds: 2
+          display: "&aSpeed &fLvl 40"
+        41:
+          cost:
+            scrap: 79000
+            screws: 33
+            energy-cells: 5
+          interval-seconds: 2
+          display: "&eSpeed &fLvl 41"
+        42:
+          cost:
+            scrap: 90000
+            screws: 36
+            energy-cells: 5
+          interval-seconds: 2
+          display: "&eSpeed &fLvl 42"
+        43:
+          cost:
+            scrap: 100000
+            screws: 39
+            energy-cells: 6
+          interval-seconds: 2
+          display: "&eSpeed &fLvl 43"
+        44:
+          cost:
+            scrap: 115000
+            screws: 43
+            energy-cells: 6
+          interval-seconds: 2
+          display: "&eSpeed &fLvl 44"
+        45:
+          cost:
+            scrap: 130000
+            screws: 48
+            energy-cells: 7
+          interval-seconds: 2
+          display: "&eSpeed &fLvl 45"
+        46:
+          cost:
+            scrap: 150000
+            screws: 52
+            energy-cells: 7
+          interval-seconds: 2
+          display: "&eSpeed &fLvl 46"
+        47:
+          cost:
+            scrap: 170000
+            screws: 58
+            energy-cells: 8
+          interval-seconds: 2
+          display: "&eSpeed &fLvl 47"
+        48:
+          cost:
+            scrap: 190000
+            screws: 63
+            energy-cells: 9
+          interval-seconds: 2
+          display: "&eSpeed &fLvl 48"
+        49:
+          cost:
+            scrap: 220000
+            screws: 70
+            energy-cells: 9
+          interval-seconds: 2
+          display: "&eSpeed &fLvl 49"
+        50:
+          cost:
+            scrap: 250000
+            screws: 77
+            energy-cells: 10
+          interval-seconds: 2
+          display: "&eSpeed &fLvl 50"
+        51:
+          cost:
+            scrap: 280000
+            screws: 84
+            energy-cells: 11
+            bio-samples: 2
+          interval-seconds: 2
+          display: "&eSpeed &fLvl 51"
+        52:
+          cost:
+            scrap: 320000
+            screws: 93
+            energy-cells: 12
+            bio-samples: 2
+          interval-seconds: 2
+          display: "&eSpeed &fLvl 52"
+        53:
+          cost:
+            scrap: 360000
+            screws: 102
+            energy-cells: 13
+            bio-samples: 2
+          interval-seconds: 2
+          display: "&eSpeed &fLvl 53"
+        54:
+          cost:
+            scrap: 410000
+            screws: 112
+            energy-cells: 15
+            bio-samples: 3
+          interval-seconds: 2
+          display: "&eSpeed &fLvl 54"
+        55:
+          cost:
+            scrap: 465000
+            screws: 123
+            energy-cells: 16
+            bio-samples: 3
+          interval-seconds: 2
+          display: "&eSpeed &fLvl 55"
+        56:
+          cost:
+            scrap: 530000
+            screws: 136
+            energy-cells: 17
+            bio-samples: 3
+          interval-seconds: 2
+          display: "&eSpeed &fLvl 56"
+        57:
+          cost:
+            scrap: 600000
+            screws: 149
+            energy-cells: 19
+            bio-samples: 3
+          interval-seconds: 2
+          display: "&eSpeed &fLvl 57"
+        58:
+          cost:
+            scrap: 680000
+            screws: 164
+            energy-cells: 20
+            bio-samples: 3
+          interval-seconds: 2
+          display: "&eSpeed &fLvl 58"
+        59:
+          cost:
+            scrap: 775000
+            screws: 181
+            energy-cells: 22
+            bio-samples: 4
+          interval-seconds: 2
+          display: "&eSpeed &fLvl 59"
+        60:
+          cost:
+            scrap: 880000
+            screws: 199
+            energy-cells: 24
+            bio-samples: 4
+          interval-seconds: 2
+          display: "&eSpeed &fLvl 60"
+        61:
+          cost:
+            scrap: 995000
+            screws: 219
+            energy-cells: 27
+            bio-samples: 4
+          interval-seconds: 2
+          display: "&6Speed &fLvl 61"
+        62:
+          cost:
+            scrap: 1150000
+            screws: 241
+            energy-cells: 29
+            bio-samples: 5
+          interval-seconds: 2
+          display: "&6Speed &fLvl 62"
+        63:
+          cost:
+            scrap: 1300000
+            screws: 265
+            energy-cells: 32
+            bio-samples: 5
+          interval-seconds: 1
+          display: "&6Speed &fLvl 63"
+        64:
+          cost:
+            scrap: 1450000
+            screws: 291
+            energy-cells: 34
+            bio-samples: 5
+          interval-seconds: 1
+          display: "&6Speed &fLvl 64"
+        65:
+          cost:
+            scrap: 1650000
+            screws: 320
+            energy-cells: 37
+            bio-samples: 6
+          interval-seconds: 1
+          display: "&6Speed &fLvl 65"
+        66:
+          cost:
+            scrap: 1900000
+            screws: 352
+            energy-cells: 41
+            bio-samples: 6
+          interval-seconds: 1
+          display: "&6Speed &fLvl 66"
+        67:
+          cost:
+            scrap: 2150000
+            screws: 387
+            energy-cells: 45
+            bio-samples: 7
+          interval-seconds: 1
+          display: "&6Speed &fLvl 67"
+        68:
+          cost:
+            scrap: 2400000
+            screws: 426
+            energy-cells: 49
+            bio-samples: 7
+          interval-seconds: 1
+          display: "&6Speed &fLvl 68"
+        69:
+          cost:
+            scrap: 2750000
+            screws: 469
+            energy-cells: 53
+            bio-samples: 8
+          interval-seconds: 1
+          display: "&6Speed &fLvl 69"
+        70:
+          cost:
+            scrap: 3100000
+            screws: 516
+            energy-cells: 58
+            bio-samples: 9
+          interval-seconds: 1
+          display: "&6Speed &fLvl 70"
+        71:
+          cost:
+            scrap: 3550000
+            screws: 567
+            energy-cells: 63
+            bio-samples: 9
+            tech-shards: 1
+          interval-seconds: 1
+          display: "&6Speed &fLvl 71"
+        72:
+          cost:
+            scrap: 4000000
+            screws: 624
+            energy-cells: 68
+            bio-samples: 10
+            tech-shards: 1
+          interval-seconds: 1
+          display: "&6Speed &fLvl 72"
+        73:
+          cost:
+            scrap: 4550000
+            screws: 686
+            energy-cells: 75
+            bio-samples: 11
+            tech-shards: 1
+          interval-seconds: 1
+          display: "&6Speed &fLvl 73"
+        74:
+          cost:
+            scrap: 5150000
+            screws: 755
+            energy-cells: 81
+            bio-samples: 12
+            tech-shards: 1
+          interval-seconds: 1
+          display: "&6Speed &fLvl 74"
+        75:
+          cost:
+            scrap: 5850000
+            screws: 830
+            energy-cells: 89
+            bio-samples: 13
+            tech-shards: 1
+          interval-seconds: 1
+          display: "&6Speed &fLvl 75"
+        76:
+          cost:
+            scrap: 6650000
+            screws: 913
+            energy-cells: 97
+            bio-samples: 14
+            tech-shards: 1
+          interval-seconds: 1
+          display: "&6Speed &fLvl 76"
+        77:
+          cost:
+            scrap: 7550000
+            screws: 1005
+            energy-cells: 105
+            bio-samples: 15
+            tech-shards: 2
+          interval-seconds: 1
+          display: "&6Speed &fLvl 77"
+        78:
+          cost:
+            scrap: 8600000
+            screws: 1105
+            energy-cells: 115
+            bio-samples: 16
+            tech-shards: 2
+          interval-seconds: 1
+          display: "&6Speed &fLvl 78"
+        79:
+          cost:
+            scrap: 9750000
+            screws: 1216
+            energy-cells: 125
+            bio-samples: 17
+            tech-shards: 2
+          interval-seconds: 1
+          display: "&6Speed &fLvl 79"
+        80:
+          cost:
+            scrap: 11000000
+            screws: 1337
+            energy-cells: 136
+            bio-samples: 19
+            tech-shards: 2
+          interval-seconds: 1
+          display: "&6Speed &fLvl 80"
+        81:
+          cost:
+            scrap: 12500000
+            screws: 1471
+            energy-cells: 149
+            bio-samples: 20
+            tech-shards: 2
+          interval-seconds: 1
+          display: "&bSpeed &fLvl 81"
+        82:
+          cost:
+            scrap: 14000000
+            screws: 1618
+            energy-cells: 162
+            bio-samples: 22
+            tech-shards: 2
+          interval-seconds: 1
+          display: "&bSpeed &fLvl 82"
+        83:
+          cost:
+            scrap: 16000000
+            screws: 1780
+            energy-cells: 177
+            bio-samples: 23
+            tech-shards: 2
+          interval-seconds: 1
+          display: "&bSpeed &fLvl 83"
+        84:
+          cost:
+            scrap: 18500000
+            screws: 1958
+            energy-cells: 193
+            bio-samples: 25
+            tech-shards: 2
+          interval-seconds: 1
+          display: "&bSpeed &fLvl 84"
+        85:
+          cost:
+            scrap: 21000000
+            screws: 2154
+            energy-cells: 210
+            bio-samples: 27
+            tech-shards: 3
+          interval-seconds: 1
+          display: "&bSpeed &fLvl 85"
+        86:
+          cost:
+            scrap: 23500000
+            screws: 2369
+            energy-cells: 229
+            bio-samples: 30
+            tech-shards: 3
+          interval-seconds: 1
+          display: "&bSpeed &fLvl 86"
+        87:
+          cost:
+            scrap: 27000000
+            screws: 2606
+            energy-cells: 249
+            bio-samples: 32
+            tech-shards: 3
+          interval-seconds: 1
+          display: "&bSpeed &fLvl 87"
+        88:
+          cost:
+            scrap: 30500000
+            screws: 2867
+            energy-cells: 272
+            bio-samples: 34
+            tech-shards: 3
+          interval-seconds: 1
+          display: "&bSpeed &fLvl 88"
+        89:
+          cost:
+            scrap: 34500000
+            screws: 3153
+            energy-cells: 296
+            bio-samples: 37
+            tech-shards: 3
+          interval-seconds: 1
+          display: "&bSpeed &fLvl 89"
+        90:
+          cost:
+            scrap: 39000000
+            screws: 3469
+            energy-cells: 323
+            bio-samples: 40
+            tech-shards: 4
+          interval-seconds: 1
+          display: "&bSpeed &fLvl 90"
+        91:
+          cost:
+            scrap: 44500000
+            screws: 3816
+            energy-cells: 352
+            bio-samples: 43
+            tech-shards: 4
+          interval-seconds: 1
+          display: "&bSpeed &fLvl 91"
+        92:
+          cost:
+            scrap: 50500000
+            screws: 4197
+            energy-cells: 384
+            bio-samples: 47
+            tech-shards: 4
+          interval-seconds: 1
+          display: "&bSpeed &fLvl 92"
+        93:
+          cost:
+            scrap: 57500000
+            screws: 4617
+            energy-cells: 418
+            bio-samples: 51
+            tech-shards: 4
+          interval-seconds: 1
+          display: "&bSpeed &fLvl 93"
+        94:
+          cost:
+            scrap: 65000000
+            screws: 5079
+            energy-cells: 456
+            bio-samples: 55
+            tech-shards: 5
+          interval-seconds: 1
+          display: "&bSpeed &fLvl 94"
+        95:
+          cost:
+            scrap: 74000000
+            screws: 5587
+            energy-cells: 497
+            bio-samples: 59
+            tech-shards: 5
+          interval-seconds: 1
+          display: "&bSpeed &fLvl 95"
+        96:
+          cost:
+            scrap: 84000000
+            screws: 6145
+            energy-cells: 542
+            bio-samples: 64
+            tech-shards: 5
+          interval-seconds: 1
+          display: "&bSpeed &fLvl 96"
+        97:
+          cost:
+            scrap: 95000000
+            screws: 6760
+            energy-cells: 590
+            bio-samples: 69
+            tech-shards: 6
+          interval-seconds: 1
+          display: "&bSpeed &fLvl 97"
+        98:
+          cost:
+            scrap: 108000000
+            screws: 7436
+            energy-cells: 644
+            bio-samples: 74
+            tech-shards: 6
+          interval-seconds: 1
+          display: "&bSpeed &fLvl 98"
+        99:
+          cost:
+            scrap: 122500000
+            screws: 8179
+            energy-cells: 702
+            bio-samples: 80
+            tech-shards: 7
+          interval-seconds: 1
+          display: "&bSpeed &fLvl 99"
+        100:
+          cost:
+            scrap: 139000000
+            screws: 8997
+            energy-cells: 765
+            bio-samples: 87
+            tech-shards: 7
+          interval-seconds: 1
+          display: "&bSpeed &fLvl 100"
+
+    production:
+      max-level: 100
+      levels:
+        1:
+          cost:
+            scrap: 400
+          scrap-per-interval: 10
+          display: "&7Production &fLvl 1"
+        2:
+          cost:
+            scrap: 500
+          scrap-per-interval: 10
+          display: "&7Production &fLvl 2"
+        3:
+          cost:
+            scrap: 500
+          scrap-per-interval: 15
+          display: "&7Production &fLvl 3"
+        4:
+          cost:
+            scrap: 600
+          scrap-per-interval: 15
+          display: "&7Production &fLvl 4"
+        5:
+          cost:
+            scrap: 700
+          scrap-per-interval: 15
+          display: "&7Production &fLvl 5"
+        6:
+          cost:
+            scrap: 800
+          scrap-per-interval: 15
+          display: "&7Production &fLvl 6"
+        7:
+          cost:
+            scrap: 900
+          scrap-per-interval: 15
+          display: "&7Production &fLvl 7"
+        8:
+          cost:
+            scrap: 1000
+          scrap-per-interval: 20
+          display: "&7Production &fLvl 8"
+        9:
+          cost:
+            scrap: 1100
+          scrap-per-interval: 20
+          display: "&7Production &fLvl 9"
+        10:
+          cost:
+            scrap: 1300
+          scrap-per-interval: 20
+          display: "&7Production &fLvl 10"
+        11:
+          cost:
+            scrap: 1400
+          scrap-per-interval: 25
+          display: "&7Production &fLvl 11"
+        12:
+          cost:
+            scrap: 1600
+          scrap-per-interval: 25
+          display: "&7Production &fLvl 12"
+        13:
+          cost:
+            scrap: 1800
+          scrap-per-interval: 30
+          display: "&7Production &fLvl 13"
+        14:
+          cost:
+            scrap: 2100
+          scrap-per-interval: 30
+          display: "&7Production &fLvl 14"
+        15:
+          cost:
+            scrap: 2400
+          scrap-per-interval: 30
+          display: "&7Production &fLvl 15"
+        16:
+          cost:
+            scrap: 2700
+            screws: 3
+          scrap-per-interval: 35
+          display: "&7Production &fLvl 16"
+        17:
+          cost:
+            scrap: 3000
+            screws: 3
+          scrap-per-interval: 40
+          display: "&7Production &fLvl 17"
+        18:
+          cost:
+            scrap: 3400
+            screws: 4
+          scrap-per-interval: 40
+          display: "&7Production &fLvl 18"
+        19:
+          cost:
+            scrap: 3900
+            screws: 4
+          scrap-per-interval: 45
+          display: "&7Production &fLvl 19"
+        20:
+          cost:
+            scrap: 4400
+            screws: 4
+          scrap-per-interval: 50
+          display: "&7Production &fLvl 20"
+        21:
+          cost:
+            scrap: 5000
+            screws: 5
+          scrap-per-interval: 50
+          display: "&aProduction &fLvl 21"
+        22:
+          cost:
+            scrap: 5700
+            screws: 5
+          scrap-per-interval: 55
+          display: "&aProduction &fLvl 22"
+        23:
+          cost:
+            scrap: 6500
+            screws: 6
+          scrap-per-interval: 60
+          display: "&aProduction &fLvl 23"
+        24:
+          cost:
+            scrap: 7400
+            screws: 6
+          scrap-per-interval: 65
+          display: "&aProduction &fLvl 24"
+        25:
+          cost:
+            scrap: 8400
+            screws: 7
+          scrap-per-interval: 70
+          display: "&aProduction &fLvl 25"
+        26:
+          cost:
+            scrap: 9500
+            screws: 8
+          scrap-per-interval: 75
+          display: "&aProduction &fLvl 26"
+        27:
+          cost:
+            scrap: 11000
+            screws: 9
+          scrap-per-interval: 80
+          display: "&aProduction &fLvl 27"
+        28:
+          cost:
+            scrap: 12000
+            screws: 9
+          scrap-per-interval: 90
+          display: "&aProduction &fLvl 28"
+        29:
+          cost:
+            scrap: 14000
+            screws: 10
+          scrap-per-interval: 95
+          display: "&aProduction &fLvl 29"
+        30:
+          cost:
+            scrap: 16000
+            screws: 11
+          scrap-per-interval: 100
+          display: "&aProduction &fLvl 30"
+        31:
+          cost:
+            scrap: 18000
+            screws: 13
+            energy-cells: 2
+          scrap-per-interval: 110
+          display: "&aProduction &fLvl 31"
+        32:
+          cost:
+            scrap: 20000
+            screws: 14
+            energy-cells: 2
+          scrap-per-interval: 120
+          display: "&aProduction &fLvl 32"
+        33:
+          cost:
+            scrap: 23000
+            screws: 15
+            energy-cells: 2
+          scrap-per-interval: 130
+          display: "&aProduction &fLvl 33"
+        34:
+          cost:
+            scrap: 26000
+            screws: 17
+            energy-cells: 3
+          scrap-per-interval: 140
+          display: "&aProduction &fLvl 34"
+        35:
+          cost:
+            scrap: 30000
+            screws: 18
+            energy-cells: 3
+          scrap-per-interval: 150
+          display: "&aProduction &fLvl 35"
+        36:
+          cost:
+            scrap: 34000
+            screws: 20
+            energy-cells: 3
+          scrap-per-interval: 170
+          display: "&aProduction &fLvl 36"
+        37:
+          cost:
+            scrap: 38000
+            screws: 22
+            energy-cells: 3
+          scrap-per-interval: 180
+          display: "&aProduction &fLvl 37"
+        38:
+          cost:
+            scrap: 43000
+            screws: 24
+            energy-cells: 4
+          scrap-per-interval: 190
+          display: "&aProduction &fLvl 38"
+        39:
+          cost:
+            scrap: 49000
+            screws: 27
+            energy-cells: 4
+          scrap-per-interval: 210
+          display: "&aProduction &fLvl 39"
+        40:
+          cost:
+            scrap: 56000
+            screws: 30
+            energy-cells: 4
+          scrap-per-interval: 230
+          display: "&aProduction &fLvl 40"
+        41:
+          cost:
+            scrap: 63000
+            screws: 33
+            energy-cells: 5
+          scrap-per-interval: 240
+          display: "&eProduction &fLvl 41"
+        42:
+          cost:
+            scrap: 72000
+            screws: 36
+            energy-cells: 5
+          scrap-per-interval: 260
+          display: "&eProduction &fLvl 42"
+        43:
+          cost:
+            scrap: 82000
+            screws: 39
+            energy-cells: 6
+          scrap-per-interval: 290
+          display: "&eProduction &fLvl 43"
+        44:
+          cost:
+            scrap: 93000
+            screws: 43
+            energy-cells: 6
+          scrap-per-interval: 310
+          display: "&eProduction &fLvl 44"
+        45:
+          cost:
+            scrap: 105000
+            screws: 48
+            energy-cells: 7
+          scrap-per-interval: 330
+          display: "&eProduction &fLvl 45"
+        46:
+          cost:
+            scrap: 120000
+            screws: 52
+            energy-cells: 7
+          scrap-per-interval: 360
+          display: "&eProduction &fLvl 46"
+        47:
+          cost:
+            scrap: 135000
+            screws: 58
+            energy-cells: 8
+          scrap-per-interval: 390
+          display: "&eProduction &fLvl 47"
+        48:
+          cost:
+            scrap: 155000
+            screws: 63
+            energy-cells: 9
+          scrap-per-interval: 420
+          display: "&eProduction &fLvl 48"
+        49:
+          cost:
+            scrap: 175000
+            screws: 70
+            energy-cells: 9
+          scrap-per-interval: 460
+          display: "&eProduction &fLvl 49"
+        50:
+          cost:
+            scrap: 200000
+            screws: 77
+            energy-cells: 10
+          scrap-per-interval: 490
+          display: "&eProduction &fLvl 50"
+        51:
+          cost:
+            scrap: 225000
+            screws: 84
+            energy-cells: 11
+            bio-samples: 2
+          scrap-per-interval: 530
+          display: "&eProduction &fLvl 51"
+        52:
+          cost:
+            scrap: 255000
+            screws: 93
+            energy-cells: 12
+            bio-samples: 2
+          scrap-per-interval: 580
+          display: "&eProduction &fLvl 52"
+        53:
+          cost:
+            scrap: 290000
+            screws: 102
+            energy-cells: 13
+            bio-samples: 2
+          scrap-per-interval: 620
+          display: "&eProduction &fLvl 53"
+        54:
+          cost:
+            scrap: 330000
+            screws: 112
+            energy-cells: 15
+            bio-samples: 3
+          scrap-per-interval: 670
+          display: "&eProduction &fLvl 54"
+        55:
+          cost:
+            scrap: 375000
+            screws: 123
+            energy-cells: 16
+            bio-samples: 3
+          scrap-per-interval: 730
+          display: "&eProduction &fLvl 55"
+        56:
+          cost:
+            scrap: 425000
+            screws: 136
+            energy-cells: 17
+            bio-samples: 3
+          scrap-per-interval: 790
+          display: "&eProduction &fLvl 56"
+        57:
+          cost:
+            scrap: 480000
+            screws: 149
+            energy-cells: 19
+            bio-samples: 3
+          scrap-per-interval: 850
+          display: "&eProduction &fLvl 57"
+        58:
+          cost:
+            scrap: 545000
+            screws: 164
+            energy-cells: 20
+            bio-samples: 3
+          scrap-per-interval: 920
+          display: "&eProduction &fLvl 58"
+        59:
+          cost:
+            scrap: 620000
+            screws: 181
+            energy-cells: 22
+            bio-samples: 4
+          scrap-per-interval: 1000
+          display: "&eProduction &fLvl 59"
+        60:
+          cost:
+            scrap: 705000
+            screws: 199
+            energy-cells: 24
+            bio-samples: 4
+          scrap-per-interval: 1100
+          display: "&eProduction &fLvl 60"
+        61:
+          cost:
+            scrap: 800000
+            screws: 219
+            energy-cells: 27
+            bio-samples: 4
+          scrap-per-interval: 1150
+          display: "&6Production &fLvl 61"
+        62:
+          cost:
+            scrap: 905000
+            screws: 241
+            energy-cells: 29
+            bio-samples: 5
+          scrap-per-interval: 1250
+          display: "&6Production &fLvl 62"
+        63:
+          cost:
+            scrap: 1050000
+            screws: 265
+            energy-cells: 32
+            bio-samples: 5
+          scrap-per-interval: 1350
+          display: "&6Production &fLvl 63"
+        64:
+          cost:
+            scrap: 1150000
+            screws: 291
+            energy-cells: 34
+            bio-samples: 5
+          scrap-per-interval: 1450
+          display: "&6Production &fLvl 64"
+        65:
+          cost:
+            scrap: 1300000
+            screws: 320
+            energy-cells: 37
+            bio-samples: 6
+          scrap-per-interval: 1600
+          display: "&6Production &fLvl 65"
+        66:
+          cost:
+            scrap: 1500000
+            screws: 352
+            energy-cells: 41
+            bio-samples: 6
+          scrap-per-interval: 1700
+          display: "&6Production &fLvl 66"
+        67:
+          cost:
+            scrap: 1700000
+            screws: 387
+            energy-cells: 45
+            bio-samples: 7
+          scrap-per-interval: 1850
+          display: "&6Production &fLvl 67"
+        68:
+          cost:
+            scrap: 1950000
+            screws: 426
+            energy-cells: 49
+            bio-samples: 7
+          scrap-per-interval: 2000
+          display: "&6Production &fLvl 68"
+        69:
+          cost:
+            scrap: 2200000
+            screws: 469
+            energy-cells: 53
+            bio-samples: 8
+          scrap-per-interval: 2150
+          display: "&6Production &fLvl 69"
+        70:
+          cost:
+            scrap: 2500000
+            screws: 516
+            energy-cells: 58
+            bio-samples: 9
+          scrap-per-interval: 2350
+          display: "&6Production &fLvl 70"
+        71:
+          cost:
+            scrap: 2850000
+            screws: 567
+            energy-cells: 63
+            bio-samples: 9
+            tech-shards: 1
+          scrap-per-interval: 2550
+          display: "&6Production &fLvl 71"
+        72:
+          cost:
+            scrap: 3200000
+            screws: 624
+            energy-cells: 68
+            bio-samples: 10
+            tech-shards: 1
+          scrap-per-interval: 2750
+          display: "&6Production &fLvl 72"
+        73:
+          cost:
+            scrap: 3650000
+            screws: 686
+            energy-cells: 75
+            bio-samples: 11
+            tech-shards: 1
+          scrap-per-interval: 2950
+          display: "&6Production &fLvl 73"
+        74:
+          cost:
+            scrap: 4150000
+            screws: 755
+            energy-cells: 81
+            bio-samples: 12
+            tech-shards: 1
+          scrap-per-interval: 3200
+          display: "&6Production &fLvl 74"
+        75:
+          cost:
+            scrap: 4700000
+            screws: 830
+            energy-cells: 89
+            bio-samples: 13
+            tech-shards: 1
+          scrap-per-interval: 3450
+          display: "&6Production &fLvl 75"
+        76:
+          cost:
+            scrap: 5350000
+            screws: 913
+            energy-cells: 97
+            bio-samples: 14
+            tech-shards: 1
+          scrap-per-interval: 3750
+          display: "&6Production &fLvl 76"
+        77:
+          cost:
+            scrap: 6050000
+            screws: 1005
+            energy-cells: 105
+            bio-samples: 15
+            tech-shards: 2
+          scrap-per-interval: 4050
+          display: "&6Production &fLvl 77"
+        78:
+          cost:
+            scrap: 6850000
+            screws: 1105
+            energy-cells: 115
+            bio-samples: 16
+            tech-shards: 2
+          scrap-per-interval: 4400
+          display: "&6Production &fLvl 78"
+        79:
+          cost:
+            scrap: 7800000
+            screws: 1216
+            energy-cells: 125
+            bio-samples: 17
+            tech-shards: 2
+          scrap-per-interval: 4750
+          display: "&6Production &fLvl 79"
+        80:
+          cost:
+            scrap: 8850000
+            screws: 1337
+            energy-cells: 136
+            bio-samples: 19
+            tech-shards: 2
+          scrap-per-interval: 5150
+          display: "&6Production &fLvl 80"
+        81:
+          cost:
+            scrap: 10000000
+            screws: 1471
+            energy-cells: 149
+            bio-samples: 20
+            tech-shards: 2
+          scrap-per-interval: 5550
+          display: "&bProduction &fLvl 81"
+        82:
+          cost:
+            scrap: 11500000
+            screws: 1618
+            energy-cells: 162
+            bio-samples: 22
+            tech-shards: 2
+          scrap-per-interval: 6000
+          display: "&bProduction &fLvl 82"
+        83:
+          cost:
+            scrap: 13000000
+            screws: 1780
+            energy-cells: 177
+            bio-samples: 23
+            tech-shards: 2
+          scrap-per-interval: 6500
+          display: "&bProduction &fLvl 83"
+        84:
+          cost:
+            scrap: 14500000
+            screws: 1958
+            energy-cells: 193
+            bio-samples: 25
+            tech-shards: 2
+          scrap-per-interval: 7000
+          display: "&bProduction &fLvl 84"
+        85:
+          cost:
+            scrap: 16500000
+            screws: 2154
+            energy-cells: 210
+            bio-samples: 27
+            tech-shards: 3
+          scrap-per-interval: 7550
+          display: "&bProduction &fLvl 85"
+        86:
+          cost:
+            scrap: 19000000
+            screws: 2369
+            energy-cells: 229
+            bio-samples: 30
+            tech-shards: 3
+          scrap-per-interval: 8200
+          display: "&bProduction &fLvl 86"
+        87:
+          cost:
+            scrap: 21500000
+            screws: 2606
+            energy-cells: 249
+            bio-samples: 32
+            tech-shards: 3
+          scrap-per-interval: 8850
+          display: "&bProduction &fLvl 87"
+        88:
+          cost:
+            scrap: 24500000
+            screws: 2867
+            energy-cells: 272
+            bio-samples: 34
+            tech-shards: 3
+          scrap-per-interval: 9550
+          display: "&bProduction &fLvl 88"
+        89:
+          cost:
+            scrap: 27500000
+            screws: 3153
+            energy-cells: 296
+            bio-samples: 37
+            tech-shards: 3
+          scrap-per-interval: 10300
+          display: "&bProduction &fLvl 89"
+        90:
+          cost:
+            scrap: 31500000
+            screws: 3469
+            energy-cells: 323
+            bio-samples: 40
+            tech-shards: 4
+          scrap-per-interval: 11200
+          display: "&bProduction &fLvl 90"
+        91:
+          cost:
+            scrap: 35500000
+            screws: 3816
+            energy-cells: 352
+            bio-samples: 43
+            tech-shards: 4
+          scrap-per-interval: 12100
+          display: "&bProduction &fLvl 91"
+        92:
+          cost:
+            scrap: 40500000
+            screws: 4197
+            energy-cells: 384
+            bio-samples: 47
+            tech-shards: 4
+          scrap-per-interval: 13100
+          display: "&bProduction &fLvl 92"
+        93:
+          cost:
+            scrap: 46000000
+            screws: 4617
+            energy-cells: 418
+            bio-samples: 51
+            tech-shards: 4
+          scrap-per-interval: 14100
+          display: "&bProduction &fLvl 93"
+        94:
+          cost:
+            scrap: 52000000
+            screws: 5079
+            energy-cells: 456
+            bio-samples: 55
+            tech-shards: 5
+          scrap-per-interval: 15300
+          display: "&bProduction &fLvl 94"
+        95:
+          cost:
+            scrap: 59000000
+            screws: 5587
+            energy-cells: 497
+            bio-samples: 59
+            tech-shards: 5
+          scrap-per-interval: 16500
+          display: "&bProduction &fLvl 95"
+        96:
+          cost:
+            scrap: 67000000
+            screws: 6145
+            energy-cells: 542
+            bio-samples: 64
+            tech-shards: 5
+          scrap-per-interval: 17900
+          display: "&bProduction &fLvl 96"
+        97:
+          cost:
+            scrap: 76000000
+            screws: 6760
+            energy-cells: 590
+            bio-samples: 69
+            tech-shards: 6
+          scrap-per-interval: 19300
+          display: "&bProduction &fLvl 97"
+        98:
+          cost:
+            scrap: 86500000
+            screws: 7436
+            energy-cells: 644
+            bio-samples: 74
+            tech-shards: 6
+          scrap-per-interval: 20900
+          display: "&bProduction &fLvl 98"
+        99:
+          cost:
+            scrap: 98000000
+            screws: 8179
+            energy-cells: 702
+            bio-samples: 80
+            tech-shards: 7
+          scrap-per-interval: 22600
+          display: "&bProduction &fLvl 99"
+        100:
+          cost:
+            scrap: 111500000
+            screws: 8997
+            energy-cells: 765
+            bio-samples: 87
+            tech-shards: 7
+          scrap-per-interval: 24400
+          display: "&bProduction &fLvl 100"

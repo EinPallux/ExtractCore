@@ -1,0 +1,178 @@
+package com.pallux.extractcore.gui;
+
+import com.pallux.extractcore.ExtractCore;
+import com.pallux.extractcore.model.PlayerData;
+import com.pallux.extractcore.util.ColorUtil;
+import com.pallux.extractcore.util.GuiUtil;
+import com.pallux.extractcore.util.ItemBuilder;
+import org.bukkit.Material;
+import org.bukkit.Sound;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryClickEvent;
+
+import java.util.*;
+
+public class CoreGUI extends BaseGUI {
+
+    private final GuiUtil g;
+
+    public CoreGUI(ExtractCore plugin, Player player) {
+        super(plugin, player,
+            new GuiUtil(plugin, "core-gui").title(),
+            new GuiUtil(plugin, "core-gui").rows());
+        this.g = new GuiUtil(plugin, "core-gui");
+    }
+
+    @Override
+    protected void build() {
+        fillBorder();
+        fill(ItemBuilder.filler());
+
+        PlayerData data = plugin.getPlayerDataManager().get(player);
+        var cm  = plugin.getCoreManager();
+        var cfg = plugin.getConfigManager().getCoreConfig();
+
+        int speedMax  = cfg.getInt("core.upgrades.speed.max-level", 100);
+        int prodMax   = cfg.getInt("core.upgrades.production.max-level", 100);
+        int pickupSec = cfg.getInt("core.pickup-duration-seconds", 10);
+
+        Map<String, String> ph = GuiUtil.ph(
+            "scrap_rate",    ColorUtil.formatNumber(cm.getScrapPerInterval(data)),
+            "interval",      String.valueOf(cm.getIntervalTicks(data)),
+            "core_x",        String.valueOf(data.getCoreX()),
+            "core_y",        String.valueOf(data.getCoreY()),
+            "core_z",        String.valueOf(data.getCoreZ()),
+            "speed_lvl",     String.valueOf(data.getCoreSpeedLevel()),
+            "prod_lvl",      String.valueOf(data.getCoreProductionLevel()),
+            "speed_max",     String.valueOf(speedMax),
+            "prod_max",      String.valueOf(prodMax),
+            "pickup_seconds",String.valueOf(pickupSec),
+            "stored_scrap",  ColorUtil.formatNumber(data.getCoreStoredScrap())
+        );
+
+        // Info
+        set(g.slot("info-item"), new ItemBuilder(mat(g.material("info-item")))
+            .name(g.str("info-item.name", ph))
+            .lore(g.lore("info-item.lore", ph))
+            .hideAll().build());
+
+        // Collect button
+        set(g.slot("collect-button"), new ItemBuilder(mat(g.material("collect-button")))
+            .name(g.str("collect-button.name", ph))
+            .lore(g.lore("collect-button.lore", ph))
+            .hideAll().build());
+
+        // Speed upgrade
+        set(g.slot("speed-upgrade"), buildUpgradeItem("speed-upgrade", "speed", data, cfg, ph, speedMax));
+
+        // Production upgrade
+        set(g.slot("production-upgrade"), buildUpgradeItem("production-upgrade", "production", data, cfg, ph, prodMax));
+
+        // Pickup
+        set(g.slot("pickup-button"), new ItemBuilder(mat(g.material("pickup-button")))
+            .name(g.str("pickup-button.name", ph))
+            .lore(g.lore("pickup-button.lore", ph))
+            .hideAll().build());
+
+        // Close
+        set(g.slot("close-button"), new ItemBuilder(mat(g.material("close-button")))
+            .name(g.str("close-button.name"))
+            .lore(g.lore("close-button.lore"))
+            .hideAll().build());
+    }
+
+    private org.bukkit.inventory.ItemStack buildUpgradeItem(
+            String guiKey, String upgradeType, PlayerData data,
+            FileConfiguration cfg, Map<String, String> basePh, int maxLevel) {
+
+        boolean isSpeed  = upgradeType.equals("speed");
+        int currentLevel = isSpeed ? data.getCoreSpeedLevel() : data.getCoreProductionLevel();
+        int nextLevel    = currentLevel + 1;
+        Map<String, String> ph = new HashMap<>(basePh);
+
+        List<String> lore = new ArrayList<>(g.lore(guiKey + ".lore-header", ph));
+
+        if (currentLevel < maxLevel) {
+            String basePath = "core.upgrades." + upgradeType + ".levels." + nextLevel;
+            long scrap  = cfg.getLong(basePath + ".cost.scrap", 0);
+            long screws = cfg.getLong(basePath + ".cost.screws", 0);
+            long energy = cfg.getLong(basePath + ".cost.energy-cells", 0);
+            long bio    = cfg.getLong(basePath + ".cost.bio-samples", 0);
+            long tech   = cfg.getLong(basePath + ".cost.tech-shards", 0);
+            String nextDisplay = cfg.getString(basePath + ".display", "Level " + nextLevel);
+
+            ph.put("next_display", ColorUtil.color(nextDisplay));
+            ph.put("cost_scrap",  ColorUtil.formatNumber(scrap));
+            ph.put("cost_screws", ColorUtil.formatNumber(screws));
+            ph.put("cost_energy", ColorUtil.formatNumber(energy));
+            ph.put("cost_bio",    ColorUtil.formatNumber(bio));
+            ph.put("cost_tech",   ColorUtil.formatNumber(tech));
+
+            lore = new ArrayList<>(g.lore(guiKey + ".lore-header", ph));
+            if (scrap  > 0) lore.add(g.str(guiKey + ".lore-cost-scrap",  ph));
+            if (screws > 0) lore.add(g.str(guiKey + ".lore-cost-screws", ph));
+            if (energy > 0) lore.add(g.str(guiKey + ".lore-cost-energy", ph));
+            if (bio    > 0) lore.add(g.str(guiKey + ".lore-cost-bio",    ph));
+            if (tech   > 0) lore.add(g.str(guiKey + ".lore-cost-tech",   ph));
+            lore.add("");
+            boolean canAfford = data.hasMaterials(scrap, screws, energy, bio, tech);
+            lore.add(canAfford ? g.str(guiKey + ".lore-can-afford") : g.str(guiKey + ".lore-cant-afford"));
+        } else {
+            lore.add(g.str(guiKey + ".lore-max-level"));
+        }
+        lore.addAll(g.lore(guiKey + ".lore-footer", ph));
+
+        return new ItemBuilder(mat(g.material(guiKey)))
+            .name(g.str(guiKey + ".name", ph))
+            .lore(lore)
+            .hideAll().build();
+    }
+
+    @Override
+    public void handleClick(InventoryClickEvent event) {
+        event.setCancelled(true);
+        int slot = event.getRawSlot();
+
+        if      (slot == g.slot("close-button"))       player.closeInventory();
+        else if (slot == g.slot("collect-button"))     { plugin.getCoreManager().collectStoredScrap(player); build(); }
+        else if (slot == g.slot("pickup-button"))      { player.closeInventory(); plugin.getCoreManager().initiatePickup(player); }
+        else if (slot == g.slot("speed-upgrade"))      upgradeCore("speed");
+        else if (slot == g.slot("production-upgrade")) upgradeCore("production");
+    }
+
+    private void upgradeCore(String type) {
+        PlayerData data = plugin.getPlayerDataManager().get(player);
+        var cfg         = plugin.getConfigManager().getCoreConfig();
+        boolean isSpeed = type.equals("speed");
+        int current     = isSpeed ? data.getCoreSpeedLevel() : data.getCoreProductionLevel();
+        int max         = cfg.getInt("core.upgrades." + type + ".max-level", 100);
+
+        if (current >= max) { player.sendMessage(g.str("upgrade-messages.max-level")); return; }
+
+        int    next   = current + 1;
+        String base   = "core.upgrades." + type + ".levels." + next + ".cost";
+        long   scrap  = cfg.getLong(base + ".scrap", 0);
+        long   screws = cfg.getLong(base + ".screws", 0);
+        long   energy = cfg.getLong(base + ".energy-cells", 0);
+        long   bio    = cfg.getLong(base + ".bio-samples", 0);
+        long   tech   = cfg.getLong(base + ".tech-shards", 0);
+
+        if (!data.hasMaterials(scrap, screws, energy, bio, tech)) {
+            player.sendMessage(g.str("upgrade-messages.not-enough"));
+            player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 0.5f, 0.8f);
+            return;
+        }
+        data.deductMaterials(scrap, screws, energy, bio, tech);
+        if (isSpeed) data.setCoreSpeedLevel(next);
+        else         data.setCoreProductionLevel(next);
+        plugin.getPlayerDataManager().saveAsync(data);
+
+        String msgKey = isSpeed ? "upgrade-messages.success-speed" : "upgrade-messages.success-production";
+        player.sendMessage(g.str(msgKey, GuiUtil.ph("level", String.valueOf(next))));
+        player.playSound(player.getLocation(), Sound.BLOCK_BEACON_POWER_SELECT, 1f, 1.2f);
+        build();
+    }
+
+    private Material mat(String n) { try { return Material.valueOf(n); } catch (Exception e) { return Material.BARRIER; } }
+}
