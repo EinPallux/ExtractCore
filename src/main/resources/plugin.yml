@@ -10,6 +10,7 @@ softdepend:
   - PlayerPoints
   - WorldEdit
   - FastAsyncWorldEdit
+  - WorldGuard
 
 commands:
   armory:
