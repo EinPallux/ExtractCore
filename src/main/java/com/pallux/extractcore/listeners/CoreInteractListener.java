@@ -23,10 +23,16 @@ import java.util.UUID;
 /**
  * Handles Core placement, right-click GUI opening, and raiding.
  *
- * WorldGuard integration:
- *   - Core PLACEMENT is blocked if the region has flag extract-core-place set to DENY.
- *   - Core PLACEMENT and core RAIDING always bypass WorldGuard's own block protection,
- *     because we cancel the vanilla event ourselves at HIGH priority (before WG's HIGHEST).
+ * WorldGuard bypass strategy:
+ *   We run at HIGHEST priority (same as WG) with ignoreCancelled = false,
+ *   so we see events WG already cancelled and can un-cancel them for plugin cores.
+ *
+ *   For placement: we un-cancel what WG cancelled, letting vanilla keep the
+ *   block in the world. We never call setType() during the event — doing so
+ *   on a cancelled BlockPlaceEvent causes Paper 1.21 to revert it next tick.
+ *
+ *   For breaking (raiding): same — un-cancel, remove block ourselves, handle
+ *   raid logic, and suppress vanilla drops.
  */
 public class CoreInteractListener implements Listener {
 
@@ -37,7 +43,8 @@ public class CoreInteractListener implements Listener {
     }
 
     // ── Place Core ────────────────────────────────────────────────────────────
-    @EventHandler(priority = EventPriority.HIGH)
+
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = false)
     public void onBlockPlace(BlockPlaceEvent event) {
         Player player = event.getPlayer();
         ItemStack item = event.getItemInHand();
@@ -45,9 +52,7 @@ public class CoreInteractListener implements Listener {
         if (item.getType() != Material.BEACON) return;
         if (!plugin.getCoreManager().isCoreItem(item)) return;
 
-        // ── WorldGuard: check custom extract-core-place flag ─────────────────
-        // This lets admins deny Core placement in specific regions (e.g. spawn)
-        // independently of the normal WG block-place protection.
+        // ── Custom flag: block placement in spawn/safe regions ───────────────
         if (!WorldGuardHook.canPlaceCore(player, event.getBlockPlaced().getLocation())) {
             event.setCancelled(true);
             String msg = plugin.getConfigManager().getMessages()
@@ -57,16 +62,15 @@ public class CoreInteractListener implements Listener {
             return;
         }
 
-        // We cancel the event so WorldGuard (HIGHEST) sees it as already handled
-        // and skips its own block-place protection — the core is placed via CoreManager.
-        event.setCancelled(true);
+        // ── WG bypass: un-cancel whatever WG may have cancelled ──────────────
+        // Vanilla already placed the block before this event fired.
+        // Un-cancelling lets Paper keep the placed block in the world.
+        event.setCancelled(false);
 
-        // Manually place the beacon block (WG would have blocked it otherwise)
-        event.getBlockPlaced().setType(Material.BEACON);
-
+        // Register with CoreManager (hologram, generation task, etc.)
         plugin.getCoreManager().placeCore(player, event.getBlockPlaced().getLocation());
 
-        // Consume the core item from hand
+        // Remove the core item from the player's hand on the next tick
         plugin.getServer().getScheduler().runTask(plugin, () -> {
             if (!player.isOnline()) return;
             ItemStack hand = player.getInventory().getItemInMainHand();
@@ -78,7 +82,8 @@ public class CoreInteractListener implements Listener {
     }
 
     // ── Right-click placed Core → open GUI (owner) or inform (others) ────────
-    @EventHandler(priority = EventPriority.HIGH)
+
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = false)
     public void onInteract(PlayerInteractEvent event) {
         if (event.getAction() != Action.RIGHT_CLICK_BLOCK) return;
         if (event.getHand() != EquipmentSlot.HAND) return;
@@ -89,7 +94,7 @@ public class CoreInteractListener implements Listener {
         UUID owner = plugin.getCoreManager().getOwnerAtLocation(event.getClickedBlock().getLocation());
         if (owner == null) return; // not a plugin core — let vanilla handle it
 
-        // Cancel the event so WG's HIGHEST handler skips its interact protection.
+        // Always cancel interact on plugin cores to prevent vanilla beacon UI
         event.setCancelled(true);
 
         if (owner.equals(player.getUniqueId())) {
@@ -100,37 +105,38 @@ public class CoreInteractListener implements Listener {
     }
 
     // ── Break Core (left-click / mining = raiding) ────────────────────────────
-    @EventHandler(priority = EventPriority.HIGH)
+
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = false)
     public void onBlockBreak(BlockBreakEvent event) {
         if (event.getBlock().getType() != Material.BEACON) return;
 
         Player breaker = event.getPlayer();
         UUID owner = plugin.getCoreManager().getOwnerAtLocation(event.getBlock().getLocation());
-        if (owner == null) return; // not a plugin core
-
-        // Cancel vanilla break (prevents drops, bypasses WG's HIGHEST handler).
-        event.setCancelled(true);
-        event.setDropItems(false);
+        if (owner == null) return; // not a plugin core — let vanilla handle it
 
         if (owner.equals(breaker.getUniqueId())) {
-            // Owner tries to mine their own core → redirect to GUI
+            // Owner tries to mine their own core → redirect to GUI pickup
+            event.setCancelled(true);
             breaker.sendMessage(new GuiUtil(plugin, "core-gui").str("redirect-to-gui"));
             return;
         }
 
         // ── Attacker raiding an enemy core ────────────────────────────────────
+        // Un-cancel WG's protection, suppress drops, remove block ourselves.
+        event.setCancelled(false);
+        event.setDropItems(false);
+        event.getBlock().setType(Material.AIR);
+
         Player ownerPlayer = plugin.getServer().getPlayer(owner);
         if (ownerPlayer != null) {
             plugin.getCoreManager().destroyCore(ownerPlayer, breaker);
         } else {
-            // Owner offline — load data async then destroy on main thread
+            // Owner offline — load data async, destroy on main thread
             plugin.getServer().getScheduler().runTaskAsynchronously(plugin, () -> {
                 PlayerData ownerData = plugin.getPlayerDataManager().get(owner);
                 if (ownerData == null) return;
-                plugin.getServer().getScheduler().runTask(plugin, () -> {
-                    event.getBlock().setType(Material.AIR);
-                    plugin.getCoreManager().destroyCoreOfflineOwner(owner, breaker);
-                });
+                plugin.getServer().getScheduler().runTask(plugin, () ->
+                        plugin.getCoreManager().destroyCoreOfflineOwner(owner, breaker));
             });
         }
     }

@@ -1,6 +1,8 @@
 package com.pallux.extractcore;
 
 import com.pallux.extractcore.armory.ArmoryManager;
+import com.pallux.extractcore.blocks.DefenseBlockManager;
+import com.pallux.extractcore.blocks.NormalBlockManager;
 import com.pallux.extractcore.commands.admin.AdminCommand;
 import com.pallux.extractcore.commands.player.*;
 import com.pallux.extractcore.core.CoreManager;
@@ -13,6 +15,7 @@ import com.pallux.extractcore.leveling.LevelManager;
 import com.pallux.extractcore.listeners.*;
 import com.pallux.extractcore.milestones.MilestoneManager;
 import com.pallux.extractcore.placeholders.ExtractPlaceholders;
+import com.pallux.extractcore.shop.ShopManager;
 import com.pallux.extractcore.util.ColorUtil;
 import com.pallux.extractcore.worldguard.WorldGuardHook;
 import org.bukkit.Bukkit;
@@ -31,11 +34,10 @@ public final class ExtractCore extends JavaPlugin {
     private MilestoneManager milestoneManager;
     private ExchangeManager exchangeManager;
     private HologramManager hologramManager;
+    private ShopManager shopManager;
+    private DefenseBlockManager defenseBlockManager;
+    private NormalBlockManager normalBlockManager;
 
-    /**
-     * onLoad() runs before any plugin is enabled, which is the required moment
-     * to register custom WorldGuard flags.
-     */
     @Override
     public void onLoad() {
         if (Bukkit.getPluginManager().getPlugin("WorldGuard") != null) {
@@ -55,7 +57,14 @@ public final class ExtractCore extends JavaPlugin {
         // ── Data ───────────────────────────────
         playerDataManager = new PlayerDataManager(this);
 
-        // ── Managers ───────────────────────────
+        // ── Shop (before block managers so they can reference entries) ──
+        shopManager = new ShopManager(this);
+
+        // ── Block managers ─────────────────────
+        defenseBlockManager = new DefenseBlockManager(this);
+        normalBlockManager  = new NormalBlockManager(this);
+
+        // ── Core managers ──────────────────────
         coreManager       = new CoreManager(this);
         hologramManager   = new HologramManager(this);
         armoryManager     = new ArmoryManager(this);
@@ -68,9 +77,9 @@ public final class ExtractCore extends JavaPlugin {
         WorldGuardHook.init();
         if (WorldGuardHook.isHooked()) {
             getLogger().info("[ExtractCore] WorldGuard hooked successfully.");
-            getLogger().info("[ExtractCore] Use flag 'extract-core-place deny' on spawn/safe regions to block Core placement.");
+            getLogger().info("[ExtractCore] Flag 'extract-core-place deny' blocks Core/shop-block placement.");
         } else {
-            getLogger().info("[ExtractCore] WorldGuard not found — region protection disabled.");
+            getLogger().info("[ExtractCore] WorldGuard not found — region protection features disabled.");
         }
 
         // ── Listeners ──────────────────────────
@@ -93,15 +102,17 @@ public final class ExtractCore extends JavaPlugin {
         Bukkit.getScheduler().runTaskTimerAsynchronously(this,
                 () -> playerDataManager.saveAll(), interval * 20L, interval * 20L);
 
-        getLogger().info(ColorUtil.strip("&a[ExtractCore] Plugin enabled successfully! Running on MC 1.21.4"));
+        getLogger().info(ColorUtil.strip("&a[ExtractCore] Plugin enabled successfully!"));
     }
 
     @Override
     public void onDisable() {
-        if (playerDataManager != null) playerDataManager.saveAll();
-        if (extractionManager != null) extractionManager.shutdown();
-        if (hologramManager != null) hologramManager.shutdown();
-        if (coreManager != null) coreManager.shutdown();
+        if (playerDataManager != null)  playerDataManager.saveAll();
+        if (extractionManager != null)  extractionManager.shutdown();
+        if (hologramManager != null)    hologramManager.shutdown();
+        if (coreManager != null)        coreManager.shutdown();
+        if (defenseBlockManager != null) defenseBlockManager.shutdown();
+        if (normalBlockManager != null)  normalBlockManager.shutdown();
         getLogger().info("[ExtractCore] Plugin disabled. All data saved.");
     }
 
@@ -114,6 +125,7 @@ public final class ExtractCore extends JavaPlugin {
         pm.registerEvents(new GUIListener(this), this);
         pm.registerEvents(new PlayerMoveListener(this), this);
         pm.registerEvents(new PlaytimeListener(this), this);
+        pm.registerEvents(new ShopBlockListener(this), this);  // NEW
     }
 
     private void registerCommands() {
@@ -123,6 +135,7 @@ public final class ExtractCore extends JavaPlugin {
         getCommand("core").setExecutor(new CoreCommand(this));
         getCommand("exchange").setExecutor(new ExchangeCommand(this));
         getCommand("milestones").setExecutor(new MilestonesCommand(this));
+        getCommand("shop").setExecutor(new ShopCommand(this));          // NEW
         getCommand("ex").setExecutor(new AdminCommand(this));
         getCommand("ex").setTabCompleter(new AdminCommand(this));
     }
@@ -132,18 +145,22 @@ public final class ExtractCore extends JavaPlugin {
         extractionManager.reload();
         hologramManager.reload();
         armoryManager.reload();
+        shopManager.reload();
         getLogger().info("[ExtractCore] All configs reloaded.");
     }
 
     // ── Getters ────────────────────────────────
-    public static ExtractCore getInstance() { return instance; }
-    public ConfigManager getConfigManager()       { return configManager; }
-    public PlayerDataManager getPlayerDataManager() { return playerDataManager; }
-    public CoreManager getCoreManager()           { return coreManager; }
-    public ArmoryManager getArmoryManager()       { return armoryManager; }
-    public ExtractionManager getExtractionManager() { return extractionManager; }
-    public LevelManager getLevelManager()         { return levelManager; }
-    public MilestoneManager getMilestoneManager() { return milestoneManager; }
-    public ExchangeManager getExchangeManager()   { return exchangeManager; }
-    public HologramManager getHologramManager()   { return hologramManager; }
+    public static ExtractCore getInstance()          { return instance; }
+    public ConfigManager getConfigManager()          { return configManager; }
+    public PlayerDataManager getPlayerDataManager()  { return playerDataManager; }
+    public CoreManager getCoreManager()              { return coreManager; }
+    public ArmoryManager getArmoryManager()          { return armoryManager; }
+    public ExtractionManager getExtractionManager()  { return extractionManager; }
+    public LevelManager getLevelManager()            { return levelManager; }
+    public MilestoneManager getMilestoneManager()    { return milestoneManager; }
+    public ExchangeManager getExchangeManager()      { return exchangeManager; }
+    public HologramManager getHologramManager()      { return hologramManager; }
+    public ShopManager getShopManager()              { return shopManager; }
+    public DefenseBlockManager getDefenseBlockManager() { return defenseBlockManager; }
+    public NormalBlockManager getNormalBlockManager()   { return normalBlockManager; }
 }

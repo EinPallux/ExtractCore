@@ -1,0 +1,95 @@
+# ═══════════════════════════════════════════
+#        ExtractCore - Shop Configuration
+# ═══════════════════════════════════════════
+
+settings:
+  # How many hours after placement before normal shop blocks automatically despawn.
+  # Supports decimals (e.g. 1.5 = 1 hour 30 minutes)
+  normal-block-despawn-hours: 2.0
+
+# ── Normal Blocks ────────────────────────────────────────────────
+# These blocks auto-despawn after normal-block-despawn-hours.
+# They bypass WorldGuard block-place protection (but not extract-core-place=deny).
+#
+# Placeholders in lore:
+#   {cost}   – cost in Scrap
+#   {amount} – stack size given per purchase
+normal-blocks:
+
+  cobblestone:
+    material: COBBLESTONE
+    display-name: "&7◈ Cobblestone"
+    lore:
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&7A versatile building block."
+      - ""
+      - "&7Cost: &e{cost} Scrap &8/ &f{amount}x"
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+    cost-scrap: 10
+    amount: 16
+    gui-slot: 10
+
+  cobblestone-stairs:
+    material: COBBLESTONE_STAIRS
+    display-name: "&7◈ Cobblestone Stairs"
+    lore:
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&7Useful for ramps and walls."
+      - ""
+      - "&7Cost: &e{cost} Scrap &8/ &f{amount}x"
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+    cost-scrap: 12
+    amount: 8
+    gui-slot: 12
+
+  cobblestone-wall:
+    material: COBBLESTONE_WALL
+    display-name: "&7◈ Cobblestone Wall"
+    lore:
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&7Good for barriers."
+      - ""
+      - "&7Cost: &e{cost} Scrap &8/ &f{amount}x"
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+    cost-scrap: 12
+    amount: 8
+    gui-slot: 14
+
+  cobblestone-slab:
+    material: COBBLESTONE_SLAB
+    display-name: "&7◈ Cobblestone Slab"
+    lore:
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&7Half-block for compact builds."
+      - ""
+      - "&7Cost: &e{cost} Scrap &8/ &f{amount}x"
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+    cost-scrap: 10
+    amount: 8
+    gui-slot: 16
+
+  ladder:
+    material: LADDER
+    display-name: "&7◈ Ladder"
+    lore:
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&7Climb up and down walls."
+      - ""
+      - "&7Cost: &e{cost} Scrap &8/ &f{amount}x"
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+    cost-scrap: 15
+    amount: 8
+    gui-slot: 28
+
+  scaffolding:
+    material: SCAFFOLDING
+    display-name: "&7◈ Scaffolding"
+    lore:
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&7Temporary building platform."
+      - ""
+      - "&7Cost: &e{cost} Scrap &8/ &f{amount}x"
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+    cost-scrap: 20
+    amount: 8
+    gui-slot: 30

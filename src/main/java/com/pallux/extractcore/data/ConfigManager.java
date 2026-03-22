@@ -22,6 +22,8 @@ public class ConfigManager {
     private FileConfiguration levelsConfig;
     private FileConfiguration milestonesConfig;
     private FileConfiguration guiConfig;
+    private FileConfiguration shopConfig;
+    private FileConfiguration defenseBlocksConfig;
 
     public ConfigManager(ExtractCore plugin) {
         this.plugin = plugin;
@@ -38,6 +40,8 @@ public class ConfigManager {
         levelsConfig      = loadConfig("config/levels.yml");
         milestonesConfig  = loadConfig("config/milestones.yml");
         guiConfig         = loadConfig("config/guis.yml");
+        shopConfig        = loadConfig("config/shop.yml");
+        defenseBlocksConfig = loadConfig("config/defense-blocks.yml");
 
         plugin.getLogger().info("[ExtractCore] All configuration files loaded.");
     }
@@ -70,12 +74,14 @@ public class ConfigManager {
         }
     }
 
-    public FileConfiguration getMain()             { return plugin.getConfig(); }
-    public FileConfiguration getMessages()         { return messages; }
-    public FileConfiguration getCoreConfig()       { return coreConfig; }
-    public FileConfiguration getArmoryConfig()     { return armoryConfig; }
-    public FileConfiguration getExtractionsConfig(){ return extractionsConfig; }
-    public FileConfiguration getLevelsConfig()     { return levelsConfig; }
-    public FileConfiguration getMilestonesConfig() { return milestonesConfig; }
-    public FileConfiguration getGuiConfig()        { return guiConfig; }
+    public FileConfiguration getMain()               { return plugin.getConfig(); }
+    public FileConfiguration getMessages()           { return messages; }
+    public FileConfiguration getCoreConfig()         { return coreConfig; }
+    public FileConfiguration getArmoryConfig()       { return armoryConfig; }
+    public FileConfiguration getExtractionsConfig()  { return extractionsConfig; }
+    public FileConfiguration getLevelsConfig()       { return levelsConfig; }
+    public FileConfiguration getMilestonesConfig()   { return milestonesConfig; }
+    public FileConfiguration getGuiConfig()          { return guiConfig; }
+    public FileConfiguration getShopConfig()         { return shopConfig; }
+    public FileConfiguration getDefenseBlocksConfig(){ return defenseBlocksConfig; }
 }

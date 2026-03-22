@@ -36,6 +36,10 @@ core:
   teleported-to-core: "&#5B8DD9Teleported to your Core."
   spawn-given: "&#5B8DD9You have been given your &eStarting Gear&7."
   already-placed: "&cYou already have a Core placed down. Pick it up first."
+  # Sent when a player clicks Pickup but is too far from their Core
+  pickup-too-far: "&cYou are too far from your Core. Get within &e{range} blocks &cto pick it up."
+  # Sent when a player tries to place their Core in a region with extract-core-place=deny
+  placement-denied-region: "&cYou cannot place your Core in this protected area."
 
 # ── Extraction ───────────────────────────
 extraction:
@@ -99,6 +103,15 @@ milestones:
 exchange:
   purchased: "&#5B8DD9Purchased &e{amount}x {material} &7for &e{cost} Scrap&8."
   not-enough-scrap: "&cNot enough Scrap. You need &e{cost} Scrap&c."
+
+# ── Shop ─────────────────────────────────
+shop:
+  purchased: "&#5B8DD9Purchased &e{amount}x {item} &7for &e{cost} Scrap&8."
+  not-enough-scrap: "&cNot enough Scrap. You need &e{cost} Scrap&c."
+  inventory-full: "&cYour inventory is full. Make some space first."
+  # Sent when a player tries to place a shop block in a region with extract-core-place=deny
+  placement-denied-region: "&cYou cannot place blocks in this protected area."
+  defense-block-destroyed: "&#5B8DD9You destroyed a &e{name}&8!"
 
 # ── Admin ────────────────────────────────
 admin:

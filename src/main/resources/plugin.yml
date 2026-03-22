@@ -38,6 +38,10 @@ commands:
     description: Opens the milestones GUI
     usage: /milestones
     permission: ex.player
+  shop:
+    description: Opens the shop GUI
+    usage: /shop
+    permission: ex.player
   ex:
     description: Admin command for ExtractCore
     usage: /ex <subcommand>

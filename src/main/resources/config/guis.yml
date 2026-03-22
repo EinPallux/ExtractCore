@@ -1,22 +1,5 @@
 # ExtractCore — GUI Configuration
 # Colors: &#RRGGBB hex or &c legacy codes
-#
-# Common text placeholders (available in most GUIs):
-#   {player}  {level}  {progress}
-#   {scrap}  {screws}  {energy}  {bio}  {tech}
-#   {sword_t}  {pickaxe_t}  {axe_t}  {helmet_t}
-#   {speed_lvl}  {prod_lvl}
-#   {core_x}  {core_y}  {core_z}
-#   {milestones_done}  {next_extraction}  {current_extraction}  {zone_name}
-#
-# Filler/Border (available in every GUI):
-#   filler.enabled / filler.material    — background fill pane
-#   border.enabled / border.material    — edge border pane
-#   border.slots                        — explicit slot list, or [] for auto outer-edge
-#
-# Placeholder ??? items (available in every GUI):
-#   placeholder.material / .name / .lore / .slots
-#   Add slot numbers to .slots to place ??? items. Empty [] = disabled.
 
 # ── MAIN MENU (/extract) ──────────────────────────────────────────
 main-menu:
@@ -182,7 +165,6 @@ armory:
       - "&8→ &7Click any item to upgrade"
       - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
 
-  # Slot order: [sword, pickaxe, axe, helmet, chestplate, leggings, boots]
   gear-slots: [10, 12, 14, 28, 30, 32, 34]
 
   gear-labels:
@@ -219,8 +201,6 @@ armory:
       - "&7Click to close this menu."
 
 # ── CORE GUI (right-click placed core) ───────────────────────────
-# Extra placeholders: {scrap_rate} {interval} {speed_lvl} {prod_lvl}
-#                     {speed_max} {prod_max} {stored_scrap} {pickup_seconds}
 core-gui:
   title: "&#5B8DD9◈ &fCore Management"
   rows: 6
@@ -242,6 +222,23 @@ core-gui:
       - "&8Coming soon..."
       - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
     slots: []
+
+  # ── Sounds ──────────────────────────────────────────────────────
+  # Use any valid Bukkit Sound name. Volume: 0.0–1.0. Pitch: 0.5–2.0.
+  sounds:
+    upgrade-success: "BLOCK_BEACON_POWER_SELECT"
+    upgrade-success-volume: 1.0
+    upgrade-success-pitch: 1.2
+    upgrade-fail: "BLOCK_ANVIL_LAND"
+    upgrade-fail-volume: 0.5
+    upgrade-fail-pitch: 0.8
+    pickup-denied: "BLOCK_ANVIL_LAND"
+    pickup-denied-volume: 0.5
+    pickup-denied-pitch: 0.8
+
+  # Labels used as the {in_range} placeholder in pickup button lore
+  pickup-in-range-label:     "&aIn range ✔"
+  pickup-out-of-range-label: "&cOut of range ✘"
 
   info-item:
     slot: 4
@@ -318,17 +315,32 @@ core-gui:
     lore-footer:
       - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
 
+  # Shown when player IS within pickup-range of their core
   pickup-button:
     slot: 40
     material: MINECART
     name: "&#FFD700⤴ &ePickup Core"
     lore:
       - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
-      - "&7Hold still for &e{pickup_seconds}s to pick up your Core."
+      - "&7Hold still for &e{pickup_seconds}s &7to pick up your Core."
       - ""
+      - "&aYou are within range. &8({in_range}&8)"
       - "&c⚠ Moving will cancel pickup!"
       - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
       - "&#5B8DD9→ &7Click to begin pickup."
+
+  # Shown when player is TOO FAR from their core
+  pickup-button-out-of-range:
+    slot: 40
+    material: BARRIER
+    name: "&c⤴ &fPickup Core &8(Too Far)"
+    lore:
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&cYou are too far from your Core."
+      - "&7Get within &e{pickup_range} blocks &7to pick it up."
+      - ""
+      - "&7Your Core: &eX{core_x} Y{core_y} Z{core_z}"
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
 
   close-button:
     slot: 49
@@ -348,10 +360,6 @@ core-gui:
   redirect-to-gui:           "&7To pick up your Core, &eright-click &7it and use the Pickup button."
 
 # ── STATS (/stats) ───────────────────────────────────────────────
-# Extra placeholders: {xp_raw} {xp_needed} {kills} {deaths} {kd}
-#                     {cores_destroyed} {extractions}
-#                     {playtime_h} {playtime_m}
-#                     {chest_t} {legs_t} {boots_t}
 stats:
   title: "&#5B8DD9◈ &f{player} &8— &7Stats"
   rows: 5
@@ -452,7 +460,6 @@ stats:
       - "&7Click to close."
 
 # ── EXCHANGE (/exchange) ─────────────────────────────────────────
-# Extra placeholders: {cost_1} {cost_10} {cost_64}
 exchange:
   title: "&#5B8DD9◈ &fExchange &8— &7Buy with Scrap"
   rows: 5
@@ -558,10 +565,6 @@ exchange:
       - "&7Click to close."
 
 # ── MILESTONES (/milestones) ─────────────────────────────────────
-# Extra placeholders: {milestones_total} {claimable_count} {category}
-#                     {done} {total} {current} {target}
-#                     {reward_scrap} {reward_screws} {reward_energy}
-#                     {reward_bio} {reward_tech} {reward_points}
 milestones:
   title: "&#FFD700★ &fMilestones"
   rows: 3
@@ -584,10 +587,8 @@ milestones:
       - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
     slots: []
 
-  # Slot for each category in order: EXTRACTIONS, KILLS, PLAYTIME_MINUTES, CORES_DESTROYED, LEVEL
   category-slots: [10, 12, 14, 16, 13]
 
-  # Display name for each category type (used in lore and complete-item name)
   category-labels:
     extractions:      "Extractions"
     kills:            "Player Kills"
@@ -605,7 +606,6 @@ milestones:
       - "&7Claimable: &#FFD700{claimable_count}"
       - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
 
-  # Item shown when all milestones in a category are done
   category-complete:
     material: LIME_STAINED_GLASS_PANE
     name: "&#5B8DD9✔ &a{category} Complete"
@@ -617,16 +617,13 @@ milestones:
       - "&7You've mastered this category."
       - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
 
-  # Prefix on the item name for claimable vs locked milestones
   milestone-claimable-prefix:  "&#FFD700★ "
   milestone-incomplete-prefix: "&8◈ "
 
-  # Milestone item lore template — sections are built in order below
   milestone-lore-header:
     - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
     - "&8◈ &7{category}  &8|  &7{done} &8/ &7{total}"
     - ""
-  # Description lines are injected here from milestones.yml
   milestone-lore-progress:
     - ""
     - "&7Progress: &e{current} &8/ &e{target}"
@@ -656,12 +653,10 @@ milestones:
       - "&7Click to close."
 
 # ── RESET CONFIRM (admin GUI) ─────────────────────────────────────
-# Extra placeholders: {player} {reset_type}
 reset-confirm:
   title: "&#FF4444⚠ Confirm Reset — {player}"
   rows: 3
 
-  # Filler material for this GUI (the red glass)
   filler:
     enabled: true
     material: RED_STAINED_GLASS_PANE
@@ -715,6 +710,209 @@ admin:
     amount-positive:        "&cAmount must be positive."
     reset-usage:            "&cUsage: /ex reset <type> <player>"
     zone-offline-destroyed: "&#5B8DD9You destroyed &e{player}'s &7Core! &8(offline player)"
+
+# ── SHOP MAIN MENU (/shop) ───────────────────────────────────────
+shop:
+  title: "&#5B8DD9◈ &fShop &8— &7Categories"
+  rows: 4
+
+  filler:
+    enabled: true
+    material: GRAY_STAINED_GLASS_PANE
+
+  border:
+    enabled: true
+    material: BLACK_STAINED_GLASS_PANE
+    slots: []
+
+  placeholder:
+    material: GRAY_DYE
+    name: "&7???"
+    lore:
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&8Coming soon..."
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+    slots: []
+
+  scrap-display:
+    slot: 4
+    material: SUNFLOWER
+    name: "&#FFD700◈ &fYour Scrap"
+    lore:
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&7Balance: &e{scrap} Scrap"
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+
+  normal-blocks-button:
+    slot: 11
+    material: COBBLESTONE
+    name: "&7◈ &fNormal Blocks"
+    lore:
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&7Buy standard building blocks."
+      - "&7These auto-despawn after a few hours."
+      - ""
+      - "&8→ &7Cobblestone, Stairs, Walls, Slabs"
+      - "&8→ &7Ladders, Scaffolding"
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&#5B8DD9→ &7Click to browse."
+
+  defense-blocks-button:
+    slot: 15
+    material: GILDED_BLACKSTONE
+    name: "&#5B8DD9⬡ &fDefense Blocks"
+    lore:
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&7Fortify your base with blocks"
+      - "&7that require many hits to destroy."
+      - ""
+      - "&8→ &7T1 Cobblestone  &8(&f25 HP&8)"
+      - "&8→ &7T2 Stone        &8(&f50 HP&8)"
+      - "&8→ &7T3 Stone Brick  &8(&f75 HP&8)"
+      - "&8→ &7T4 Deepslate    &8(&f100 HP&8)"
+      - "&8→ &7T5 Tiles        &8(&f150 HP&8)"
+      - "&8→ &7T6 Gilded       &8(&f250 HP&8)"
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&#5B8DD9→ &7Click to browse."
+
+  close-button:
+    slot: 31
+    material: BARRIER
+    name: "&cClose"
+    lore:
+      - "&7Click to close."
+
+# ── SHOP: NORMAL BLOCKS ──────────────────────────────────────────
+shop-normal:
+  title: "&#5B8DD9◈ &fShop &8— &7Normal Blocks"
+  rows: 5
+
+  filler:
+    enabled: true
+    material: GRAY_STAINED_GLASS_PANE
+
+  border:
+    enabled: true
+    material: BLACK_STAINED_GLASS_PANE
+    slots: []
+
+  placeholder:
+    material: GRAY_DYE
+    name: "&7???"
+    lore:
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&8Coming soon..."
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+    slots: []
+
+  # ── Sounds ──────────────────────────────────────────────────────
+  sounds:
+    purchase-success: "ENTITY_EXPERIENCE_ORB_PICKUP"
+    purchase-success-volume: 1.0
+    purchase-success-pitch: 1.2
+    purchase-fail: "BLOCK_ANVIL_LAND"
+    purchase-fail-volume: 0.5
+    purchase-fail-pitch: 0.8
+
+  scrap-display:
+    slot: 4
+    material: SUNFLOWER
+    name: "&#FFD700◈ &fYour Scrap"
+    lore:
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&7Balance: &e{scrap} Scrap"
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+
+  back-button:
+    slot: 36
+    material: ARROW
+    name: "&7← &fBack"
+    lore:
+      - "&7Return to shop categories."
+
+  close-button:
+    slot: 44
+    material: BARRIER
+    name: "&cClose"
+    lore:
+      - "&7Click to close."
+
+  item-slots: [10, 12, 14, 16, 28, 30]
+
+  buy-hint-lore:
+    - ""
+    - "&8→ &7Left Click:  &aBuy ×1  &8(&e{cost_1} Scrap&8)"
+    - "&8→ &7Right Click: &aBuy ×8  &8(&e{cost_8} Scrap&8)"
+    - "&8→ &7Shift+Click: &aBuy ×64 &8(&e{cost_64} Scrap&8)"
+    - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+
+  can-afford:  "&#5B8DD9→ &aClick to purchase!"
+  cant-afford: "&c✘ Not enough Scrap."
+
+# ── SHOP: DEFENSE BLOCKS ─────────────────────────────────────────
+shop-defense:
+  title: "&#5B8DD9⬡ &fShop &8— &7Defense Blocks"
+  rows: 5
+
+  filler:
+    enabled: true
+    material: GRAY_STAINED_GLASS_PANE
+
+  border:
+    enabled: true
+    material: BLACK_STAINED_GLASS_PANE
+    slots: []
+
+  placeholder:
+    material: GRAY_DYE
+    name: "&7???"
+    lore:
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&8Coming soon..."
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+    slots: []
+
+  # ── Sounds ──────────────────────────────────────────────────────
+  sounds:
+    purchase-success: "ENTITY_EXPERIENCE_ORB_PICKUP"
+    purchase-success-volume: 1.0
+    purchase-success-pitch: 1.2
+    purchase-fail: "BLOCK_ANVIL_LAND"
+    purchase-fail-volume: 0.5
+    purchase-fail-pitch: 0.8
+
+  scrap-display:
+    slot: 4
+    material: SUNFLOWER
+    name: "&#FFD700◈ &fYour Scrap"
+    lore:
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&7Balance: &e{scrap} Scrap"
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+
+  back-button:
+    slot: 36
+    material: ARROW
+    name: "&7← &fBack"
+    lore:
+      - "&7Return to shop categories."
+
+  close-button:
+    slot: 44
+    material: BARRIER
+    name: "&cClose"
+    lore:
+      - "&7Click to close."
+
+  item-slots: [10, 12, 14, 16, 28, 30]
+
+  buy-hint-lore:
+    - ""
+    - "&8→ &7Click: &aBuy ×1  &8(&e{cost_1} Scrap&8)"
+    - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+
+  can-afford:  "&#5B8DD9→ &aClick to purchase!"
+  cant-afford: "&c✘ Not enough Scrap."
 
 # ── JOIN MESSAGES ─────────────────────────────────────────────────
 join:

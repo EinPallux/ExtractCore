@@ -1,0 +1,141 @@
+# ═══════════════════════════════════════════
+#    ExtractCore - Defense Blocks Configuration
+# ═══════════════════════════════════════════
+
+settings:
+  # Action-bar template shown when a defense block is hit.
+  # Placeholders: {name} {hp} {max_hp}
+  hit-actionbar: "&c{name} &8| &eHP: &f{hp}&8/&f{max_hp}"
+
+  # Sound played to the attacker on each hit
+  # Use any valid Bukkit Sound enum name: https://jd.papermc.io/paper/1.21/org/bukkit/Sound.html
+  hit-sound: "BLOCK_STONE_HIT"
+  hit-sound-volume: 0.5
+  # Pitch scales dynamically between hit-sound-pitch-min and (pitch-min + pitch-range)
+  # as the block loses HP — starts low, rises toward max HP
+  hit-sound-pitch-min: 0.8
+  hit-sound-pitch-range: 0.4
+
+  # Sound played when a defense block is fully destroyed
+  destroy-sound: "BLOCK_STONE_BREAK"
+  destroy-sound-volume: 1.0
+  destroy-sound-pitch: 1.0
+
+# ── Defense Block Tiers ──────────────────────────────────────────
+# Each block requires {hp} hits to destroy.
+# Defense blocks do NOT auto-despawn — they persist until destroyed.
+# They bypass WorldGuard block-place/break protection (except extract-core-place=deny).
+#
+# Placeholders in lore:
+#   {hp}     – hit points (number of hits to destroy)
+#   {cost}   – cost in Scrap
+#   {amount} – stack size given per purchase
+defense-blocks:
+
+  cobblestone-defense:
+    material: COBBLESTONE
+    display-name: "&7⬡ Cobblestone Defense &8[&7T1&8]"
+    lore:
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&8✦ &7Defense Block  &8|  &7Common"
+      - "&8✦ &7Tier &f1"
+      - ""
+      - "&8◈ &7HP: &f{hp} hits to destroy"
+      - "&8◈ &7Cost: &e{cost} Scrap &8/ &f{amount}x"
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&8&o(Does not auto-despawn)"
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+    cost-scrap: 200
+    amount: 1
+    hp: 25
+    gui-slot: 10
+
+  stone-defense:
+    material: STONE
+    display-name: "&f⬡ Stone Defense &8[&fT2&8]"
+    lore:
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&8✦ &7Defense Block  &8|  &fUncommon"
+      - "&8✦ &7Tier &f2"
+      - ""
+      - "&8◈ &7HP: &f{hp} hits to destroy"
+      - "&8◈ &7Cost: &e{cost} Scrap &8/ &f{amount}x"
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&8&o(Does not auto-despawn)"
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+    cost-scrap: 400
+    amount: 1
+    hp: 50
+    gui-slot: 12
+
+  stone-brick-defense:
+    material: STONE_BRICKS
+    display-name: "&f⬡ Stone Brick Defense &8[&fT3&8]"
+    lore:
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&8✦ &7Defense Block  &8|  &fUncommon"
+      - "&8✦ &7Tier &f3"
+      - ""
+      - "&8◈ &7HP: &f{hp} hits to destroy"
+      - "&8◈ &7Cost: &e{cost} Scrap &8/ &f{amount}x"
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&8&o(Does not auto-despawn)"
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+    cost-scrap: 700
+    amount: 1
+    hp: 75
+    gui-slot: 14
+
+  cobbled-deepslate-defense:
+    material: COBBLED_DEEPSLATE
+    display-name: "&e⬡ Cobbled Deepslate Defense &8[&eT4&8]"
+    lore:
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&8✦ &7Defense Block  &8|  &eRare"
+      - "&8✦ &7Tier &f4"
+      - ""
+      - "&8◈ &7HP: &f{hp} hits to destroy"
+      - "&8◈ &7Cost: &e{cost} Scrap &8/ &f{amount}x"
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&8&o(Does not auto-despawn)"
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+    cost-scrap: 1200
+    amount: 1
+    hp: 100
+    gui-slot: 16
+
+  deepslate-tiles-defense:
+    material: DEEPSLATE_TILES
+    display-name: "&6⬡ Deepslate Tiles Defense &8[&6T5&8]"
+    lore:
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&8✦ &7Defense Block  &8|  &6Elite"
+      - "&8✦ &7Tier &f5"
+      - ""
+      - "&8◈ &7HP: &f{hp} hits to destroy"
+      - "&8◈ &7Cost: &e{cost} Scrap &8/ &f{amount}x"
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&8&o(Does not auto-despawn)"
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+    cost-scrap: 2500
+    amount: 1
+    hp: 150
+    gui-slot: 28
+
+  gilded-blackstone-defense:
+    material: GILDED_BLACKSTONE
+    display-name: "&b⬡ Gilded Blackstone Defense &8[&bT6&8]"
+    lore:
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&8✦ &7Defense Block  &8|  &bLegendary"
+      - "&8✦ &7Tier &f6"
+      - ""
+      - "&8◈ &7HP: &f{hp} hits to destroy"
+      - "&8◈ &7Cost: &e{cost} Scrap &8/ &f{amount}x"
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&8&o(Does not auto-despawn)"
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+    cost-scrap: 5000
+    amount: 1
+    hp: 250
+    gui-slot: 30

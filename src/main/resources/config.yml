@@ -19,6 +19,12 @@ settings:
     yaw: 0.0
     pitch: 0.0
 
+# Core Settings
+core:
+  # Maximum distance in blocks a player can be from their Core
+  # to initiate a pickup via the Core GUI.
+  pickup-range: 10
+
 # Death Settings
 death:
   # Teleport player to their core on death
