@@ -12,6 +12,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 
+import java.util.List;
 import java.util.Map;
 
 public class ExchangeGUI extends BaseGUI {
@@ -20,59 +21,73 @@ public class ExchangeGUI extends BaseGUI {
 
     public ExchangeGUI(ExtractCore plugin, Player player) {
         super(plugin, player,
-            new GuiUtil(plugin, "exchange").title(),
-            new GuiUtil(plugin, "exchange").rows());
+                new GuiUtil(plugin, "exchange").title(),
+                new GuiUtil(plugin, "exchange").rows());
         this.g = new GuiUtil(plugin, "exchange");
     }
 
     @Override
     protected void build() {
-        fillBorder();
-        fill(ItemBuilder.filler());
+        // Filler
+        if (g.getBool("filler.enabled", true))
+            fill(new ItemBuilder(mat(g.material("filler"))).name(" ").hideAll().build());
+
+        // Border
+        if (g.getBool("border.enabled", true)) {
+            Material borderMat = mat(g.material("border"));
+            List<Integer> borderSlots = g.intList("border.slots");
+            if (borderSlots.isEmpty()) {
+                fillBorderWith(borderMat);
+            } else {
+                for (int slot : borderSlots)
+                    set(slot, new ItemBuilder(borderMat).name(" ").hideAll().build());
+            }
+        }
 
         PlayerData data = plugin.getPlayerDataManager().get(player);
         var em = plugin.getExchangeManager();
 
         Map<String, String> infoPh = GuiUtil.ph("scrap", ColorUtil.formatNumber(data.getScrap()));
         set(g.slot("info-item"), new ItemBuilder(mat(g.material("info-item")))
-            .name(g.str("info-item.name", infoPh))
-            .lore(g.lore("info-item.lore", infoPh))
-            .hideAll().build());
+                .name(g.str("info-item.name", infoPh))
+                .lore(g.lore("info-item.lore", infoPh))
+                .hideAll().build());
 
-        // Each material entry from config
         ConfigurationSection mats = plugin.getConfigManager().getGuiConfig()
-            .getConfigurationSection("exchange.materials");
+                .getConfigurationSection("exchange.materials");
         if (mats != null) {
             for (String key : mats.getKeys(false)) {
                 String path = "materials." + key;
-                int slot    = g.slot(path);
                 long cost1  = em.getCostInScrap(key, 1);
                 Map<String, String> ph = GuiUtil.ph(
-                    "cost_1",  ColorUtil.formatNumber(cost1),
-                    "cost_10", ColorUtil.formatNumber(cost1 * 10),
-                    "cost_64", ColorUtil.formatNumber(cost1 * 64)
+                        "cost_1",  ColorUtil.formatNumber(cost1),
+                        "cost_10", ColorUtil.formatNumber(cost1 * 10),
+                        "cost_64", ColorUtil.formatNumber(cost1 * 64)
                 );
-                set(slot, new ItemBuilder(mat(g.material(path)))
-                    .name(g.str(path + ".name", ph))
-                    .lore(g.lore(path + ".lore", ph))
-                    .hideAll().build());
+                set(g.slot(path), new ItemBuilder(mat(g.material(path)))
+                        .name(g.str(path + ".name", ph))
+                        .lore(g.lore(path + ".lore", ph))
+                        .hideAll().build());
             }
         }
 
         set(g.slot("close-button"), new ItemBuilder(mat(g.material("close-button")))
-            .name(g.str("close-button.name"))
-            .lore(g.lore("close-button.lore"))
-            .hideAll().build());
+                .name(g.str("close-button.name"))
+                .lore(g.lore("close-button.lore"))
+                .hideAll().build());
+
+        buildPlaceholders(g);
     }
 
     @Override
     public void handleClick(InventoryClickEvent event) {
         event.setCancelled(true);
         int slot = event.getRawSlot();
+        if (slot >= inventory.getSize()) return;
         if (slot == g.slot("close-button")) { player.closeInventory(); return; }
 
         ConfigurationSection mats = plugin.getConfigManager().getGuiConfig()
-            .getConfigurationSection("exchange.materials");
+                .getConfigurationSection("exchange.materials");
         if (mats == null) return;
 
         for (String key : mats.getKeys(false)) {
@@ -85,6 +100,16 @@ public class ExchangeGUI extends BaseGUI {
                 build();
                 return;
             }
+        }
+    }
+
+    private void fillBorderWith(Material mat) {
+        int size = inventory.getSize(); int rows = size / 9;
+        for (int i = 0; i < 9; i++) set(i, new ItemBuilder(mat).name(" ").hideAll().build());
+        for (int i = size - 9; i < size; i++) set(i, new ItemBuilder(mat).name(" ").hideAll().build());
+        for (int r = 1; r < rows - 1; r++) {
+            set(r * 9,     new ItemBuilder(mat).name(" ").hideAll().build());
+            set(r * 9 + 8, new ItemBuilder(mat).name(" ").hideAll().build());
         }
     }
 

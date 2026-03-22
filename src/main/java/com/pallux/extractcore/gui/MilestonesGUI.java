@@ -15,95 +15,89 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
-/**
- * Compact 3-row Milestones GUI.
- *
- * Layout (27 slots):
- *
- *  [border][border][border][border][border][border][border][border][border]
- *  [border][ EXT ] [KILLS] [TIME ] [CORES] [LEVEL] [border][border][TOTAL]
- *  [border][border][border][border][border][border][border][border][CLOSE]
- *
- * Each category slot shows the NEXT unclaimed milestone:
- *   - If claimable (target met) → enchant glint + "CLAIM" prompt
- *   - If in progress            → normal icon + progress info
- *   - If all complete           → lime stained glass + "Completed!" message
- *
- * Clicking a claimable slot claims it immediately and refreshes.
- */
 public class MilestonesGUI extends BaseGUI {
-
-    // Category slot positions in the 3-row (27-slot) inventory
-    private static final int[] CATEGORY_SLOTS = {10, 12, 14, 16, 13};
-    // Matches MilestoneManager.CATEGORIES order: EXTRACTIONS, KILLS, PLAYTIME, CORES, LEVEL
-    // We use 5 categories across the middle row
-
-    private static final int SLOT_TOTAL = 17;
-    private static final int SLOT_CLOSE = 26;
 
     private final GuiUtil g;
 
     public MilestonesGUI(ExtractCore plugin, Player player) {
         super(plugin, player,
-            new GuiUtil(plugin, "milestones").title(),
-            3);   // 3 rows = 27 slots
+                new GuiUtil(plugin, "milestones").title(),
+                new GuiUtil(plugin, "milestones").rows());
         this.g = new GuiUtil(plugin, "milestones");
     }
 
     @Override
     protected void build() {
-        fillBorder();
-        fill(ItemBuilder.filler());
+        // Filler
+        if (g.getBool("filler.enabled", true))
+            fill(new ItemBuilder(mat(g.material("filler"))).name(" ").hideAll().build());
+
+        // Border
+        if (g.getBool("border.enabled", true)) {
+            Material borderMat = mat(g.material("border"));
+            List<Integer> borderSlots = g.intList("border.slots");
+            if (borderSlots.isEmpty()) {
+                fillBorderWith(borderMat);
+            } else {
+                for (int slot : borderSlots)
+                    set(slot, new ItemBuilder(borderMat).name(" ").hideAll().build());
+            }
+        }
 
         PlayerData data = plugin.getPlayerDataManager().get(player);
         MilestoneManager mm = plugin.getMilestoneManager();
 
-        // ── Category slots ────────────────────────────────────────
+        // Category items — slots and category order both come from config
         List<String> categories = MilestoneManager.CATEGORIES;
-        int[] slots = {10, 12, 14, 16, 13}; // EXT, KILLS, TIME, CORES, LEVEL
-
+        List<Integer> catSlots  = g.intList("category-slots");
         for (int i = 0; i < categories.size(); i++) {
-            String cat  = categories.get(i);
-            int slot    = slots[i];
-            set(slot, buildCategoryItem(mm, data, cat));
+            int slot = i < catSlots.size() ? catSlots.get(i) : i + 10;
+            set(slot, buildCategoryItem(mm, data, categories.get(i)));
         }
 
-        // ── Overall progress item ─────────────────────────────────
-        int totalDone = data.getCompletedMilestones().size();
-        int totalAll  = mm.getAllMilestones().size();
+        // Header / progress item
+        int totalDone      = data.getCompletedMilestones().size();
+        int totalAll       = mm.getAllMilestones().size();
         int claimableCount = data.getClaimableMilestones().size();
-
         Map<String, String> ph = GuiUtil.ph(
-            "milestones_done",     String.valueOf(totalDone),
-            "milestones_total",    String.valueOf(totalAll),
-            "claimable_count",     String.valueOf(claimableCount)
+                "milestones_done",  String.valueOf(totalDone),
+                "milestones_total", String.valueOf(totalAll),
+                "claimable_count",  String.valueOf(claimableCount)
         );
-        set(SLOT_TOTAL, new ItemBuilder(mat(g.material("header-item")))
-            .name(g.str("header-item.name", ph))
-            .lore(g.lore("header-item.lore", ph))
-            .hideAll().build());
+        set(g.slot("header-item"), new ItemBuilder(mat(g.material("header-item")))
+                .name(g.str("header-item.name", ph))
+                .lore(g.lore("header-item.lore", ph))
+                .hideAll().build());
 
-        // ── Close ─────────────────────────────────────────────────
-        set(SLOT_CLOSE, new ItemBuilder(mat(g.material("close-button")))
-            .name(g.str("close-button.name"))
-            .lore(g.lore("close-button.lore"))
-            .hideAll().build());
+        // Close
+        set(g.slot("close-button"), new ItemBuilder(mat(g.material("close-button")))
+                .name(g.str("close-button.name"))
+                .lore(g.lore("close-button.lore"))
+                .hideAll().build());
+
+        buildPlaceholders(g);
     }
 
     private ItemStack buildCategoryItem(MilestoneManager mm, PlayerData data, String category) {
         String nextId = mm.getNextForCategory(data, category);
-        int done      = mm.countCompleted(data, category);
-        int total     = mm.countTotal(category);
+        int done  = mm.countCompleted(data, category);
+        int total = mm.countTotal(category);
 
-        // ── All milestones in this category done ──────────────────
+        // All done in this category
         if (nextId == null) {
-            return new ItemBuilder(Material.LIME_STAINED_GLASS_PANE)
-                .name(g.str("category-complete.name",
-                    GuiUtil.ph("category", categoryLabel(category))))
-                .lore(buildCompleteLore(category, done, total))
-                .hideAll().build();
+            Map<String, String> ph = GuiUtil.ph(
+                    "category", g.str("category-labels." + category.toLowerCase()),
+                    "done", String.valueOf(done), "total", String.valueOf(total)
+            );
+            return new ItemBuilder(mat(g.material("category-complete")))
+                    .name(g.str("category-complete.name", ph))
+                    .lore(g.lore("category-complete.lore", ph))
+                    .hideAll().build();
         }
 
         MilestoneManager.MilestoneEntry entry = mm.getEntry(nextId);
@@ -115,114 +109,90 @@ public class MilestonesGUI extends BaseGUI {
         try { icon = Material.valueOf(entry.icon()); } catch (Exception e) { icon = Material.PAPER; }
 
         String namePrefix = claimable
-            ? g.str("milestone-claimable-prefix")
-            : g.str("milestone-incomplete-prefix");
+                ? g.str("milestone-claimable-prefix")
+                : g.str("milestone-incomplete-prefix");
         String name = namePrefix + ColorUtil.color(entry.displayName());
 
         List<String> lore = buildMilestoneLore(entry, data, done, total, claimable);
 
-        ItemStack item = new ItemBuilder(icon)
-            .name(name)
-            .lore(lore)
-            .hideAll()
-            .build();
-
-        // Enchantment glint when claimable
+        ItemStack item = new ItemBuilder(icon).name(name).lore(lore).hideAll().build();
         if (claimable) {
             ItemMeta meta = item.getItemMeta();
             meta.addEnchant(Enchantment.LUCK_OF_THE_SEA, 1, true);
             meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
             item.setItemMeta(meta);
         }
-
         return item;
     }
 
     private List<String> buildMilestoneLore(MilestoneManager.MilestoneEntry entry,
-                                             PlayerData data,
-                                             int done, int total, boolean claimable) {
-        List<String> lore = new ArrayList<>();
-        lore.add("&8━━━━━━━━━━━━━━━━━━━━━━━━");
-
-        // Category + progress counter
-        lore.add("&8◈ &7" + categoryLabel(entry.type()) + "  &8|  &7" + done + " &8/ &7" + total);
-        lore.add("");
-
-        // Description
-        entry.description().stream().map(ColorUtil::color).forEach(lore::add);
-        lore.add("");
-
-        // Target progress
+                                            PlayerData data, int done, int total, boolean claimable) {
+        String categoryLabel = g.str("category-labels." + entry.type().toLowerCase());
         long current = getStatValue(data, entry.type());
-        lore.add("&7Progress: &e" + ColorUtil.formatNumber(current)
-                + " &8/ &e" + ColorUtil.formatNumber(entry.target()));
 
-        // Rewards
-        lore.add("");
-        lore.add("&8◈ &7Rewards:");
-        if (entry.rewardScrap()  > 0) lore.add("  &8◆ &eScrap:        &f" + ColorUtil.formatNumber(entry.rewardScrap()));
-        if (entry.rewardScrews() > 0) lore.add("  &8◆ &bScrews:       &f" + ColorUtil.formatNumber(entry.rewardScrews()));
-        if (entry.rewardEnergy() > 0) lore.add("  &8◆ &aEnergy Cells: &f" + ColorUtil.formatNumber(entry.rewardEnergy()));
-        if (entry.rewardBio()    > 0) lore.add("  &8◆ &dBio Samples:  &f" + ColorUtil.formatNumber(entry.rewardBio()));
-        if (entry.rewardTech()   > 0) lore.add("  &8◆ &6Tech Shards:  &f" + ColorUtil.formatNumber(entry.rewardTech()));
-        if (entry.rewardPoints() > 0) lore.add("  &8◆ &fPoints:       &f" + entry.rewardPoints());
-
-        lore.add("");
-        if (claimable) {
-            lore.add("&#FFD700★ &aReady to claim! Click to collect.");
-        } else {
-            lore.add("&8▸ &7Keep going to unlock this reward.");
-        }
-        lore.add("&8━━━━━━━━━━━━━━━━━━━━━━━━");
-
-        return lore.stream().map(ColorUtil::color).collect(java.util.stream.Collectors.toList());
-    }
-
-    private List<String> buildCompleteLore(String category, int done, int total) {
-        return List.of(
-            ColorUtil.color("&8━━━━━━━━━━━━━━━━━━━━━━━━"),
-            ColorUtil.color("&8◈ &7" + categoryLabel(category)),
-            ColorUtil.color(""),
-            ColorUtil.color("&#5B8DD9✔ &aAll " + total + " milestones completed!"),
-            ColorUtil.color("&7You've mastered this category."),
-            ColorUtil.color("&8━━━━━━━━━━━━━━━━━━━━━━━━")
+        Map<String, String> ph = GuiUtil.ph(
+                "category",    categoryLabel,
+                "done",        String.valueOf(done),
+                "total",       String.valueOf(total),
+                "current",     ColorUtil.formatNumber(current),
+                "target",      ColorUtil.formatNumber(entry.target()),
+                "reward_scrap",   entry.rewardScrap()  > 0 ? ColorUtil.formatNumber(entry.rewardScrap())  : "",
+                "reward_screws",  entry.rewardScrews() > 0 ? ColorUtil.formatNumber(entry.rewardScrews()) : "",
+                "reward_energy",  entry.rewardEnergy() > 0 ? ColorUtil.formatNumber(entry.rewardEnergy()) : "",
+                "reward_bio",     entry.rewardBio()    > 0 ? ColorUtil.formatNumber(entry.rewardBio())    : "",
+                "reward_tech",    entry.rewardTech()   > 0 ? ColorUtil.formatNumber(entry.rewardTech())   : "",
+                "reward_points",  String.valueOf(entry.rewardPoints())
         );
+
+        List<String> lore = new ArrayList<>(g.lore("milestone-lore-header", ph));
+
+        // Description lines come from milestones.yml, passed through colour
+        entry.description().stream().map(ColorUtil::color).forEach(lore::add);
+        lore.addAll(g.lore("milestone-lore-progress", ph));
+
+        // Rewards — only add lines where the reward is > 0
+        lore.addAll(g.lore("milestone-lore-rewards-header", ph));
+        if (entry.rewardScrap()  > 0) lore.add(g.str("milestone-lore-reward-scrap",  ph));
+        if (entry.rewardScrews() > 0) lore.add(g.str("milestone-lore-reward-screws", ph));
+        if (entry.rewardEnergy() > 0) lore.add(g.str("milestone-lore-reward-energy", ph));
+        if (entry.rewardBio()    > 0) lore.add(g.str("milestone-lore-reward-bio",    ph));
+        if (entry.rewardTech()   > 0) lore.add(g.str("milestone-lore-reward-tech",   ph));
+        if (entry.rewardPoints() > 0) lore.add(g.str("milestone-lore-reward-points", ph));
+
+        lore.addAll(claimable
+                ? g.lore("milestone-lore-footer-claimable", ph)
+                : g.lore("milestone-lore-footer-locked",    ph));
+
+        return lore.stream().map(ColorUtil::color).collect(Collectors.toList());
     }
 
     @Override
     public void handleClick(InventoryClickEvent event) {
         event.setCancelled(true);
         int slot = event.getRawSlot();
+        if (slot >= inventory.getSize()) return;
 
-        if (slot == SLOT_CLOSE) { player.closeInventory(); return; }
+        if (slot == g.slot("close-button")) { player.closeInventory(); return; }
 
-        // Check if a category slot was clicked
         List<String> categories = MilestoneManager.CATEGORIES;
-        int[] slots = {10, 12, 14, 16, 13};
+        List<Integer> catSlots  = g.intList("category-slots");
 
-        for (int i = 0; i < slots.length; i++) {
-            if (slot != slots[i]) continue;
-
-            String category = categories.get(i);
+        for (int i = 0; i < catSlots.size(); i++) {
+            if (slot != catSlots.get(i) || i >= categories.size()) continue;
             PlayerData data = plugin.getPlayerDataManager().get(player);
             MilestoneManager mm = plugin.getMilestoneManager();
-            String nextId = mm.getNextForCategory(data, category);
-
-            if (nextId == null) return; // all done, nothing to claim
-
+            String nextId = mm.getNextForCategory(data, categories.get(i));
+            if (nextId == null) return;
             if (data.getClaimableMilestones().contains(nextId)) {
                 mm.claim(player, data, nextId);
                 player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 0.8f, 1.2f);
-                build(); // refresh GUI
+                build();
             } else {
-                // Not claimable yet — play deny sound
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 0.5f, 0.8f);
             }
             return;
         }
     }
-
-    // ── Helpers ───────────────────────────────────────────────────────────────
 
     private long getStatValue(PlayerData data, String type) {
         return switch (type) {
@@ -235,18 +205,15 @@ public class MilestonesGUI extends BaseGUI {
         };
     }
 
-    private String categoryLabel(String type) {
-        return switch (type) {
-            case "EXTRACTIONS"      -> "Extractions";
-            case "KILLS"            -> "Player Kills";
-            case "PLAYTIME_MINUTES" -> "Playtime";
-            case "CORES_DESTROYED"  -> "Cores Raided";
-            case "LEVEL"            -> "Level";
-            default                 -> type;
-        };
+    private void fillBorderWith(Material mat) {
+        int size = inventory.getSize(); int rows = size / 9;
+        for (int i = 0; i < 9; i++) set(i, new ItemBuilder(mat).name(" ").hideAll().build());
+        for (int i = size - 9; i < size; i++) set(i, new ItemBuilder(mat).name(" ").hideAll().build());
+        for (int r = 1; r < rows - 1; r++) {
+            set(r * 9,     new ItemBuilder(mat).name(" ").hideAll().build());
+            set(r * 9 + 8, new ItemBuilder(mat).name(" ").hideAll().build());
+        }
     }
 
-    private Material mat(String n) {
-        try { return Material.valueOf(n); } catch (Exception e) { return Material.PAPER; }
-    }
+    private Material mat(String n) { try { return Material.valueOf(n); } catch (Exception e) { return Material.PAPER; } }
 }

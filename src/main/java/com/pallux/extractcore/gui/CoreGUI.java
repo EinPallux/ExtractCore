@@ -11,7 +11,10 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class CoreGUI extends BaseGUI {
 
@@ -19,15 +22,28 @@ public class CoreGUI extends BaseGUI {
 
     public CoreGUI(ExtractCore plugin, Player player) {
         super(plugin, player,
-            new GuiUtil(plugin, "core-gui").title(),
-            new GuiUtil(plugin, "core-gui").rows());
+                new GuiUtil(plugin, "core-gui").title(),
+                new GuiUtil(plugin, "core-gui").rows());
         this.g = new GuiUtil(plugin, "core-gui");
     }
 
     @Override
     protected void build() {
-        fillBorder();
-        fill(ItemBuilder.filler());
+        // Filler
+        if (g.getBool("filler.enabled", true))
+            fill(new ItemBuilder(mat(g.material("filler"))).name(" ").hideAll().build());
+
+        // Border
+        if (g.getBool("border.enabled", true)) {
+            Material borderMat = mat(g.material("border"));
+            List<Integer> borderSlots = g.intList("border.slots");
+            if (borderSlots.isEmpty()) {
+                fillBorderWith(borderMat);
+            } else {
+                for (int slot : borderSlots)
+                    set(slot, new ItemBuilder(borderMat).name(" ").hideAll().build());
+            }
+        }
 
         PlayerData data = plugin.getPlayerDataManager().get(player);
         var cm  = plugin.getCoreManager();
@@ -38,48 +54,43 @@ public class CoreGUI extends BaseGUI {
         int pickupSec = cfg.getInt("core.pickup-duration-seconds", 10);
 
         Map<String, String> ph = GuiUtil.ph(
-            "scrap_rate",    ColorUtil.formatNumber(cm.getScrapPerInterval(data)),
-            "interval",      String.valueOf(cm.getIntervalTicks(data)),
-            "core_x",        String.valueOf(data.getCoreX()),
-            "core_y",        String.valueOf(data.getCoreY()),
-            "core_z",        String.valueOf(data.getCoreZ()),
-            "speed_lvl",     String.valueOf(data.getCoreSpeedLevel()),
-            "prod_lvl",      String.valueOf(data.getCoreProductionLevel()),
-            "speed_max",     String.valueOf(speedMax),
-            "prod_max",      String.valueOf(prodMax),
-            "pickup_seconds",String.valueOf(pickupSec),
-            "stored_scrap",  ColorUtil.formatNumber(data.getCoreStoredScrap())
+                "scrap_rate",     ColorUtil.formatNumber(cm.getScrapPerInterval(data)),
+                "interval",       String.valueOf(cm.getIntervalTicks(data)),
+                "core_x",         String.valueOf(data.getCoreX()),
+                "core_y",         String.valueOf(data.getCoreY()),
+                "core_z",         String.valueOf(data.getCoreZ()),
+                "speed_lvl",      String.valueOf(data.getCoreSpeedLevel()),
+                "prod_lvl",       String.valueOf(data.getCoreProductionLevel()),
+                "speed_max",      String.valueOf(speedMax),
+                "prod_max",       String.valueOf(prodMax),
+                "pickup_seconds", String.valueOf(pickupSec),
+                "stored_scrap",   ColorUtil.formatNumber(data.getCoreStoredScrap())
         );
 
-        // Info
         set(g.slot("info-item"), new ItemBuilder(mat(g.material("info-item")))
-            .name(g.str("info-item.name", ph))
-            .lore(g.lore("info-item.lore", ph))
-            .hideAll().build());
+                .name(g.str("info-item.name", ph))
+                .lore(g.lore("info-item.lore", ph))
+                .hideAll().build());
 
-        // Collect button
         set(g.slot("collect-button"), new ItemBuilder(mat(g.material("collect-button")))
-            .name(g.str("collect-button.name", ph))
-            .lore(g.lore("collect-button.lore", ph))
-            .hideAll().build());
+                .name(g.str("collect-button.name", ph))
+                .lore(g.lore("collect-button.lore", ph))
+                .hideAll().build());
 
-        // Speed upgrade
-        set(g.slot("speed-upgrade"), buildUpgradeItem("speed-upgrade", "speed", data, cfg, ph, speedMax));
-
-        // Production upgrade
+        set(g.slot("speed-upgrade"),      buildUpgradeItem("speed-upgrade",      "speed",      data, cfg, ph, speedMax));
         set(g.slot("production-upgrade"), buildUpgradeItem("production-upgrade", "production", data, cfg, ph, prodMax));
 
-        // Pickup
         set(g.slot("pickup-button"), new ItemBuilder(mat(g.material("pickup-button")))
-            .name(g.str("pickup-button.name", ph))
-            .lore(g.lore("pickup-button.lore", ph))
-            .hideAll().build());
+                .name(g.str("pickup-button.name", ph))
+                .lore(g.lore("pickup-button.lore", ph))
+                .hideAll().build());
 
-        // Close
         set(g.slot("close-button"), new ItemBuilder(mat(g.material("close-button")))
-            .name(g.str("close-button.name"))
-            .lore(g.lore("close-button.lore"))
-            .hideAll().build());
+                .name(g.str("close-button.name"))
+                .lore(g.lore("close-button.lore"))
+                .hideAll().build());
+
+        buildPlaceholders(g);
     }
 
     private org.bukkit.inventory.ItemStack buildUpgradeItem(
@@ -90,8 +101,7 @@ public class CoreGUI extends BaseGUI {
         int currentLevel = isSpeed ? data.getCoreSpeedLevel() : data.getCoreProductionLevel();
         int nextLevel    = currentLevel + 1;
         Map<String, String> ph = new HashMap<>(basePh);
-
-        List<String> lore = new ArrayList<>(g.lore(guiKey + ".lore-header", ph));
+        List<String> lore;
 
         if (currentLevel < maxLevel) {
             String basePath = "core.upgrades." + upgradeType + ".levels." + nextLevel;
@@ -100,14 +110,13 @@ public class CoreGUI extends BaseGUI {
             long energy = cfg.getLong(basePath + ".cost.energy-cells", 0);
             long bio    = cfg.getLong(basePath + ".cost.bio-samples", 0);
             long tech   = cfg.getLong(basePath + ".cost.tech-shards", 0);
-            String nextDisplay = cfg.getString(basePath + ".display", "Level " + nextLevel);
 
-            ph.put("next_display", ColorUtil.color(nextDisplay));
-            ph.put("cost_scrap",  ColorUtil.formatNumber(scrap));
-            ph.put("cost_screws", ColorUtil.formatNumber(screws));
-            ph.put("cost_energy", ColorUtil.formatNumber(energy));
-            ph.put("cost_bio",    ColorUtil.formatNumber(bio));
-            ph.put("cost_tech",   ColorUtil.formatNumber(tech));
+            ph.put("next_display", ColorUtil.color(cfg.getString(basePath + ".display", "Level " + nextLevel)));
+            ph.put("cost_scrap",   ColorUtil.formatNumber(scrap));
+            ph.put("cost_screws",  ColorUtil.formatNumber(screws));
+            ph.put("cost_energy",  ColorUtil.formatNumber(energy));
+            ph.put("cost_bio",     ColorUtil.formatNumber(bio));
+            ph.put("cost_tech",    ColorUtil.formatNumber(tech));
 
             lore = new ArrayList<>(g.lore(guiKey + ".lore-header", ph));
             if (scrap  > 0) lore.add(g.str(guiKey + ".lore-cost-scrap",  ph));
@@ -119,20 +128,22 @@ public class CoreGUI extends BaseGUI {
             boolean canAfford = data.hasMaterials(scrap, screws, energy, bio, tech);
             lore.add(canAfford ? g.str(guiKey + ".lore-can-afford") : g.str(guiKey + ".lore-cant-afford"));
         } else {
+            lore = new ArrayList<>(g.lore(guiKey + ".lore-header", ph));
             lore.add(g.str(guiKey + ".lore-max-level"));
         }
         lore.addAll(g.lore(guiKey + ".lore-footer", ph));
 
         return new ItemBuilder(mat(g.material(guiKey)))
-            .name(g.str(guiKey + ".name", ph))
-            .lore(lore)
-            .hideAll().build();
+                .name(g.str(guiKey + ".name", ph))
+                .lore(lore)
+                .hideAll().build();
     }
 
     @Override
     public void handleClick(InventoryClickEvent event) {
         event.setCancelled(true);
         int slot = event.getRawSlot();
+        if (slot >= inventory.getSize()) return;
 
         if      (slot == g.slot("close-button"))       player.closeInventory();
         else if (slot == g.slot("collect-button"))     { plugin.getCoreManager().collectStoredScrap(player); build(); }
@@ -172,6 +183,16 @@ public class CoreGUI extends BaseGUI {
         player.sendMessage(g.str(msgKey, GuiUtil.ph("level", String.valueOf(next))));
         player.playSound(player.getLocation(), Sound.BLOCK_BEACON_POWER_SELECT, 1f, 1.2f);
         build();
+    }
+
+    private void fillBorderWith(Material mat) {
+        int size = inventory.getSize(); int rows = size / 9;
+        for (int i = 0; i < 9; i++) set(i, new ItemBuilder(mat).name(" ").hideAll().build());
+        for (int i = size - 9; i < size; i++) set(i, new ItemBuilder(mat).name(" ").hideAll().build());
+        for (int r = 1; r < rows - 1; r++) {
+            set(r * 9,     new ItemBuilder(mat).name(" ").hideAll().build());
+            set(r * 9 + 8, new ItemBuilder(mat).name(" ").hideAll().build());
+        }
     }
 
     private Material mat(String n) { try { return Material.valueOf(n); } catch (Exception e) { return Material.BARRIER; } }

@@ -8,13 +8,13 @@ import com.pallux.extractcore.util.GuiUtil;
 import com.pallux.extractcore.util.ItemBuilder;
 import org.bukkit.Material;
 import org.bukkit.Sound;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class ArmoryGUI extends BaseGUI {
 
@@ -23,27 +23,39 @@ public class ArmoryGUI extends BaseGUI {
 
     public ArmoryGUI(ExtractCore plugin, Player player) {
         super(plugin, player,
-            new GuiUtil(plugin, "armory").title(),
-            new GuiUtil(plugin, "armory").rows());
+                new GuiUtil(plugin, "armory").title(),
+                new GuiUtil(plugin, "armory").rows());
         this.g = new GuiUtil(plugin, "armory");
     }
 
     @Override
     protected void build() {
-        fillBorder();
-        fill(ItemBuilder.filler());
+        // Filler
+        if (g.getBool("filler.enabled", true))
+            fill(new ItemBuilder(mat(g.material("filler"))).name(" ").hideAll().build());
+
+        // Border
+        if (g.getBool("border.enabled", true)) {
+            Material borderMat = mat(g.material("border"));
+            List<Integer> borderSlots = g.intList("border.slots");
+            if (borderSlots.isEmpty()) {
+                fillBorderWith(borderMat);
+            } else {
+                for (int slot : borderSlots)
+                    set(slot, new ItemBuilder(borderMat).name(" ").hideAll().build());
+            }
+        }
 
         // Info item
         set(g.slot("info-item"), new ItemBuilder(mat(g.material("info-item")))
-            .name(g.str("info-item.name"))
-            .lore(g.lore("info-item.lore"))
-            .hideAll().build());
+                .name(g.str("info-item.name"))
+                .lore(g.lore("info-item.lore"))
+                .hideAll().build());
 
+        // Gear items
         PlayerData data = plugin.getPlayerDataManager().get(player);
         ArmoryManager am = plugin.getArmoryManager();
-        List<Integer> slots = plugin.getConfigManager().getGuiConfig()
-            .getIntegerList("armory.gear-slots");
-
+        List<Integer> slots = g.intList("gear-slots");
         for (int i = 0; i < GEAR_TYPES.length; i++) {
             int slot = i < slots.size() ? slots.get(i) : 10 + i * 2;
             set(slot, buildGearItem(am, data, GEAR_TYPES[i]));
@@ -51,9 +63,11 @@ public class ArmoryGUI extends BaseGUI {
 
         // Close
         set(g.slot("close-button"), new ItemBuilder(mat(g.material("close-button")))
-            .name(g.str("close-button.name"))
-            .lore(g.lore("close-button.lore"))
-            .hideAll().build());
+                .name(g.str("close-button.name"))
+                .lore(g.lore("close-button.lore"))
+                .hideAll().build());
+
+        buildPlaceholders(g);
     }
 
     private ItemStack buildGearItem(ArmoryManager am, PlayerData data, String type) {
@@ -62,26 +76,24 @@ public class ArmoryGUI extends BaseGUI {
         ArmoryManager.UpgradeCost cost = tier < maxTier ? am.getUpgradeCost(type, tier) : null;
 
         String label = g.str("gear-labels." + type);
-        Map<String, String> ph = GuiUtil.ph("tier", String.valueOf(tier), "max_tier", String.valueOf(maxTier), "gear_label", label);
+        Map<String, String> ph = GuiUtil.ph(
+                "tier", String.valueOf(tier), "max_tier", String.valueOf(maxTier), "gear_label", label);
 
-        // Name from config template
         String name = g.str("gear-name-format", ph);
-
-        // Build lore from config templates
         List<String> lore = new ArrayList<>(g.lore("gear-lore-header", ph));
 
         if (cost != null) {
             lore.add(g.str("gear-lore-cost-header", ph));
             if (cost.scrap()  > 0) lore.add(g.str("gear-lore-cost-scrap",
-                GuiUtil.ph("cost_scrap", ColorUtil.formatNumber(cost.scrap()))));
+                    GuiUtil.ph("cost_scrap",  ColorUtil.formatNumber(cost.scrap()))));
             if (cost.screws() > 0) lore.add(g.str("gear-lore-cost-screws",
-                GuiUtil.ph("cost_screws", ColorUtil.formatNumber(cost.screws()))));
+                    GuiUtil.ph("cost_screws", ColorUtil.formatNumber(cost.screws()))));
             if (cost.energy() > 0) lore.add(g.str("gear-lore-cost-energy",
-                GuiUtil.ph("cost_energy", ColorUtil.formatNumber(cost.energy()))));
+                    GuiUtil.ph("cost_energy", ColorUtil.formatNumber(cost.energy()))));
             if (cost.bio()    > 0) lore.add(g.str("gear-lore-cost-bio",
-                GuiUtil.ph("cost_bio",    ColorUtil.formatNumber(cost.bio()))));
+                    GuiUtil.ph("cost_bio",    ColorUtil.formatNumber(cost.bio()))));
             if (cost.tech()   > 0) lore.add(g.str("gear-lore-cost-tech",
-                GuiUtil.ph("cost_tech",   ColorUtil.formatNumber(cost.tech()))));
+                    GuiUtil.ph("cost_tech",   ColorUtil.formatNumber(cost.tech()))));
             lore.add("");
             boolean canAfford = data.hasMaterials(cost.scrap(), cost.screws(), cost.energy(), cost.bio(), cost.tech());
             lore.add(canAfford ? g.str("gear-lore-can-afford") : g.str("gear-lore-cant-afford"));
@@ -90,7 +102,6 @@ public class ArmoryGUI extends BaseGUI {
         }
         lore.addAll(g.lore("gear-lore-footer"));
 
-        // Use current tier item material
         ItemStack base = switch (type) {
             case "sword"      -> am.createSword(tier);
             case "pickaxe"    -> am.createPickaxe(tier);
@@ -108,10 +119,10 @@ public class ArmoryGUI extends BaseGUI {
     public void handleClick(InventoryClickEvent event) {
         event.setCancelled(true);
         int slot = event.getRawSlot();
+        if (slot >= inventory.getSize()) return;
         if (slot == g.slot("close-button")) { player.closeInventory(); return; }
 
-        List<Integer> gearSlots = plugin.getConfigManager().getGuiConfig()
-            .getIntegerList("armory.gear-slots");
+        List<Integer> gearSlots = g.intList("gear-slots");
         for (int i = 0; i < gearSlots.size(); i++) {
             if (slot == gearSlots.get(i) && i < GEAR_TYPES.length) {
                 plugin.getArmoryManager().upgradeGear(player, GEAR_TYPES[i]);
@@ -119,6 +130,16 @@ public class ArmoryGUI extends BaseGUI {
                 build();
                 return;
             }
+        }
+    }
+
+    private void fillBorderWith(Material mat) {
+        int size = inventory.getSize(); int rows = size / 9;
+        for (int i = 0; i < 9; i++) set(i, new ItemBuilder(mat).name(" ").hideAll().build());
+        for (int i = size - 9; i < size; i++) set(i, new ItemBuilder(mat).name(" ").hideAll().build());
+        for (int r = 1; r < rows - 1; r++) {
+            set(r * 9,     new ItemBuilder(mat).name(" ").hideAll().build());
+            set(r * 9 + 8, new ItemBuilder(mat).name(" ").hideAll().build());
         }
     }
 

@@ -1,44 +1,49 @@
-# ═══════════════════════════════════════════════════════════════════
-#           ExtractCore - GUI & Display Configuration
-#  Every title, item name, lore line, button label and dynamic text
-#  is defined here. Supports &#RRGGBB hex and &c legacy colors.
+# ExtractCore — GUI Configuration
+# Colors: &#RRGGBB hex or &c legacy codes
 #
-#  Placeholders usable in lore/name fields:
-#    {player}        player name
-#    {level}         colored level
-#    {level_raw}     raw level number
-#    {progress}      XP progress % (e.g. 80.0)
-#    {scrap}         formatted scrap
-#    {screws}        formatted screws
-#    {energy}        formatted energy cells
-#    {bio}           formatted bio samples
-#    {tech}          formatted tech shards
-#    {tier}          current gear tier number
-#    {max_tier}      max gear tier number
-#    {speed_lvl}     core speed upgrade level
-#    {prod_lvl}      core production upgrade level
-#    {core_x/y/z}    core coordinates
-#    {scrap_rate}    scrap per interval
-#    {interval}      generation interval in seconds
-#    {kills} {deaths} {kd} {extractions} {cores_destroyed}
-#    {playtime_h} {playtime_m}
-#    {milestones_done} {milestones_total}
-#    {next_extraction} {current_extraction}
-#    {cost_scrap} {cost_screws} {cost_energy} {cost_bio} {cost_tech}
-#    {next_display}  display name of the next upgrade tier
-#    {sword_t} {pickaxe_t} {axe_t} {helmet_t} {chest_t} {legs_t} {boots_t}
-# ═══════════════════════════════════════════════════════════════════
+# Common text placeholders (available in most GUIs):
+#   {player}  {level}  {progress}
+#   {scrap}  {screws}  {energy}  {bio}  {tech}
+#   {sword_t}  {pickaxe_t}  {axe_t}  {helmet_t}
+#   {speed_lvl}  {prod_lvl}
+#   {core_x}  {core_y}  {core_z}
+#   {milestones_done}  {next_extraction}  {current_extraction}  {zone_name}
+#
+# Filler/Border (available in every GUI):
+#   filler.enabled / filler.material    — background fill pane
+#   border.enabled / border.material    — edge border pane
+#   border.slots                        — explicit slot list, or [] for auto outer-edge
+#
+# Placeholder ??? items (available in every GUI):
+#   placeholder.material / .name / .lore / .slots
+#   Add slot numbers to .slots to place ??? items. Empty [] = disabled.
 
-# ─────────────────────────────────────────────────────────────────
-# MAIN MENU  (/extract, /menu)
-# ─────────────────────────────────────────────────────────────────
+# ── MAIN MENU (/extract) ──────────────────────────────────────────
 main-menu:
   title: "&#5B8DD9◈ &fExtract &8— &7Main Menu"
   rows: 6
 
+  filler:
+    enabled: true
+    material: GRAY_STAINED_GLASS_PANE
+
+  border:
+    enabled: true
+    material: BLACK_STAINED_GLASS_PANE
+    slots: []
+
+  placeholder:
+    material: GRAY_DYE
+    name: "&7???"
+    lore:
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&8Coming soon..."
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+    slots: [22, 23, 24, 28, 29, 30, 31, 32, 33]
+
   player-overview:
-    slot: 13
-    material: PLAYER_HEAD
+    enabled: true
+    slot: 4
     name: "&#5B8DD9◈ &f{player}"
     lore:
       - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
@@ -53,22 +58,24 @@ main-menu:
       - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
 
   armory-button:
-    slot: 28
+    enabled: true
+    slot: 19
     material: DIAMOND_SWORD
     name: "&#5B8DD9⚔ &fArmory"
     lore:
       - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
       - "&7Upgrade your &eGear&7."
       - ""
-      - "&7Sword:      &eT{sword_t}"
-      - "&7Pickaxe:    &eT{pickaxe_t}"
-      - "&7Axe:        &eT{axe_t}"
-      - "&7Armor:      &eT{helmet_t}"
+      - "&7Sword:   &eT{sword_t}"
+      - "&7Pickaxe: &eT{pickaxe_t}"
+      - "&7Axe:     &eT{axe_t}"
+      - "&7Armor:   &eT{helmet_t}"
       - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
       - "&#5B8DD9→ &7Click to open."
 
   core-button:
-    slot: 30
+    enabled: true
+    slot: 20
     material: BEACON
     name: "&#5B8DD9◈ &fCore"
     lore:
@@ -80,32 +87,35 @@ main-menu:
       - "&7Prod. Lvl:  &e{prod_lvl}"
       - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
       - "&#5B8DD9→ &7Click to manage."
-    # Line shown when core IS placed (replaces "Core not placed." line)
-    core-placed-line: "&aCore placed at: &eX{core_x} Y{core_y} Z{core_z}"
+    core-placed-line:     "&aCore placed at: &eX{core_x} Y{core_y} Z{core_z}"
     core-not-placed-line: "&cCore not placed."
 
-  stats-button:
-    slot: 32
-    material: PAPER
-    name: "&#5B8DD9📊 &fStats"
-    lore:
-      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
-      - "&7View all your statistics."
-      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
-      - "&#5B8DD9→ &7Click to view."
-
   exchange-button:
-    slot: 34
+    enabled: true
+    slot: 21
     material: EMERALD
     name: "&#5B8DD9💱 &fExchange"
     lore:
       - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
-      - "&7Buy materials with Scrap."
+      - "&7Buy materials with &eScrap&7."
       - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
       - "&#5B8DD9→ &7Click to open."
 
+  extraction-status:
+    enabled: true
+    slot: 25
+    material: ENDER_CHEST
+    name: "&#5B8DD9⚡ &fExtraction Status"
+    lore:
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "{extraction_status}"
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+    status-active:  "&#FF6B35⚡ ACTIVE: &e{zone_name} &8— &7{current_extraction} left"
+    status-waiting: "&#5B8DD9⚡ Next in: &e{next_extraction}"
+
   milestones-button:
-    slot: 40
+    enabled: true
+    slot: 28
     material: NETHER_STAR
     name: "&#FFD700★ &fMilestones"
     lore:
@@ -115,18 +125,19 @@ main-menu:
       - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
       - "&#5B8DD9→ &7Click to view."
 
-  extraction-status:
-    slot: 22
-    material: ENDER_CHEST
-    name: "&#5B8DD9⚡ &fExtraction Status"
+  stats-button:
+    enabled: true
+    slot: 34
+    material: PAPER
+    name: "&#5B8DD9📊 &fStats"
     lore:
       - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
-      - "{extraction_status}"
+      - "&7View all your statistics."
       - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
-    status-active:   "&#FF6B35⚡ ACTIVE: &e{zone_name} &8— &7{current_extraction} left"
-    status-waiting:  "&#5B8DD9⚡ Next in: &e{next_extraction}"
+      - "&#5B8DD9→ &7Click to view."
 
   close-button:
+    enabled: true
     slot: 49
     material: BARRIER
     name: "&cClose"
@@ -135,12 +146,28 @@ main-menu:
 
   no-core-message: "&cYou need to place your Core first!"
 
-# ─────────────────────────────────────────────────────────────────
-# ARMORY GUI  (/armory)
-# ─────────────────────────────────────────────────────────────────
+# ── ARMORY (/armory) ─────────────────────────────────────────────
 armory:
   title: "&#5B8DD9◈ &fArmory &8— &7Upgrade your Gear"
   rows: 6
+
+  filler:
+    enabled: true
+    material: GRAY_STAINED_GLASS_PANE
+
+  border:
+    enabled: true
+    material: BLACK_STAINED_GLASS_PANE
+    slots: []
+
+  placeholder:
+    material: GRAY_DYE
+    name: "&7???"
+    lore:
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&8Coming soon..."
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+    slots: []
 
   info-item:
     slot: 4
@@ -155,10 +182,9 @@ armory:
       - "&8→ &7Click any item to upgrade"
       - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
 
-  # Gear slot positions [sword, pickaxe, axe, helmet, chestplate, leggings, boots]
+  # Slot order: [sword, pickaxe, axe, helmet, chestplate, leggings, boots]
   gear-slots: [10, 12, 14, 28, 30, 32, 34]
 
-  # Display labels for each gear type (used in lore header)
   gear-labels:
     sword:      "⚔ Sword"
     pickaxe:    "⛏ Pickaxe"
@@ -168,7 +194,7 @@ armory:
     leggings:   "◈ Leggings"
     boots:      "◈ Boots"
 
-  # Gear item lore template — {gear_label}, {tier}, {max_tier}, cost placeholders, etc.
+  gear-name-format:      "&#5B8DD9{gear_label} &8[&fT{tier}&8]"
   gear-lore-header:
     - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
     - "&7Current Tier: &f{tier} &8/ &f{max_tier}"
@@ -179,14 +205,11 @@ armory:
   gear-lore-cost-energy: "  &8◆ &aEnergy Cells: &f{cost_energy}"
   gear-lore-cost-bio:    "  &8◆ &dBio Samples: &f{cost_bio}"
   gear-lore-cost-tech:   "  &8◆ &6Tech Shards: &f{cost_tech}"
-  gear-lore-can-afford:    "&#5B8DD9→ &aClick to upgrade!"
-  gear-lore-cant-afford:   "&c✘ Not enough resources."
-  gear-lore-max-tier:      "&#FFD700★ &eMax Tier Reached!"
+  gear-lore-can-afford:  "&#5B8DD9→ &aClick to upgrade!"
+  gear-lore-cant-afford: "&c✘ Not enough resources."
+  gear-lore-max-tier:    "&#FFD700★ &eMax Tier Reached!"
   gear-lore-footer:
     - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
-
-  # Name format for gear item in GUI: {color_prefix}{gear_label} [T{tier}]
-  gear-name-format: "&#5B8DD9{gear_label} &8[&fT{tier}&8]"
 
   close-button:
     slot: 49
@@ -195,12 +218,30 @@ armory:
     lore:
       - "&7Click to close this menu."
 
-# ─────────────────────────────────────────────────────────────────
-# CORE GUI  (right-click core)
-# ─────────────────────────────────────────────────────────────────
+# ── CORE GUI (right-click placed core) ───────────────────────────
+# Extra placeholders: {scrap_rate} {interval} {speed_lvl} {prod_lvl}
+#                     {speed_max} {prod_max} {stored_scrap} {pickup_seconds}
 core-gui:
   title: "&#5B8DD9◈ &fCore Management"
   rows: 6
+
+  filler:
+    enabled: true
+    material: GRAY_STAINED_GLASS_PANE
+
+  border:
+    enabled: true
+    material: BLACK_STAINED_GLASS_PANE
+    slots: []
+
+  placeholder:
+    material: GRAY_DYE
+    name: "&7???"
+    lore:
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&8Coming soon..."
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+    slots: []
 
   info-item:
     slot: 4
@@ -250,9 +291,9 @@ core-gui:
     lore-cost-energy: "  &8◆ &aEnergy Cells: &f{cost_energy}"
     lore-cost-bio:    "  &8◆ &dBio Samples: &f{cost_bio}"
     lore-cost-tech:   "  &8◆ &6Tech Shards: &f{cost_tech}"
-    lore-can-afford:   "&#5B8DD9→ &aClick to upgrade!"
-    lore-cant-afford:  "&c✘ Not enough resources."
-    lore-max-level:    "&#FFD700★ &eMax Level Reached!"
+    lore-can-afford:  "&#5B8DD9→ &aClick to upgrade!"
+    lore-cant-afford: "&c✘ Not enough resources."
+    lore-max-level:   "&#FFD700★ &eMax Level Reached!"
     lore-footer:
       - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
 
@@ -271,9 +312,9 @@ core-gui:
     lore-cost-energy: "  &8◆ &aEnergy Cells: &f{cost_energy}"
     lore-cost-bio:    "  &8◆ &dBio Samples: &f{cost_bio}"
     lore-cost-tech:   "  &8◆ &6Tech Shards: &f{cost_tech}"
-    lore-can-afford:   "&#5B8DD9→ &aClick to upgrade!"
-    lore-cant-afford:  "&c✘ Not enough resources."
-    lore-max-level:    "&#FFD700★ &eMax Level Reached!"
+    lore-can-afford:  "&#5B8DD9→ &aClick to upgrade!"
+    lore-cant-afford: "&c✘ Not enough resources."
+    lore-max-level:   "&#FFD700★ &eMax Level Reached!"
     lore-footer:
       - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
 
@@ -283,8 +324,7 @@ core-gui:
     name: "&#FFD700⤴ &ePickup Core"
     lore:
       - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
-      - "&7Hold still for &e{pickup_seconds}s"
-      - "&7to pick up your Core."
+      - "&7Hold still for &e{pickup_seconds}s to pick up your Core."
       - ""
       - "&c⚠ Moving will cancel pickup!"
       - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
@@ -298,21 +338,41 @@ core-gui:
       - "&7Click to close this menu."
 
   upgrade-messages:
-    max-level:         "&7This upgrade is already at &emax level&7."
-    not-enough:        "&cNot enough resources for this upgrade."
-    success-speed:     "&#5B8DD9Core Speed upgraded to level &e{level}&8."
+    max-level:          "&7This upgrade is already at &emax level&7."
+    not-enough:         "&cNot enough resources for this upgrade."
+    success-speed:      "&#5B8DD9Core Speed upgraded to level &e{level}&8."
     success-production: "&#5B8DD9Core Production upgraded to level &e{level}&8."
 
-  not-your-core: "&cThis is not your Core."
+  not-your-core:             "&cThis is not your Core."
   not-your-core-right-click: "&7This is not your Core. &8| &cMine it &7to raid it."
-  redirect-to-gui: "&7To pick up your Core, &eright-click &7it and use the Pickup button."
+  redirect-to-gui:           "&7To pick up your Core, &eright-click &7it and use the Pickup button."
 
-# ─────────────────────────────────────────────────────────────────
-# STATS GUI  (/stats)
-# ─────────────────────────────────────────────────────────────────
+# ── STATS (/stats) ───────────────────────────────────────────────
+# Extra placeholders: {xp_raw} {xp_needed} {kills} {deaths} {kd}
+#                     {cores_destroyed} {extractions}
+#                     {playtime_h} {playtime_m}
+#                     {chest_t} {legs_t} {boots_t}
 stats:
   title: "&#5B8DD9◈ &f{player} &8— &7Stats"
   rows: 5
+
+  filler:
+    enabled: true
+    material: GRAY_STAINED_GLASS_PANE
+
+  border:
+    enabled: true
+    material: BLACK_STAINED_GLASS_PANE
+    slots: []
+
+  placeholder:
+    material: GRAY_DYE
+    name: "&7???"
+    lore:
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&8Coming soon..."
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+    slots: []
 
   level-item:
     slot: 11
@@ -391,12 +451,29 @@ stats:
     lore:
       - "&7Click to close."
 
-# ─────────────────────────────────────────────────────────────────
-# EXCHANGE GUI  (/exchange)
-# ─────────────────────────────────────────────────────────────────
+# ── EXCHANGE (/exchange) ─────────────────────────────────────────
+# Extra placeholders: {cost_1} {cost_10} {cost_64}
 exchange:
   title: "&#5B8DD9◈ &fExchange &8— &7Buy with Scrap"
   rows: 5
+
+  filler:
+    enabled: true
+    material: GRAY_STAINED_GLASS_PANE
+
+  border:
+    enabled: true
+    material: BLACK_STAINED_GLASS_PANE
+    slots: []
+
+  placeholder:
+    material: GRAY_DYE
+    name: "&7???"
+    lore:
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&8Coming soon..."
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+    slots: []
 
   info-item:
     slot: 13
@@ -415,7 +492,6 @@ exchange:
       - "&8→ &7Shift+Click:  &f×64"
       - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
 
-  # Each material entry: slot, key, display-name, material icon
   materials:
     screws:
       slot: 20
@@ -481,12 +557,43 @@ exchange:
     lore:
       - "&7Click to close."
 
-# ─────────────────────────────────────────────────────────────────
-# MILESTONES GUI  (/milestones)
-# ─────────────────────────────────────────────────────────────────
+# ── MILESTONES (/milestones) ─────────────────────────────────────
+# Extra placeholders: {milestones_total} {claimable_count} {category}
+#                     {done} {total} {current} {target}
+#                     {reward_scrap} {reward_screws} {reward_energy}
+#                     {reward_bio} {reward_tech} {reward_points}
 milestones:
   title: "&#FFD700★ &fMilestones"
   rows: 3
+
+  filler:
+    enabled: true
+    material: GRAY_STAINED_GLASS_PANE
+
+  border:
+    enabled: true
+    material: BLACK_STAINED_GLASS_PANE
+    slots: []
+
+  placeholder:
+    material: GRAY_DYE
+    name: "&7???"
+    lore:
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&8Coming soon..."
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+    slots: []
+
+  # Slot for each category in order: EXTRACTIONS, KILLS, PLAYTIME_MINUTES, CORES_DESTROYED, LEVEL
+  category-slots: [10, 12, 14, 16, 13]
+
+  # Display name for each category type (used in lore and complete-item name)
+  category-labels:
+    extractions:      "Extractions"
+    kills:            "Player Kills"
+    playtime_minutes: "Playtime"
+    cores_destroyed:  "Cores Raided"
+    level:            "Level"
 
   header-item:
     slot: 17
@@ -498,13 +605,48 @@ milestones:
       - "&7Claimable: &#FFD700{claimable_count}"
       - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
 
-  # Prefix on claimable slots (enchant glint active)
-  milestone-claimable-prefix: "&#FFD700★ "
-  # Prefix on locked/in-progress slots
+  # Item shown when all milestones in a category are done
+  category-complete:
+    material: LIME_STAINED_GLASS_PANE
+    name: "&#5B8DD9✔ &a{category} Complete"
+    lore:
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&8◈ &7{category}"
+      - ""
+      - "&#5B8DD9✔ &aAll {total} milestones completed!"
+      - "&7You've mastered this category."
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+
+  # Prefix on the item name for claimable vs locked milestones
+  milestone-claimable-prefix:  "&#FFD700★ "
   milestone-incomplete-prefix: "&8◈ "
 
-  category-complete:
-    name: "&#5B8DD9✔ &a{category} Complete"
+  # Milestone item lore template — sections are built in order below
+  milestone-lore-header:
+    - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+    - "&8◈ &7{category}  &8|  &7{done} &8/ &7{total}"
+    - ""
+  # Description lines are injected here from milestones.yml
+  milestone-lore-progress:
+    - ""
+    - "&7Progress: &e{current} &8/ &e{target}"
+    - ""
+  milestone-lore-rewards-header:
+    - "&8◈ &7Rewards:"
+  milestone-lore-reward-scrap:  "  &8◆ &eScrap:        &f{reward_scrap}"
+  milestone-lore-reward-screws: "  &8◆ &bScrews:       &f{reward_screws}"
+  milestone-lore-reward-energy: "  &8◆ &aEnergy Cells: &f{reward_energy}"
+  milestone-lore-reward-bio:    "  &8◆ &dBio Samples:  &f{reward_bio}"
+  milestone-lore-reward-tech:   "  &8◆ &6Tech Shards:  &f{reward_tech}"
+  milestone-lore-reward-points: "  &8◆ &fPoints:       &f{reward_points}"
+  milestone-lore-footer-claimable:
+    - ""
+    - "&#FFD700★ &aReady to claim! Click to collect."
+    - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+  milestone-lore-footer-locked:
+    - ""
+    - "&8▸ &7Keep going to unlock this reward."
+    - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
 
   close-button:
     slot: 26
@@ -513,10 +655,25 @@ milestones:
     lore:
       - "&7Click to close."
 
+# ── RESET CONFIRM (admin GUI) ─────────────────────────────────────
+# Extra placeholders: {player} {reset_type}
 reset-confirm:
   title: "&#FF4444⚠ Confirm Reset — {player}"
   rows: 3
-  filler-material: RED_STAINED_GLASS_PANE
+
+  # Filler material for this GUI (the red glass)
+  filler:
+    enabled: true
+    material: RED_STAINED_GLASS_PANE
+
+  placeholder:
+    material: GRAY_DYE
+    name: "&7???"
+    lore:
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&8Coming soon..."
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+    slots: []
 
   confirm-button:
     slot: 11
@@ -540,30 +697,26 @@ reset-confirm:
       - "&7Click to cancel the reset."
       - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
 
-# ─────────────────────────────────────────────────────────────────
-# ADMIN COMMAND  (/ex)
-# ─────────────────────────────────────────────────────────────────
+# ── ADMIN COMMAND (/ex) ───────────────────────────────────────────
 admin:
   help:
-    header: "&#5B8DD9ExtractCore Admin Commands:"
-    reload: "&8/ex &7reload"
-    define: "&8/ex &7define extract <n>"
+    header:   "&#5B8DD9ExtractCore Admin Commands:"
+    reload:   "&8/ex &7reload"
+    define:   "&8/ex &7define extract <n>"
     currency: "&8/ex &7set|give|take <currency> <player> <amount>"
-    reset: "&8/ex &7reset <type> <player>"
+    reset:    "&8/ex &7reset <type> <player>"
   errors:
-    no-permission:       "&cNo permission."
-    players-only:        "&cOnly players can use this command."
-    define-players-only: "&cOnly players can define zones."
-    define-usage:        "&cUsage: /ex define extract <n>"
-    worldedit-no-sel:    "&cMake a WorldEdit selection first!"
-    currency-usage:      "&cUsage: /ex {action} <currency> <player> <amount>"
-    amount-positive:     "&cAmount must be positive."
-    reset-usage:         "&cUsage: /ex reset <type> <player>"
+    no-permission:          "&cNo permission."
+    players-only:           "&cOnly players can use this command."
+    define-players-only:    "&cOnly players can define zones."
+    define-usage:           "&cUsage: /ex define extract <n>"
+    worldedit-no-sel:       "&cMake a WorldEdit selection first!"
+    currency-usage:         "&cUsage: /ex {action} <currency> <player> <amount>"
+    amount-positive:        "&cAmount must be positive."
+    reset-usage:            "&cUsage: /ex reset <type> <player>"
     zone-offline-destroyed: "&#5B8DD9You destroyed &e{player}'s &7Core! &8(offline player)"
 
-# ─────────────────────────────────────────────────────────────────
-# PLAYER JOIN
-# ─────────────────────────────────────────────────────────────────
+# ── JOIN MESSAGES ─────────────────────────────────────────────────
 join:
   first-join-message:
     - ""

@@ -3,12 +3,16 @@ package com.pallux.extractcore.gui;
 import com.pallux.extractcore.ExtractCore;
 import com.pallux.extractcore.listeners.GUIListener;
 import com.pallux.extractcore.util.ColorUtil;
+import com.pallux.extractcore.util.GuiUtil;
 import com.pallux.extractcore.util.ItemBuilder;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+
+import java.util.List;
 
 /**
  * Abstract base for all ExtractCore GUIs.
@@ -20,8 +24,8 @@ public abstract class BaseGUI {
     protected final Player player;
 
     protected BaseGUI(ExtractCore plugin, Player player, String title, int rows) {
-        this.plugin = plugin;
-        this.player = player;
+        this.plugin    = plugin;
+        this.player    = player;
         this.inventory = Bukkit.createInventory(null, rows * 9, ColorUtil.component(title));
     }
 
@@ -48,7 +52,7 @@ public abstract class BaseGUI {
         for (int i = 0; i < 9; i++) inventory.setItem(i, ItemBuilder.border());
         for (int i = size - 9; i < size; i++) inventory.setItem(i, ItemBuilder.border());
         for (int r = 1; r < rows - 1; r++) {
-            inventory.setItem(r * 9, ItemBuilder.border());
+            inventory.setItem(r * 9,     ItemBuilder.border());
             inventory.setItem(r * 9 + 8, ItemBuilder.border());
         }
     }
@@ -63,6 +67,29 @@ public abstract class BaseGUI {
         int row  = slot / 9;
         int col  = slot % 9;
         return row == 0 || row == rows - 1 || col == 0 || col == 8;
+    }
+    protected void buildPlaceholders(GuiUtil guiSection) {
+        List<Integer> slots = guiSection.intList("placeholder.slots");
+        if (slots.isEmpty()) return;
+
+        Material mat;
+        try {
+            mat = Material.valueOf(guiSection.material("placeholder"));
+        } catch (Exception e) {
+            mat = Material.GRAY_DYE;
+        }
+
+        ItemStack item = new ItemBuilder(mat)
+                .name(guiSection.str("placeholder.name"))
+                .lore(guiSection.lore("placeholder.lore"))
+                .hideAll()
+                .build();
+
+        for (int slot : slots) {
+            if (slot >= 0 && slot < inventory.getSize()) {
+                set(slot, item);
+            }
+        }
     }
 
     public Inventory getInventory() { return inventory; }

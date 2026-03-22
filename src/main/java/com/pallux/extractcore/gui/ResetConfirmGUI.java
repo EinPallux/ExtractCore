@@ -21,9 +21,9 @@ public class ResetConfirmGUI extends BaseGUI {
 
     public ResetConfirmGUI(ExtractCore plugin, Player admin, OfflinePlayer target, String resetType) {
         super(plugin, admin,
-            new GuiUtil(plugin, "reset-confirm").title(
-                GuiUtil.ph("player", target.getName() != null ? target.getName() : "Unknown")),
-            new GuiUtil(plugin, "reset-confirm").rows());
+                new GuiUtil(plugin, "reset-confirm").title(
+                        GuiUtil.ph("player", target.getName() != null ? target.getName() : "Unknown")),
+                new GuiUtil(plugin, "reset-confirm").rows());
         this.target    = target;
         this.resetType = resetType;
         this.g         = new GuiUtil(plugin, "reset-confirm");
@@ -31,51 +31,50 @@ public class ResetConfirmGUI extends BaseGUI {
 
     @Override
     protected void build() {
-        // Fill with configured material
-        Material fillerMat;
-        try { fillerMat = Material.valueOf(
-            plugin.getConfigManager().getGuiConfig()
-                .getString("reset-confirm.filler-material", "RED_STAINED_GLASS_PANE"));
-        } catch (Exception e) { fillerMat = Material.RED_STAINED_GLASS_PANE; }
-        fill(new ItemBuilder(fillerMat).name(" ").hideAll().build());
+        // Filler — material comes from config
+        if (g.getBool("filler.enabled", true))
+            fill(new ItemBuilder(mat(g.material("filler"))).name(" ").hideAll().build());
 
         Map<String, String> ph = GuiUtil.ph(
-            "player",     target.getName() != null ? target.getName() : "Unknown",
-            "reset_type", resetType.toUpperCase()
+                "player",     target.getName() != null ? target.getName() : "Unknown",
+                "reset_type", resetType.toUpperCase()
         );
 
         set(g.slot("confirm-button"), new ItemBuilder(mat(g.material("confirm-button")))
-            .name(g.str("confirm-button.name", ph))
-            .lore(g.lore("confirm-button.lore", ph))
-            .hideAll().build());
+                .name(g.str("confirm-button.name", ph))
+                .lore(g.lore("confirm-button.lore", ph))
+                .hideAll().build());
 
         set(g.slot("cancel-button"), new ItemBuilder(mat(g.material("cancel-button")))
-            .name(g.str("cancel-button.name", ph))
-            .lore(g.lore("cancel-button.lore", ph))
-            .hideAll().build());
+                .name(g.str("cancel-button.name", ph))
+                .lore(g.lore("cancel-button.lore", ph))
+                .hideAll().build());
+
+        buildPlaceholders(g);
     }
 
     @Override
     public void handleClick(InventoryClickEvent event) {
         event.setCancelled(true);
         int slot = event.getRawSlot();
+        if (slot >= inventory.getSize()) return;
 
         if (slot == g.slot("confirm-button")) {
             PlayerData data = plugin.getPlayerDataManager().load(
-                target.getUniqueId(), target.getName() != null ? target.getName() : "Unknown");
+                    target.getUniqueId(), target.getName() != null ? target.getName() : "Unknown");
             executeReset(data);
             plugin.getPlayerDataManager().save(data);
-
             String msg = plugin.getConfigManager().getMessages()
-                .getString("admin.reset-success", "&#5B8DD9Reset &e{type} &7for &e{player}&8.")
-                .replace("{type}", resetType).replace("{player}", target.getName() != null ? target.getName() : "?");
+                    .getString("admin.reset-success", "&#5B8DD9Reset &e{type} &7for &e{player}&8.")
+                    .replace("{type}", resetType)
+                    .replace("{player}", target.getName() != null ? target.getName() : "?");
             player.sendMessage(ColorUtil.color(msg));
             player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1f, 1f);
             player.closeInventory();
 
         } else if (slot == g.slot("cancel-button")) {
-            player.sendMessage(ColorUtil.color(
-                plugin.getConfigManager().getMessages().getString("admin.reset-cancel", "&7Reset cancelled.")));
+            player.sendMessage(ColorUtil.color(plugin.getConfigManager().getMessages()
+                    .getString("admin.reset-cancel", "&7Reset cancelled.")));
             player.closeInventory();
         }
     }
