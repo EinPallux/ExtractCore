@@ -1,7 +1,6 @@
 package com.pallux.extractcore.util;
 
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.ChatColor;
 
@@ -10,7 +9,12 @@ import java.util.regex.Pattern;
 
 /**
  * Utility class for color code parsing.
- * Supports &#RRGGBB hex format, &x legacy hex, and standard &c legacy codes.
+ * Supports &#RRGGBB hex format and standard &c legacy codes.
+ *
+ * Also resolves the {prefix} placeholder by reading the prefix value
+ * from messages.yml via ExtractCore. This means any message string that
+ * contains {prefix} will automatically have the configured prefix injected
+ * before color codes are translated — no manual duplication needed.
  */
 public final class ColorUtil {
 
@@ -20,10 +24,14 @@ public final class ColorUtil {
     private ColorUtil() {}
 
     /**
-     * Translates &#RRGGBB and legacy &c color codes into a colored string.
+     * Translates &#RRGGBB, legacy &c color codes, and resolves {prefix}.
      */
     public static String color(String text) {
         if (text == null) return "";
+
+        // Resolve {prefix} before anything else
+        text = resolvePrefix(text);
+
         // Replace &#RRGGBB with §x§R§R§G§G§B§B
         Matcher matcher = HEX_PATTERN.matcher(text);
         StringBuilder buffer = new StringBuilder();
@@ -36,12 +44,14 @@ public final class ColorUtil {
             matcher.appendReplacement(buffer, replacement.toString());
         }
         matcher.appendTail(buffer);
-        // Now translate legacy &c codes
+
+        // Translate legacy &c codes
         return ChatColor.translateAlternateColorCodes('&', buffer.toString());
     }
 
     /**
      * Converts a color-coded string to an Adventure Component.
+     * Also resolves {prefix}.
      */
     public static Component component(String text) {
         return LEGACY.deserialize(color(text).replace("§", "&"));
@@ -55,8 +65,24 @@ public final class ColorUtil {
     }
 
     /**
+     * Replaces {prefix} in the string with the configured prefix from messages.yml.
+     * Falls back to an empty string if the plugin instance is not yet available.
+     */
+    private static String resolvePrefix(String text) {
+        if (!text.contains("{prefix}")) return text;
+        try {
+            String prefix = com.pallux.extractcore.ExtractCore.getInstance()
+                    .getConfigManager().getMessages()
+                    .getString("prefix", "");
+            return text.replace("{prefix}", prefix);
+        } catch (Exception e) {
+            return text.replace("{prefix}", "");
+        }
+    }
+
+    /**
      * Formats a number with K, M, B, T suffixes.
-     * e.g. 7462 -> "7.4K", 1500000 -> "1.5M"
+     * e.g. 7462 → "7.4K", 1500000 → "1.5M"
      */
     public static String formatNumber(long value) {
         if (value < 0) return "-" + formatNumber(-value);

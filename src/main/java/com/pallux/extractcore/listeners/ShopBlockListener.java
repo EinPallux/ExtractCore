@@ -14,13 +14,26 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.inventory.ItemStack;
 
 /**
- * Handles placement and breaking of shop blocks.
+ * Handles placement and breaking of shop blocks (normal + defense).
  *
- * WorldGuard bypass:
- *   Both normal shop blocks and defense blocks bypass WG's block-place and
- *   block-break protection (so players can fortify their arena regions).
- *   However, placement is still blocked in regions with extract-core-place=DENY
- *   (the same spawn-protection flag used for cores).
+ * WorldGuard bypass strategy — same pattern as CoreInteractListener:
+ *   Run at HIGHEST with ignoreCancelled=false so we see events WG already
+ *   cancelled. For our tracked blocks we un-cancel them, letting vanilla
+ *   keep the placed/broken block. We never call setType() during a place
+ *   event — Paper 1.21 reverts that on the next tick for cancelled events.
+ *
+ * Placement rules:
+ *   - Blocked if the region has extract-core-place=DENY (spawn/safe zones).
+ *   - Allowed everywhere else, including WG-protected arena regions.
+ *   - Only blocks sold via /shop are affected — vanilla blocks are untouched,
+ *     so players cannot grief non-shop blocks in the arena.
+ *
+ * Break rules:
+ *   - Defense blocks: always intercepted (HP system), no drops, WG bypassed.
+ *   - Normal shop blocks: WG bypassed so the player can remove their own
+ *     placed blocks; tracked location is unregistered; vanilla drops proceed.
+ *   - ALL other blocks: this listener does nothing — WG protection stays
+ *     in place and players cannot break arena terrain.
  */
 public class ShopBlockListener implements Listener {
 
@@ -32,17 +45,22 @@ public class ShopBlockListener implements Listener {
 
     // ── Place ─────────────────────────────────────────────────────────────────
 
-    @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = false)
+    /**
+     * HIGHEST + ignoreCancelled=false: we run after WorldGuard and can
+     * un-cancel events WG blocked.
+     */
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = false)
     public void onBlockPlace(BlockPlaceEvent event) {
-        Player player = event.getPlayer();
-        ItemStack item = event.getItemInHand();
+        Player    player = event.getPlayer();
+        ItemStack item   = event.getItemInHand();
 
         boolean isNormal  = plugin.getShopManager().isNormalShopBlock(item);
         boolean isDefense = plugin.getShopManager().isDefenseBlock(item);
 
+        // Not a shop block — leave WG's decision untouched
         if (!isNormal && !isDefense) return;
 
-        // ── Spawn-protection check (extract-core-place flag) ─────────────────
+        // Custom flag: block placement in spawn/safe regions regardless of WG state
         if (!WorldGuardHook.canPlaceCore(player, event.getBlockPlaced().getLocation())) {
             event.setCancelled(true);
             String msg = plugin.getConfigManager().getMessages()
@@ -52,22 +70,17 @@ public class ShopBlockListener implements Listener {
             return;
         }
 
-        // ── WG bypass: cancel the vanilla event, place block ourselves ────────
-        // This prevents WG's HIGHEST handler from blocking placement in arena regions.
-        event.setCancelled(true);
-        Material mat;
-        try { mat = Material.valueOf(event.getItemInHand().getType().name()); }
-        catch (Exception e) { mat = event.getItemInHand().getType(); }
-        event.getBlockPlaced().setType(mat);
+        // WG bypass: un-cancel whatever WG set. Vanilla already placed the block
+        // before the event fired — un-cancelling tells Paper to keep it.
+        // We never call setType() here; that triggers Paper 1.21's block revert.
+        event.setCancelled(false);
 
+        // Register the placed block
         if (isNormal) {
-            String entryId = plugin.getShopManager().getNormalBlockId(item);
             plugin.getNormalBlockManager().registerBlock(event.getBlockPlaced().getLocation());
-
         } else {
-            // Defense block
-            String entryId = plugin.getShopManager().getDefenseBlockId(item);
-            ShopEntry entry = plugin.getShopManager().getDefenseEntry(entryId);
+            String    entryId = plugin.getShopManager().getDefenseBlockId(item);
+            ShopEntry entry   = plugin.getShopManager().getDefenseEntry(entryId);
             if (entry == null) return;
             plugin.getDefenseBlockManager().registerBlock(
                     event.getBlockPlaced().getLocation(), entryId, entry.hp());
@@ -76,26 +89,30 @@ public class ShopBlockListener implements Listener {
 
     // ── Break ─────────────────────────────────────────────────────────────────
 
-    @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = false)
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = false)
     public void onBlockBreak(BlockBreakEvent event) {
         Player player = event.getPlayer();
 
-        // ── Defense block hit ─────────────────────────────────────────────────
+        // ── Defense block: intercept every hit, apply HP logic ────────────────
         if (plugin.getDefenseBlockManager().isDefenseBlock(event.getBlock().getLocation())) {
-            event.setCancelled(true);
+            // Un-cancel WG's protection, then take full control
+            event.setCancelled(false);
             event.setDropItems(false);
+            // Cancel the vanilla break so the block stays until HP=0
+            event.setCancelled(true);
             plugin.getDefenseBlockManager().hit(player, event.getBlock().getLocation());
             return;
         }
 
-        // ── Normal shop block broken by a player ──────────────────────────────
+        // ── Normal shop block: remove silently, no drops ─────────────────────
         if (plugin.getNormalBlockManager().isNormalShopBlock(event.getBlock().getLocation())) {
-            // Let vanilla break proceed but unregister from tracking
-            // (WG bypass: cancel + re-place = not needed here since players breaking
-            // their own blocks in protected regions is handled by WG's member check.
-            // If needed, you can add the same cancel+setType(AIR) pattern below.)
+            event.setCancelled(false);
+            event.setDropItems(false);
             plugin.getNormalBlockManager().unregisterBlock(event.getBlock().getLocation());
-            // Don't cancel — allow vanilla block break and drops to happen normally
+            return;
         }
+
+        // ── All other blocks: do nothing ──────────────────────────────────────
+        // WG's cancellation remains intact — players cannot break arena terrain.
     }
 }
