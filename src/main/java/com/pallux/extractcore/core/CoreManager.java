@@ -117,11 +117,16 @@ public class CoreManager {
         UUID uuid = player.getUniqueId();
         if (pickupTasks.containsKey(uuid)) return;
 
-        player.playSound(player.getLocation(), Sound.BLOCK_PORTAL_TRIGGER, 0.5f, 1.5f);
-        MessageUtil.send(player, "core.core-pickup-started");
+        int totalSeconds = plugin.getConfigManager().getCoreConfig()
+                .getInt("core.pickup-duration-seconds", 10);
 
-        int[] remaining = {plugin.getConfigManager().getCoreConfig()
-                .getInt("core.pickup-duration-seconds", 10)};
+        player.playSound(player.getLocation(), Sound.BLOCK_PORTAL_TRIGGER, 0.5f, 1.5f);
+
+        // Send the startup message with the total seconds already filled in
+        MessageUtil.send(player, "core.core-pickup-started",
+                "seconds", String.valueOf(totalSeconds));
+
+        int[] remaining = { totalSeconds };
 
         BukkitTask task = new BukkitRunnable() {
             @Override public void run() {
@@ -135,7 +140,7 @@ public class CoreManager {
                     MessageUtil.send(player, "core.core-pickup-progress",
                             "seconds", String.valueOf(remaining[0]));
                     player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 0.5f,
-                            0.5f + (0.05f * (10 - remaining[0])));
+                            0.5f + (0.05f * (totalSeconds - remaining[0])));
                 }
             }
         }.runTaskTimer(plugin, 20L, 20L);
@@ -169,7 +174,7 @@ public class CoreManager {
             data.setCoreStoredScrap(0);
             String msg = plugin.getConfigManager().getMessages()
                     .getString("core.scrap-collected-on-pickup",
-                        "&#5B8DD9Auto-collected &e{amount} Scrap &7stored in your Core.")
+                            "&#5B8DD9Auto-collected &e{amount} Scrap &7stored in your Core.")
                     .replace("{amount}", ColorUtil.formatNumber(stored));
             player.sendMessage(ColorUtil.color(msg));
         }
@@ -229,7 +234,7 @@ public class CoreManager {
 
         String ownerMsg = plugin.getConfigManager().getMessages()
                 .getString("core.core-destroyed",
-                    "&c&#FF4444Your Core was destroyed! &7You lost &e20%% &7of your upgrade progress.")
+                        "&c&#FF4444Your Core was destroyed! &7You lost &e20%% &7of your upgrade progress.")
                 .replace("{stored}", ColorUtil.formatNumber(stored));
         owner.sendMessage(ColorUtil.color(ownerMsg));
 
@@ -237,14 +242,14 @@ public class CoreManager {
         attacker.playSound(attacker.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1f, 1.2f);
         String attackMsg = plugin.getConfigManager().getMessages()
                 .getString("core.core-destroyed-attacker",
-                    "&#5B8DD9You destroyed &e{player}'s &7Core!")
+                        "&#5B8DD9You destroyed &e{player}'s &7Core!")
                 .replace("{player}", owner.getName());
         attacker.sendMessage(ColorUtil.color(attackMsg));
 
         if (raidReward > 0) {
             String raidMsg = plugin.getConfigManager().getMessages()
                     .getString("core.raid-reward",
-                        "&#FFD700⚔ Raid Reward: &e+{amount} Scrap &7from the Core's storage!")
+                            "&#FFD700⚔ Raid Reward: &e+{amount} Scrap &7from the Core's storage!")
                     .replace("{amount}", ColorUtil.formatNumber(raidReward))
                     .replace("{stored}", ColorUtil.formatNumber(stored));
             attacker.sendMessage(ColorUtil.color(raidMsg));
@@ -253,7 +258,7 @@ public class CoreManager {
         // ── Server broadcast ──────────────────────────────────────────────
         String broadcastMsg = plugin.getConfigManager().getMessages()
                 .getString("core.core-raid-broadcast",
-                    "&#FF4444⚔ &e{attacker} &7raided &e{owner}'s &7Core!")
+                        "&#FF4444⚔ &e{attacker} &7raided &e{owner}'s &7Core!")
                 .replace("{attacker}", attacker.getName())
                 .replace("{owner}", owner.getName());
         Bukkit.broadcast(net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer
@@ -291,14 +296,14 @@ public class CoreManager {
         attacker.playSound(attacker.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1f, 1.2f);
         String msg = plugin.getConfigManager().getMessages()
                 .getString("core.core-destroyed-attacker-offline",
-                    "&#5B8DD9You destroyed &e{player}'s &7Core! &8(offline player)")
+                        "&#5B8DD9You destroyed &e{player}'s &7Core! &8(offline player)")
                 .replace("{player}", ownerData.getName());
         attacker.sendMessage(ColorUtil.color(msg));
 
         if (raidReward > 0) {
             String raidMsg = plugin.getConfigManager().getMessages()
                     .getString("core.raid-reward",
-                        "&#FFD700⚔ Raid Reward: &e+{amount} Scrap &7from the Core's storage!")
+                            "&#FFD700⚔ Raid Reward: &e+{amount} Scrap &7from the Core's storage!")
                     .replace("{amount}", ColorUtil.formatNumber(raidReward));
             attacker.sendMessage(ColorUtil.color(raidMsg));
         }
@@ -306,7 +311,7 @@ public class CoreManager {
         // ── Server broadcast ──────────────────────────────────────────────
         String broadcastMsg = plugin.getConfigManager().getMessages()
                 .getString("core.core-raid-broadcast",
-                    "&#FF4444⚔ &e{attacker} &7raided &e{owner}'s &7Core!")
+                        "&#FF4444⚔ &e{attacker} &7raided &e{owner}'s &7Core!")
                 .replace("{attacker}", attacker.getName())
                 .replace("{owner}", ownerData.getName());
         Bukkit.broadcast(net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer
@@ -328,8 +333,8 @@ public class CoreManager {
 
         // Armory tiers also affected
         int[] tiers = {
-            data.getSwordTier(), data.getPickaxeTier(), data.getAxeTier(),
-            data.getHelmetTier(), data.getChestplateTier(), data.getLeggingsTier(), data.getBootsTier()
+                data.getSwordTier(), data.getPickaxeTier(), data.getAxeTier(),
+                data.getHelmetTier(), data.getChestplateTier(), data.getLeggingsTier(), data.getBootsTier()
         };
         int[] r = new int[7];
         for (int i = 0; i < tiers.length; i++)
