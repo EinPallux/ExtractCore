@@ -17,12 +17,9 @@ main-menu:
 
   placeholder:
     material: GRAY_DYE
-    name: "&7???"
-    lore:
-      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
-      - "&8Coming soon..."
-      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
-    slots: [25, 28, 29, 30, 31, 32, 33]
+    name: "&7&o???"
+    lore: []
+    slots: [24, 25, 28, 29, 30, 31, 32, 33]
 
   # Slot moved from 4 → 2
   player-overview:

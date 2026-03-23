@@ -16,6 +16,9 @@ import org.bukkit.persistence.PersistentDataType;
 /**
  * Opens the Armory GUI when a player shift-right-clicks while holding
  * one of their extract sword, pickaxe or axe items.
+ *
+ * Runs at HIGHEST with ignoreCancelled=false so it fires even if
+ * ItemProtectionListener or CoreInteractListener already cancelled the event.
  */
 public class ArmoryShortcutListener implements Listener {
 
@@ -25,22 +28,26 @@ public class ArmoryShortcutListener implements Listener {
         this.plugin = plugin;
     }
 
-    @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = false)
     public void onInteract(PlayerInteractEvent event) {
-        // Only main hand, only right-click (air or block), only while sneaking
+        // Only main hand
         if (event.getHand() != EquipmentSlot.HAND) return;
-        if (event.getAction() != Action.RIGHT_CLICK_AIR
-                && event.getAction() != Action.RIGHT_CLICK_BLOCK) return;
 
+        // Only right-click actions
+        Action action = event.getAction();
+        if (action != Action.RIGHT_CLICK_AIR && action != Action.RIGHT_CLICK_BLOCK) return;
+
+        // Only while sneaking
         Player player = event.getPlayer();
         if (!player.isSneaking()) return;
 
+        // Must have an item in hand
         ItemStack item = player.getInventory().getItemInMainHand();
-        if (item == null || !item.hasItemMeta()) return;
+        if (item == null || item.getType().isAir() || !item.hasItemMeta()) return;
 
         ArmoryManager am = plugin.getArmoryManager();
 
-        // Check if it's one of the three tool types
+        // Check if the held item is one of the three tool types
         boolean isTool =
                 hasKey(item, am.getKey("sword"))   ||
                         hasKey(item, am.getKey("pickaxe")) ||
@@ -48,11 +55,19 @@ public class ArmoryShortcutListener implements Listener {
 
         if (!isTool) return;
 
+        // Consume the event fully and open the GUI
         event.setCancelled(true);
-        new ArmoryGUI(plugin, player).open();
+
+        // Open on next tick to avoid inventory glitches from the interact event
+        plugin.getServer().getScheduler().runTask(plugin, () -> {
+            if (player.isOnline()) {
+                new ArmoryGUI(plugin, player).open();
+            }
+        });
     }
 
     private boolean hasKey(ItemStack item, org.bukkit.NamespacedKey key) {
+        if (key == null) return false;
         return item.getItemMeta().getPersistentDataContainer()
                 .has(key, PersistentDataType.INTEGER);
     }
