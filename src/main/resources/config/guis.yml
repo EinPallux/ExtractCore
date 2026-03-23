@@ -22,7 +22,7 @@ main-menu:
       - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
       - "&8Coming soon..."
       - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
-    slots: [22, 23, 24, 28, 29, 30, 31, 32, 33]
+    slots: [23, 24, 29, 30, 31, 32, 33]
 
   player-overview:
     enabled: true
@@ -84,6 +84,21 @@ main-menu:
       - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
       - "&#5B8DD9→ &7Click to open."
 
+  shop-button:
+    enabled: true
+    slot: 22
+    material: CHEST
+    name: "&#5B8DD9🛒 &fShop"
+    lore:
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&7Buy Blocks & Defense Blocks"
+      - "&7using your &eScrap&7."
+      - ""
+      - "&8→ &7Normal Blocks"
+      - "&8→ &7Defense Blocks"
+      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&#5B8DD9→ &7Click to open."
+
   extraction-status:
     enabled: true
     slot: 25
@@ -127,7 +142,7 @@ main-menu:
     lore:
       - "&7Click to close."
 
-  no-core-message: "&cYou need to place your Core first!"
+  no-core-message: "{prefix}&cYou need to place your Core first!"
 
 # ── ARMORY (/armory) ─────────────────────────────────────────────
 armory:
@@ -223,8 +238,6 @@ core-gui:
       - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
     slots: []
 
-  # ── Sounds ──────────────────────────────────────────────────────
-  # Use any valid Bukkit Sound name. Volume: 0.0–1.0. Pitch: 0.5–2.0.
   sounds:
     upgrade-success: "BLOCK_BEACON_POWER_SELECT"
     upgrade-success-volume: 1.0
@@ -236,7 +249,6 @@ core-gui:
     pickup-denied-volume: 0.5
     pickup-denied-pitch: 0.8
 
-  # Labels used as the {in_range} placeholder in pickup button lore
   pickup-in-range-label:     "&aIn range ✔"
   pickup-out-of-range-label: "&cOut of range ✘"
 
@@ -315,7 +327,6 @@ core-gui:
     lore-footer:
       - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
 
-  # Shown when player IS within pickup-range of their core
   pickup-button:
     slot: 40
     material: MINECART
@@ -329,7 +340,6 @@ core-gui:
       - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
       - "&#5B8DD9→ &7Click to begin pickup."
 
-  # Shown when player is TOO FAR from their core
   pickup-button-out-of-range:
     slot: 40
     material: BARRIER
@@ -350,14 +360,14 @@ core-gui:
       - "&7Click to close this menu."
 
   upgrade-messages:
-    max-level:          "&7This upgrade is already at &emax level&7."
-    not-enough:         "&cNot enough resources for this upgrade."
-    success-speed:      "&#5B8DD9Core Speed upgraded to level &e{level}&8."
-    success-production: "&#5B8DD9Core Production upgraded to level &e{level}&8."
+    max-level:          "{prefix}&7This upgrade is already at &emax level&7."
+    not-enough:         "{prefix}&cNot enough resources for this upgrade."
+    success-speed:      "{prefix}&7Core Speed upgraded to level &e{level}&8."
+    success-production: "{prefix}&7Core Production upgraded to level &e{level}&8."
 
-  not-your-core:             "&cThis is not your Core."
-  not-your-core-right-click: "&7This is not your Core. &8| &cMine it &7to raid it."
-  redirect-to-gui:           "&7To pick up your Core, &eright-click &7it and use the Pickup button."
+  not-your-core:             "{prefix}&cThis is not your Core."
+  not-your-core-right-click: "{prefix}&7This is not your Core. &8| &cMine it &7to raid it."
+  redirect-to-gui:           "{prefix}&7To pick up your Core, &eright-click &7it and use the Pickup button."
 
 # ── STATS (/stats) ───────────────────────────────────────────────
 stats:
@@ -695,21 +705,21 @@ reset-confirm:
 # ── ADMIN COMMAND (/ex) ───────────────────────────────────────────
 admin:
   help:
-    header:   "&#5B8DD9ExtractCore Admin Commands:"
+    header:   "{prefix}Admin Commands:"
     reload:   "&8/ex &7reload"
     define:   "&8/ex &7define extract <n>"
     currency: "&8/ex &7set|give|take <currency> <player> <amount>"
     reset:    "&8/ex &7reset <type> <player>"
   errors:
-    no-permission:          "&cNo permission."
-    players-only:           "&cOnly players can use this command."
-    define-players-only:    "&cOnly players can define zones."
-    define-usage:           "&cUsage: /ex define extract <n>"
-    worldedit-no-sel:       "&cMake a WorldEdit selection first!"
-    currency-usage:         "&cUsage: /ex {action} <currency> <player> <amount>"
-    amount-positive:        "&cAmount must be positive."
-    reset-usage:            "&cUsage: /ex reset <type> <player>"
-    zone-offline-destroyed: "&#5B8DD9You destroyed &e{player}'s &7Core! &8(offline player)"
+    no-permission:          "{prefix}&cNo permission."
+    players-only:           "{prefix}&cOnly players can use this command."
+    define-players-only:    "{prefix}&cOnly players can define zones."
+    define-usage:           "{prefix}&cUsage: /ex define extract <n>"
+    worldedit-no-sel:       "{prefix}&cMake a WorldEdit selection first!"
+    currency-usage:         "{prefix}&cUsage: /ex {action} <currency> <player> <amount>"
+    amount-positive:        "{prefix}&cAmount must be positive."
+    reset-usage:            "{prefix}&cUsage: /ex reset <type> <player>"
+    zone-offline-destroyed: "{prefix}&7You destroyed &e{player}'s &7Core! &8(offline)"
 
 # ── SHOP MAIN MENU (/shop) ───────────────────────────────────────
 shop:
@@ -805,7 +815,6 @@ shop-normal:
       - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
     slots: []
 
-  # ── Sounds ──────────────────────────────────────────────────────
   sounds:
     purchase-success: "ENTITY_EXPERIENCE_ORB_PICKUP"
     purchase-success-volume: 1.0
@@ -872,7 +881,6 @@ shop-defense:
       - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
     slots: []
 
-  # ── Sounds ──────────────────────────────────────────────────────
   sounds:
     purchase-success: "ENTITY_EXPERIENCE_ORB_PICKUP"
     purchase-success-volume: 1.0

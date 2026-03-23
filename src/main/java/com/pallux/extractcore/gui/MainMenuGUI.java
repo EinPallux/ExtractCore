@@ -112,6 +112,13 @@ public class MainMenuGUI extends BaseGUI {
                     .lore(g.lore("exchange-button.lore", ph))
                     .hideAll().build());
 
+        // Shop
+        if (g.getBool("shop-button.enabled", true))
+            set(g.slot("shop-button"), new ItemBuilder(mat(g.material("shop-button")))
+                    .name(g.str("shop-button.name", ph))
+                    .lore(g.lore("shop-button.lore", ph))
+                    .hideAll().build());
+
         // Extraction status
         if (g.getBool("extraction-status.enabled", true)) {
             Map<String, String> exPh = new java.util.HashMap<>(ph);
@@ -145,8 +152,7 @@ public class MainMenuGUI extends BaseGUI {
                     .lore(g.lore("close-button.lore"))
                     .hideAll().build());
 
-        // Placeholders — rendered last so they sit on top of filler but
-        // never overwrite a real item already placed above
+        // Placeholders — rendered last
         buildPlaceholders(g);
     }
 
@@ -169,12 +175,13 @@ public class MainMenuGUI extends BaseGUI {
         int slot = event.getRawSlot();
         if (slot >= inventory.getSize()) return;
 
-        if (g.getBool("close-button.enabled", true)     && slot == g.slot("close-button"))     { player.closeInventory(); return; }
-        if (g.getBool("armory-button.enabled", true)    && slot == g.slot("armory-button"))    { player.closeInventory(); new ArmoryGUI(plugin, player).open(); return; }
-        if (g.getBool("stats-button.enabled", true)     && slot == g.slot("stats-button"))     { player.closeInventory(); new StatsGUI(plugin, player).open(); return; }
-        if (g.getBool("exchange-button.enabled", true)  && slot == g.slot("exchange-button"))  { player.closeInventory(); new ExchangeGUI(plugin, player).open(); return; }
-        if (g.getBool("milestones-button.enabled", true)&& slot == g.slot("milestones-button")){ player.closeInventory(); new MilestonesGUI(plugin, player).open(); return; }
-        if (g.getBool("core-button.enabled", true)      && slot == g.slot("core-button")) {
+        if (g.getBool("close-button.enabled", true)      && slot == g.slot("close-button"))      { player.closeInventory(); return; }
+        if (g.getBool("armory-button.enabled", true)     && slot == g.slot("armory-button"))     { player.closeInventory(); new ArmoryGUI(plugin, player).open(); return; }
+        if (g.getBool("stats-button.enabled", true)      && slot == g.slot("stats-button"))      { player.closeInventory(); new StatsGUI(plugin, player).open(); return; }
+        if (g.getBool("exchange-button.enabled", true)   && slot == g.slot("exchange-button"))   { player.closeInventory(); new ExchangeGUI(plugin, player).open(); return; }
+        if (g.getBool("milestones-button.enabled", true) && slot == g.slot("milestones-button")) { player.closeInventory(); new MilestonesGUI(plugin, player).open(); return; }
+        if (g.getBool("shop-button.enabled", true)       && slot == g.slot("shop-button"))       { player.closeInventory(); new ShopGUI(plugin, player).open(); return; }
+        if (g.getBool("core-button.enabled", true)       && slot == g.slot("core-button")) {
             if (plugin.getPlayerDataManager().get(player).isCorePlaced()) {
                 player.closeInventory(); new CoreGUI(plugin, player).open();
             } else {
