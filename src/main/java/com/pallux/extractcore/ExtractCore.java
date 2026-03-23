@@ -125,7 +125,8 @@ public final class ExtractCore extends JavaPlugin {
         pm.registerEvents(new GUIListener(this), this);
         pm.registerEvents(new PlayerMoveListener(this), this);
         pm.registerEvents(new PlaytimeListener(this), this);
-        pm.registerEvents(new ShopBlockListener(this), this);  // NEW
+        pm.registerEvents(new ShopBlockListener(this), this);
+        pm.registerEvents(new ArmoryShortcutListener(this), this);  // NEW
     }
 
     private void registerCommands() {
@@ -135,7 +136,7 @@ public final class ExtractCore extends JavaPlugin {
         getCommand("core").setExecutor(new CoreCommand(this));
         getCommand("exchange").setExecutor(new ExchangeCommand(this));
         getCommand("milestones").setExecutor(new MilestonesCommand(this));
-        getCommand("shop").setExecutor(new ShopCommand(this));          // NEW
+        getCommand("shop").setExecutor(new ShopCommand(this));
         getCommand("ex").setExecutor(new AdminCommand(this));
         getCommand("ex").setTabCompleter(new AdminCommand(this));
     }

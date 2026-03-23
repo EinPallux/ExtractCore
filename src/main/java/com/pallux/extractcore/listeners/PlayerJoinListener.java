@@ -11,8 +11,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
-import java.util.List;
-
 public class PlayerJoinListener implements Listener {
 
     private final ExtractCore plugin;
@@ -32,15 +30,6 @@ public class PlayerJoinListener implements Listener {
                 player.setGameMode(GameMode.SURVIVAL);
                 plugin.getArmoryManager().integrityCheck(player);
                 plugin.getExtractionManager().addPlayerToBossBar(player);
-
-                if (!player.hasPlayedBefore()) {
-                    // Pull first-join message lines from guis.yml
-                    List<String> lines = plugin.getConfigManager().getGuiConfig()
-                        .getStringList("join.first-join-message");
-                    for (String line : lines) {
-                        player.sendMessage(ColorUtil.color(line));
-                    }
-                }
             });
         });
     }

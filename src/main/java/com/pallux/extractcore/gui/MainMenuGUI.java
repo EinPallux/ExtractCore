@@ -5,9 +5,12 @@ import com.pallux.extractcore.model.PlayerData;
 import com.pallux.extractcore.util.ColorUtil;
 import com.pallux.extractcore.util.GuiUtil;
 import com.pallux.extractcore.util.ItemBuilder;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.SkullMeta;
 
 import java.util.List;
 import java.util.Map;
@@ -72,12 +75,19 @@ public class MainMenuGUI extends BaseGUI {
                 "zone_name",          em.getActiveZone() != null ? em.getActiveZone().getName() : "?"
         );
 
-        // Player overview
-        if (g.getBool("player-overview.enabled", true))
-            set(g.slot("player-overview"), new ItemBuilder(Material.PLAYER_HEAD)
-                    .name(g.str("player-overview.name", ph))
-                    .lore(g.lore("player-overview.lore", ph))
-                    .hideAll().build());
+        // Player overview — player skull with actual skin
+        if (g.getBool("player-overview.enabled", true)) {
+            ItemStack skull = new ItemStack(Material.PLAYER_HEAD);
+            SkullMeta skullMeta = (SkullMeta) skull.getItemMeta();
+            skullMeta.setOwningPlayer(Bukkit.getOfflinePlayer(player.getUniqueId()));
+            skullMeta.displayName(ColorUtil.component(g.str("player-overview.name", ph)));
+            List<net.kyori.adventure.text.Component> loreCmps = g.lore("player-overview.lore", ph)
+                    .stream().map(ColorUtil::component).collect(Collectors.toList());
+            skullMeta.lore(loreCmps);
+            skullMeta.addItemFlags(org.bukkit.inventory.ItemFlag.values());
+            skull.setItemMeta(skullMeta);
+            set(g.slot("player-overview"), skull);
+        }
 
         // Armory
         if (g.getBool("armory-button.enabled", true))
@@ -86,19 +96,35 @@ public class MainMenuGUI extends BaseGUI {
                     .lore(g.lore("armory-button.lore", ph))
                     .hideAll().build());
 
-        // Core
+        // Core button — build lore cleanly to avoid duplication
         if (g.getBool("core-button.enabled", true)) {
-            String statusLine = data.isCorePlaced()
-                    ? g.str("core-button.core-placed-line", ph)
-                    : g.str("core-button.core-not-placed-line", ph);
-            final boolean placed = data.isCorePlaced();
-            List<String> coreLore = g.lore("core-button.lore", ph).stream()
-                    .map(l -> (l.contains("{core_x}") || ColorUtil.strip(l).contains("Core placed")
-                            || ColorUtil.strip(l).contains("Core not placed")) ? statusLine : l)
-                    .filter(l -> placed
-                            ? !ColorUtil.strip(l).contains("Core not placed")
-                            : !ColorUtil.strip(l).contains("Core placed at"))
+            boolean placed = data.isCorePlaced();
+            List<String> rawLore = g.lore("core-button.lore", ph);
+
+            // Replace the sentinel line with only the appropriate status line
+            String placedLine    = g.str("core-button.core-placed-line", ph);
+            String notPlacedLine = g.str("core-button.core-not-placed-line", ph);
+
+            List<String> coreLore = rawLore.stream()
+                    .flatMap(line -> {
+                        // Remove whichever status line does not apply
+                        if (placed && ColorUtil.strip(line).equals(ColorUtil.strip(notPlacedLine))) {
+                            return java.util.stream.Stream.empty();
+                        }
+                        if (!placed && ColorUtil.strip(line).equals(ColorUtil.strip(placedLine))) {
+                            return java.util.stream.Stream.empty();
+                        }
+                        // Replace the "other" status line with the correct one
+                        if (!placed && ColorUtil.strip(line).equals(ColorUtil.strip(notPlacedLine))) {
+                            return java.util.stream.Stream.of(notPlacedLine);
+                        }
+                        if (placed && ColorUtil.strip(line).equals(ColorUtil.strip(placedLine))) {
+                            return java.util.stream.Stream.of(placedLine);
+                        }
+                        return java.util.stream.Stream.of(line);
+                    })
                     .collect(Collectors.toList());
+
             set(g.slot("core-button"), new ItemBuilder(mat(g.material("core-button")))
                     .name(g.str("core-button.name", ph))
                     .lore(coreLore)
