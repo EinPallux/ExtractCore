@@ -51,6 +51,15 @@ public class MainMenuGUI extends BaseGUI {
         var lm = plugin.getLevelManager();
         var em = plugin.getExtractionManager();
 
+        // Resolve the single core status line before building the ph map
+        boolean corePlaced = data.isCorePlaced();
+        String coreStatusLine = corePlaced
+                ? g.str("core-button.core-placed-line", GuiUtil.ph(
+                "core_x", String.valueOf(data.getCoreX()),
+                "core_y", String.valueOf(data.getCoreY()),
+                "core_z", String.valueOf(data.getCoreZ())))
+                : g.str("core-button.core-not-placed-line");
+
         Map<String, String> ph = GuiUtil.ph(
                 "player",             player.getName(),
                 "level",              lm.getLevelColored(data.getLevel()),
@@ -69,6 +78,7 @@ public class MainMenuGUI extends BaseGUI {
                 "core_x",             String.valueOf(data.getCoreX()),
                 "core_y",             String.valueOf(data.getCoreY()),
                 "core_z",             String.valueOf(data.getCoreZ()),
+                "core_status_line",   coreStatusLine,
                 "milestones_done",    String.valueOf(data.getCompletedMilestones().size()),
                 "next_extraction",    ColorUtil.formatDuration(em.getCountdownSeconds()),
                 "current_extraction", ColorUtil.formatDuration(em.getActiveSecondsLeft()),
@@ -96,38 +106,11 @@ public class MainMenuGUI extends BaseGUI {
                     .lore(g.lore("armory-button.lore", ph))
                     .hideAll().build());
 
-        // Core button — build lore cleanly to avoid duplication
+        // Core button — {core_status_line} is already in ph, resolved above
         if (g.getBool("core-button.enabled", true)) {
-            boolean placed = data.isCorePlaced();
-            List<String> rawLore = g.lore("core-button.lore", ph);
-
-            // Replace the sentinel line with only the appropriate status line
-            String placedLine    = g.str("core-button.core-placed-line", ph);
-            String notPlacedLine = g.str("core-button.core-not-placed-line", ph);
-
-            List<String> coreLore = rawLore.stream()
-                    .flatMap(line -> {
-                        // Remove whichever status line does not apply
-                        if (placed && ColorUtil.strip(line).equals(ColorUtil.strip(notPlacedLine))) {
-                            return java.util.stream.Stream.empty();
-                        }
-                        if (!placed && ColorUtil.strip(line).equals(ColorUtil.strip(placedLine))) {
-                            return java.util.stream.Stream.empty();
-                        }
-                        // Replace the "other" status line with the correct one
-                        if (!placed && ColorUtil.strip(line).equals(ColorUtil.strip(notPlacedLine))) {
-                            return java.util.stream.Stream.of(notPlacedLine);
-                        }
-                        if (placed && ColorUtil.strip(line).equals(ColorUtil.strip(placedLine))) {
-                            return java.util.stream.Stream.of(placedLine);
-                        }
-                        return java.util.stream.Stream.of(line);
-                    })
-                    .collect(Collectors.toList());
-
             set(g.slot("core-button"), new ItemBuilder(mat(g.material("core-button")))
                     .name(g.str("core-button.name", ph))
-                    .lore(coreLore)
+                    .lore(g.lore("core-button.lore", ph))
                     .hideAll().build());
         }
 

@@ -1,6 +1,7 @@
 package com.pallux.extractcore.util;
 
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.TextDecoration;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.ChatColor;
 
@@ -15,6 +16,10 @@ import java.util.regex.Pattern;
  * from messages.yml via ExtractCore. This means any message string that
  * contains {prefix} will automatically have the configured prefix injected
  * before color codes are translated — no manual duplication needed.
+ *
+ * All Adventure Components produced by this class have italic explicitly
+ * disabled by default, matching vanilla item behaviour expectations.
+ * Use &o in your config strings to opt into italic where desired.
  */
 public final class ColorUtil {
 
@@ -51,10 +56,17 @@ public final class ColorUtil {
 
     /**
      * Converts a color-coded string to an Adventure Component.
+     * Italic is explicitly set to false so GUI item names and lore lines
+     * are never italicised unless &o is present in the input string.
      * Also resolves {prefix}.
      */
     public static Component component(String text) {
-        return LEGACY.deserialize(color(text).replace("§", "&"));
+        // Deserialise the colored string into a Component, then wrap it so
+        // italic=false is the base decoration. Any &o in the string will
+        // still override this to true on the relevant spans.
+        return Component.empty()
+                .decoration(TextDecoration.ITALIC, false)
+                .append(LEGACY.deserialize(color(text).replace("§", "&")));
     }
 
     /**

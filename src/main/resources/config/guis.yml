@@ -19,55 +19,63 @@ main-menu:
     material: GRAY_DYE
     name: "&7&o???"
     lore: []
-    slots: [24, 25, 28, 29, 30, 31, 32, 33]
+    slots: [24, 25, 28, 29, 30, 31, 32, 33, 34]
 
   # Slot moved from 4 → 2
   player-overview:
     enabled: true
     slot: 2
-    name: "&#5B8DD9◈ &f{player}"
+    name: "&#FF7D14&lY&#FF7617&lO&#FF6F19&lU&#FF681C&lR &#FF5A21&lP&#FF5424&lR&#FF4D26&lO&#FF4629&lF&#FF3F2C&lI&#FF382E&lL&#FF3131&lE"
     lore:
-      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
-      - "&7Level:    {level}"
-      - "&7Progress: &e{progress}%"
+      - "&8ꜱᴇʀᴠᴇʀ ᴍᴇɴᴜ"
       - ""
-      - "&7Scrap:        &e{scrap}"
-      - "&7Screws:       &b{screws}"
-      - "&7Energy Cells: &a{energy}"
-      - "&7Bio Samples:  &d{bio}"
-      - "&7Tech Shards:  &6{tech}"
-      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&#FF7D14Your Progress:"
+      - "&#FF7D14&l︳ &7Level: {level}"
+      - "&#FF7D14&l︳ &7XP: &#FF7D14{progress}"
+      - ""
+      - "&#FF7D14Your Storage:"
+      - "&#FF7D14&l︳ &7Scrap: &#FF7D14{scrap}"
+      - "&#FF7D14&l︳ &7Screws: &#FF7D14{screws}"
+      - "&#FF7D14&l︳ &7Energy Cells: &#FF7D14{energy}"
+      - "&#FF7D14&l︳ &7Bio Samples: &#FF7D14{bio}"
+      - "&#FF7D14&l︳ &7Tech Shards: &#FF7D14{tech}"
+      - ""
 
   armory-button:
     enabled: true
     slot: 19
     material: DIAMOND_SWORD
-    name: "&#5B8DD9⚔ &fArmory"
+    name: "&#FF7D14&lA&#FF6E1A&lR&#FF5F20&lM&#FF4F25&lO&#FF402B&lR&#FF3131&lY"
     lore:
-      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
-      - "&7Upgrade your &eGear&7."
+      - "&8ꜱᴇʀᴠᴇʀ ᴍᴇɴᴜ"
       - ""
-      - "&7Sword:   &eT{sword_t}"
-      - "&7Pickaxe: &eT{pickaxe_t}"
-      - "&7Axe:     &eT{axe_t}"
-      - "&7Armor:   &eT{helmet_t}"
-      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
-      - "&#5B8DD9→ &7Click to open."
+      - "&7Here you can upgrade your gear. Use"
+      - "&7the command &#FF7D14/armory &7to open or click."
+      - ""
+      - "&#FF7D14Your Progress:"
+      - "&#FF7D14&l︳ &7Sword:   &#FF7D14T{sword_t}"
+      - "&#FF7D14&l︳ &7Pickaxe: &#FF7D14T{pickaxe_t}"
+      - "&#FF7D14&l︳ &7Axe:     &#FF7D14T{axe_t}"
+      - "&#FF7D14&l︳ &7Armor:   &#FF7D14T{helmet_t}"
+      - ""
+      - "&#FF7D14➠ &7Click to Open"
 
   # Lore now uses a single {core_status_line} placeholder — no duplication possible
   core-button:
     enabled: true
     slot: 20
     material: BEACON
-    name: "&#5B8DD9◈ &fCore"
+    name: "&#FF7D14&lC&#FF7816&lO&#FF7218&lR&#FF6D1A&lE &#FF621E&lM&#FF5C20&lA&#FF5723&lN&#FF5225&lA&#FF4C27&lG&#FF4729&lE&#FF412B&lM&#FF3C2D&lE&#FF362F&lN&#FF3131&lT"
     lore:
-      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&8ꜱᴇʀᴠᴇʀ ᴍᴇɴᴜ"
+      - ""
       - "{core_status_line}"
       - ""
-      - "&7Speed Lvl:  &e{speed_lvl}"
-      - "&7Prod. Lvl:  &e{prod_lvl}"
-      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
-      - "&#5B8DD9→ &7Click to manage."
+      - "&#FF7D14Your Upgrade Levels:"
+      - "&#FF7D14&l︳ &7Speed Lvl:  &#FF7D14{speed_lvl}"
+      - "&#FF7D14&l︳ &7Prod. Lvl:  &#FF7D14{prod_lvl}"
+      - ""
+      - "&#FF7D14➠ &7Click to Open"
     core-placed-line:     "&aCore placed at: &eX{core_x} Y{core_y} Z{core_z}"
     core-not-placed-line: "&cCore not placed."
 
@@ -75,38 +83,44 @@ main-menu:
     enabled: true
     slot: 21
     material: EMERALD
-    name: "&#5B8DD9💱 &fExchange"
+    name: "&#FF7D14&lM&#FF7816&lA&#FF7418&lT&#FF6F19&lE&#FF6A1B&lR&#FF651D&lI&#FF611F&lA&#FF5C21&lL &#FF5224&lE&#FF4E26&lX&#FF4928&lC&#FF442A&lH&#FF3F2C&lA&#FF3B2D&lN&#FF362F&lG&#FF3131&lE"
     lore:
-      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
-      - "&7Buy materials with &eScrap&7."
-      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
-      - "&#5B8DD9→ &7Click to open."
+      - "&8ꜱᴇʀᴠᴇʀ ᴍᴇɴᴜ"
+      - ""
+      - "&7Here you can purchase other Materials"
+      - "&7with your Core's &#FF7D14Scrap&7."
+      - ""
+      - "&#FF7D14➠ &7Click to Open"
 
   shop-button:
     enabled: true
     slot: 22
     material: CHEST
-    name: "&#5B8DD9🛒 &fShop"
+    name: "&#FF7D14&lS&#FF641E&lH&#FF4A27&lO&#FF3131&lP"
     lore:
-      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
-      - "&7Buy Blocks & Defense Blocks"
-      - "&7using your &eScrap&7."
+      - "&8ꜱᴇʀᴠᴇʀ ᴍᴇɴᴜ"
       - ""
-      - "&8→ &7Normal Blocks"
-      - "&8→ &7Defense Blocks"
-      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
-      - "&#5B8DD9→ &7Click to open."
+      - "&7Buy Blocks & Defense Blocks"
+      - "&7using your &#FF7D14Scrap&7."
+      - ""
+      - "&#FF7D14Available:"
+      - "&#FF7D14&l︳ &7Normal Blocks"
+      - "&#FF7D14&l︳ &7Defense Blocks"
+      - ""
+      - "&#FF7D14➠ &7Click to Open"
 
   # Slot moved from 25 → 6
   extraction-status:
     enabled: true
-    slot: 6
+    slot: 4
     material: ENDER_CHEST
-    name: "&#5B8DD9⚡ &fExtraction Status"
+    name: "&#FF7D14&lE&#FF7517&lX&#FF6E1A&lT&#FF661D&lR&#FF5F20&lA&#FF5723&lC&#FF4F25&lT&#FF4828&lI&#FF402B&lO&#FF392E&lN&#FF3131&lS"
     lore:
-      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
-      - "{extraction_status}"
-      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&8ꜱᴇʀᴠᴇʀ ᴍᴇɴᴜ"
+      - ""
+      - "&#FF7D14Next Extraction:"
+      - "&#FF7D14&l︳ &r{extraction_status}"
+      - ""
     status-active:  "&#FF6B35⚡ ACTIVE: &e{zone_name} &8— &7{current_extraction} left"
     status-waiting: "&#5B8DD9⚡ Next in: &e{next_extraction}"
 
@@ -115,32 +129,34 @@ main-menu:
     enabled: true
     slot: 23
     material: NETHER_STAR
-    name: "&#FFD700★ &fMilestones"
+    name: "&#FF7D14&lM&#FF7517&lI&#FF6C1A&lL&#FF641E&lE&#FF5B21&lS&#FF5324&lT&#FF4A27&lO&#FF422B&lN&#FF392E&lE&#FF3131&lS"
     lore:
-      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
-      - "&7Track your achievements."
-      - "&7Completed: &e{milestones_done}"
-      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
-      - "&#5B8DD9→ &7Click to view."
+      - "&8ꜱᴇʀᴠᴇʀ ᴍᴇɴᴜ"
+      - ""
+      - "&#FF7D14Information:"
+      - "&#FF7D14&l︳ &7Completed: &#FF7D14{milestones_done}"
+      - ""
+      - "&#FF7D14➠ &7Click to Open"
 
   stats-button:
     enabled: true
-    slot: 34
+    slot: 6
     material: PAPER
-    name: "&#5B8DD9📊 &fStats"
+    name: "&#FF7D14&lY&#FF7517&lO&#FF6C1A&lU&#FF641E&lR &#FF5324&lS&#FF4A27&lT&#FF422B&lA&#FF392E&lT&#FF3131&lS"
     lore:
-      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
-      - "&7View all your statistics."
-      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
-      - "&#5B8DD9→ &7Click to view."
+      - "&8ꜱᴇʀᴠᴇʀ ᴍᴇɴᴜ"
+      - ""
+      - "&7Here you can view all your different"
+      - "&7stats of your journey."
+      - ""
+      - "&#FF7D14➠ &7Click to Open"
 
   close-button:
     enabled: true
     slot: 49
     material: BARRIER
-    name: "&cClose"
-    lore:
-      - "&7Click to close."
+    name: "&#FF3131&lClose"
+    lore: []
 
   no-core-message: "{prefix}&cYou need to place your Core first!"
 
@@ -160,61 +176,59 @@ armory:
 
   placeholder:
     material: GRAY_DYE
-    name: "&7???"
-    lore:
-      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
-      - "&8Coming soon..."
-      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+    name: "&7&o???"
+    lore: []
     slots: []
 
   info-item:
     slot: 4
     material: NETHER_STAR
-    name: "&#5B8DD9◈ &fArmory"
+    name: "&#FF7D14&lA&#FF6E1A&lR&#FF5F20&lM&#FF4F25&lO&#FF402B&lR&#FF3131&lY"
     lore:
-      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&8ᴀʀᴍᴏʀʏ ᴍᴇɴᴜ"
+      - ""
+      - "&#FF7D14&l━&#FF7A15&l━&#FF7617&l━&#FF7318&l━&#FF7019&l━&#FF6C1A&l━&#FF691C&l━&#FF661D&l━&#FF631E&l━&#FF5F1F&l━&#FF5C21&l━&#FF5922&l━&#FF5523&l━&#FF5224&l━&#FF4F26&l━&#FF4B27&l━&#FF4828&l━&#FF4529&l━&#FF422B&l━&#FF3E2C&l━&#FF3B2D&l━&#FF382E&l━&#FF3430&l━&#FF3131&l━"
       - "&7Upgrade your &eGear &7using"
       - "&7materials gathered from"
       - "&eExtractions &7and &eCores&7."
       - ""
       - "&8→ &7Click any item to upgrade"
       - "&8&o(or Shift+Right-Click your tool)"
-      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&#FF7D14&l━&#FF7A15&l━&#FF7617&l━&#FF7318&l━&#FF7019&l━&#FF6C1A&l━&#FF691C&l━&#FF661D&l━&#FF631E&l━&#FF5F1F&l━&#FF5C21&l━&#FF5922&l━&#FF5523&l━&#FF5224&l━&#FF4F26&l━&#FF4B27&l━&#FF4828&l━&#FF4529&l━&#FF422B&l━&#FF3E2C&l━&#FF3B2D&l━&#FF382E&l━&#FF3430&l━&#FF3131&l━"
 
   gear-slots: [10, 12, 14, 28, 30, 32, 34]
 
   gear-labels:
-    sword:      "⚔ Sword"
-    pickaxe:    "⛏ Pickaxe"
-    axe:        "🪓 Axe"
-    helmet:     "◈ Helmet"
-    chestplate: "◈ Chestplate"
-    leggings:   "◈ Leggings"
-    boots:      "◈ Boots"
+    sword:      "Sword"
+    pickaxe:    "Pickaxe"
+    axe:        "Axe"
+    helmet:     "Helmet"
+    chestplate: "Chestplate"
+    leggings:   "Leggings"
+    boots:      "Boots"
 
-  gear-name-format:      "&#5B8DD9{gear_label} &8[&fT{tier}&8]"
+  gear-name-format:      "&#FF7D14{gear_label} &8[&fT{tier}&8]"
   gear-lore-header:
-    - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
-    - "&7Current Tier: &f{tier} &8/ &f{max_tier}"
+    - "&8ɢᴇᴀʀ"
     - ""
-  gear-lore-cost-header: "&7Upgrade Cost:"
-  gear-lore-cost-scrap:  "  &8◆ &eScrap: &f{cost_scrap}"
-  gear-lore-cost-screws: "  &8◆ &bScrews: &f{cost_screws}"
-  gear-lore-cost-energy: "  &8◆ &aEnergy Cells: &f{cost_energy}"
-  gear-lore-cost-bio:    "  &8◆ &dBio Samples: &f{cost_bio}"
-  gear-lore-cost-tech:   "  &8◆ &6Tech Shards: &f{cost_tech}"
-  gear-lore-can-afford:  "&#5B8DD9→ &aClick to upgrade!"
-  gear-lore-cant-afford: "&c✘ Not enough resources."
-  gear-lore-max-tier:    "&#FFD700★ &eMax Tier Reached!"
-  gear-lore-footer:
-    - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+    - "&#FF7D14Tier: &f{tier} &8/ &f{max_tier}"
+    - ""
+  gear-lore-cost-header: "&#FF7D14Upgrade Cost:"
+  gear-lore-cost-scrap:  "  &#FF7D14◆ &7Scrap: &#FF7D14{cost_scrap}"
+  gear-lore-cost-screws: "  &#FF7D14◆ &7Screws: &#FF7D14{cost_screws}"
+  gear-lore-cost-energy: "  &#FF7D14◆ &7Energy Cells: &#FF7D14{cost_energy}"
+  gear-lore-cost-bio:    "  &#FF7D14◆ &7Bio Samples: &#FF7D14{cost_bio}"
+  gear-lore-cost-tech:   "  &#FF7D14◆ &7Tech Shards: &#FF7D14{cost_tech}"
+  gear-lore-can-afford:  "&#FF7D14➠ &7Click to Upgrade"
+  gear-lore-cant-afford: "&#FF3131✘ Not enough resources."
+  gear-lore-max-tier:    "&#FF7D14★ &7Max Tier Reached!"
+  gear-lore-footer: []
 
   close-button:
     slot: 49
     material: BARRIER
-    name: "&cClose"
-    lore:
-      - "&7Click to close this menu."
+    name: "&#FF3131&lClose"
+    lore: []
 
 # ── CORE GUI (right-click placed core) ───────────────────────────
 core-gui:
@@ -233,10 +247,7 @@ core-gui:
   placeholder:
     material: GRAY_DYE
     name: "&7???"
-    lore:
-      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
-      - "&8Coming soon..."
-      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+    lore: []
     slots: []
 
   sounds:
@@ -256,9 +267,11 @@ core-gui:
   info-item:
     slot: 4
     material: BEACON
-    name: "&#5B8DD9◈ &fYour Core"
+    name: "&#FF7D14&lY&#FF7418&lO&#FF6A1B&lU&#FF611F&lR &#FF4E26&lC&#FF442A&lO&#FF3B2D&lR&#FF3131&lE"
     lore:
-      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&8ᴄᴏʀᴇ ᴍᴇɴᴜ"
+      - ""
+      - "&#FF7D14&l━&#FF7A15&l━&#FF7617&l━&#FF7318&l━&#FF7019&l━&#FF6C1A&l━&#FF691C&l━&#FF661D&l━&#FF631E&l━&#FF5F1F&l━&#FF5C21&l━&#FF5922&l━&#FF5523&l━&#FF5224&l━&#FF4F26&l━&#FF4B27&l━&#FF4828&l━&#FF4529&l━&#FF422B&l━&#FF3E2C&l━&#FF3B2D&l━&#FF382E&l━&#FF3430&l━&#FF3131&l━"
       - "&7Generation: &e+{scrap_rate} Scrap &8/ &e{interval}s"
       - "&7Location: &eX{core_x} &8| &eY{core_y} &8| &eZ{core_z}"
       - ""
@@ -267,14 +280,16 @@ core-gui:
       - ""
       - "&7Stored Scrap: &#FFD700{stored_scrap}"
       - "&8&o(Collect to transfer to your balance)"
-      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&#FF7D14&l━&#FF7A15&l━&#FF7617&l━&#FF7318&l━&#FF7019&l━&#FF6C1A&l━&#FF691C&l━&#FF661D&l━&#FF631E&l━&#FF5F1F&l━&#FF5C21&l━&#FF5922&l━&#FF5523&l━&#FF5224&l━&#FF4F26&l━&#FF4B27&l━&#FF4828&l━&#FF4529&l━&#FF422B&l━&#FF3E2C&l━&#FF3B2D&l━&#FF382E&l━&#FF3430&l━&#FF3131&l━"
 
   collect-button:
     slot: 13
     material: SUNFLOWER
-    name: "&#FFD700⬇ &eCollect Stored Scrap"
+    name: "&#FF7D14&lC&#FF7716&lO&#FF7019&lL&#FF6A1B&lL&#FF641E&lE&#FF5D20&lC&#FF5723&lT &#FF4A27&lS&#FF442A&lC&#FF3E2C&lR&#FF372F&lA&#FF3131&lP"
     lore:
-      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&8ᴄᴏʀᴇ ᴍᴇɴᴜ"
+      - ""
+      - "&#FF7D14&l━&#FF7A15&l━&#FF7617&l━&#FF7318&l━&#FF7019&l━&#FF6C1A&l━&#FF691C&l━&#FF661D&l━&#FF631E&l━&#FF5F1F&l━&#FF5C21&l━&#FF5922&l━&#FF5523&l━&#FF5224&l━&#FF4F26&l━&#FF4B27&l━&#FF4828&l━&#FF4529&l━&#FF422B&l━&#FF3E2C&l━&#FF3B2D&l━&#FF382E&l━&#FF3430&l━&#FF3131&l━"
       - "&7Stored in Core: &#FFD700{stored_scrap} Scrap"
       - ""
       - "&7Click to transfer all stored Scrap"
@@ -283,36 +298,40 @@ core-gui:
       - "&c⚠ Enemies can raid your Core!"
       - "&7The more Scrap stored, the more"
       - "&7they can steal on raid."
-      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
-      - "&#5B8DD9→ &aClick to collect."
+      - "&#FF7D14&l━&#FF7A15&l━&#FF7617&l━&#FF7318&l━&#FF7019&l━&#FF6C1A&l━&#FF691C&l━&#FF661D&l━&#FF631E&l━&#FF5F1F&l━&#FF5C21&l━&#FF5922&l━&#FF5523&l━&#FF5224&l━&#FF4F26&l━&#FF4B27&l━&#FF4828&l━&#FF4529&l━&#FF422B&l━&#FF3E2C&l━&#FF3B2D&l━&#FF382E&l━&#FF3430&l━&#FF3131&l━"
+      - "&#FF7D14➠ &7Click to Collect"
 
   speed-upgrade:
     slot: 20
     material: FEATHER
-    name: "&#5B8DD9⚡ Generation Speed"
+    name: "&#FF7D14&l⚡ &#FF7417&lG&#FF7019&lE&#FF6B1B&lN&#FF671D&lE&#FF621E&lR&#FF5E20&lA&#FF5922&lT&#FF5523&lI&#FF5025&lO&#FF4C27&lN &#FF432A&lS&#FF3E2C&lP&#FF3A2E&lE&#FF352F&lE&#FF3131&lD"
     lore-header:
-      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&8ᴄᴏʀᴇ ᴍᴇɴᴜ"
+      - ""
+      - "&#FF7D14&l━&#FF7A15&l━&#FF7617&l━&#FF7318&l━&#FF7019&l━&#FF6C1A&l━&#FF691C&l━&#FF661D&l━&#FF631E&l━&#FF5F1F&l━&#FF5C21&l━&#FF5922&l━&#FF5523&l━&#FF5224&l━&#FF4F26&l━&#FF4B27&l━&#FF4828&l━&#FF4529&l━&#FF422B&l━&#FF3E2C&l━&#FF3B2D&l━&#FF382E&l━&#FF3430&l━&#FF3131&l━"
       - "&7Current Level: &f{speed_lvl} &8/ &f{speed_max}"
       - "&7Next: &f{next_display}"
       - ""
       - "&7Upgrade Cost:"
-    lore-cost-scrap:  "  &8◆ &eScrap: &f{cost_scrap}"
-    lore-cost-screws: "  &8◆ &bScrews: &f{cost_screws}"
-    lore-cost-energy: "  &8◆ &aEnergy Cells: &f{cost_energy}"
-    lore-cost-bio:    "  &8◆ &dBio Samples: &f{cost_bio}"
-    lore-cost-tech:   "  &8◆ &6Tech Shards: &f{cost_tech}"
+    lore-cost-scrap:  "  &#FF7D14◆ &7Scrap: &f{cost_scrap}"
+    lore-cost-screws: "  &#FF7D14◆ &7Screws: &f{cost_screws}"
+    lore-cost-energy: "  &#FF7D14◆ &7Energy Cells: &f{cost_energy}"
+    lore-cost-bio:    "  &#FF7D14◆ &7Bio Samples: &f{cost_bio}"
+    lore-cost-tech:   "  &#FF7D14◆ &7Tech Shards: &f{cost_tech}"
     lore-can-afford:  "&#5B8DD9→ &aClick to upgrade!"
     lore-cant-afford: "&c✘ Not enough resources."
     lore-max-level:   "&#FFD700★ &eMax Level Reached!"
     lore-footer:
-      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&#FF7D14&l━&#FF7A15&l━&#FF7617&l━&#FF7318&l━&#FF7019&l━&#FF6C1A&l━&#FF691C&l━&#FF661D&l━&#FF631E&l━&#FF5F1F&l━&#FF5C21&l━&#FF5922&l━&#FF5523&l━&#FF5224&l━&#FF4F26&l━&#FF4B27&l━&#FF4828&l━&#FF4529&l━&#FF422B&l━&#FF3E2C&l━&#FF3B2D&l━&#FF382E&l━&#FF3430&l━&#FF3131&l━"
 
   production-upgrade:
     slot: 24
     material: FURNACE
-    name: "&#FFD700⚙ Scrap Production"
+    name: "&#FF7D14&l⚙ &#FF7417&lS&#FF7019&lC&#FF6B1B&lR&#FF671D&lA&#FF621E&lP &#FF5922&lP&#FF5523&lR&#FF5025&lO&#FF4C27&lD&#FF4728&lU&#FF432A&lC&#FF3E2C&lT&#FF3A2E&lI&#FF352F&lO&#FF3131&lN"
     lore-header:
-      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&8ᴄᴏʀᴇ ᴍᴇɴᴜ"
+      - ""
+      - "&#FF7D14&l━&#FF7A15&l━&#FF7617&l━&#FF7318&l━&#FF7019&l━&#FF6C1A&l━&#FF691C&l━&#FF661D&l━&#FF631E&l━&#FF5F1F&l━&#FF5C21&l━&#FF5922&l━&#FF5523&l━&#FF5224&l━&#FF4F26&l━&#FF4B27&l━&#FF4828&l━&#FF4529&l━&#FF422B&l━&#FF3E2C&l━&#FF3B2D&l━&#FF382E&l━&#FF3430&l━&#FF3131&l━"
       - "&7Current Level: &f{prod_lvl} &8/ &f{prod_max}"
       - "&7Next: &f{next_display}"
       - ""
@@ -326,39 +345,42 @@ core-gui:
     lore-cant-afford: "&c✘ Not enough resources."
     lore-max-level:   "&#FFD700★ &eMax Level Reached!"
     lore-footer:
-      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&#FF7D14&l━&#FF7A15&l━&#FF7617&l━&#FF7318&l━&#FF7019&l━&#FF6C1A&l━&#FF691C&l━&#FF661D&l━&#FF631E&l━&#FF5F1F&l━&#FF5C21&l━&#FF5922&l━&#FF5523&l━&#FF5224&l━&#FF4F26&l━&#FF4B27&l━&#FF4828&l━&#FF4529&l━&#FF422B&l━&#FF3E2C&l━&#FF3B2D&l━&#FF382E&l━&#FF3430&l━&#FF3131&l━"
 
   pickup-button:
     slot: 40
     material: MINECART
-    name: "&#FFD700⤴ &ePickup Core"
+    name: "&#FF7D14&lP&#FF7517&lI&#FF6E1A&lC&#FF661D&lK&#FF5F20&lU&#FF5723&lP &#FF4828&lC&#FF402B&lO&#FF392E&lR&#FF3131&lE"
     lore:
-      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&8ᴄᴏʀᴇ ᴍᴇɴᴜ"
+      - ""
+      - "&#FF7D14&l━&#FF7A15&l━&#FF7617&l━&#FF7318&l━&#FF7019&l━&#FF6C1A&l━&#FF691C&l━&#FF661D&l━&#FF631E&l━&#FF5F1F&l━&#FF5C21&l━&#FF5922&l━&#FF5523&l━&#FF5224&l━&#FF4F26&l━&#FF4B27&l━&#FF4828&l━&#FF4529&l━&#FF422B&l━&#FF3E2C&l━&#FF3B2D&l━&#FF382E&l━&#FF3430&l━&#FF3131&l━"
       - "&7Hold still for &e{pickup_seconds}s &7to pick up your Core."
       - ""
       - "&aYou are within range. &8({in_range}&8)"
       - "&c⚠ Moving will cancel pickup!"
-      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
-      - "&#5B8DD9→ &7Click to begin pickup."
+      - "&#FF7D14&l━&#FF7A15&l━&#FF7617&l━&#FF7318&l━&#FF7019&l━&#FF6C1A&l━&#FF691C&l━&#FF661D&l━&#FF631E&l━&#FF5F1F&l━&#FF5C21&l━&#FF5922&l━&#FF5523&l━&#FF5224&l━&#FF4F26&l━&#FF4B27&l━&#FF4828&l━&#FF4529&l━&#FF422B&l━&#FF3E2C&l━&#FF3B2D&l━&#FF382E&l━&#FF3430&l━&#FF3131&l━"
+      - "&#FF7D14➠ &7Click to start Pickup"
 
   pickup-button-out-of-range:
     slot: 40
     material: BARRIER
-    name: "&c⤴ &fPickup Core &8(Too Far)"
+    name: "&#FF7D14&lP&#FF7816&lI&#FF7418&lC&#FF6F19&lK&#FF6A1B&lU&#FF651D&lP &#FF5C21&lC&#FF5723&lO&#FF5224&lR&#FF4E26&lE &#FF442A&l(&#FF3F2C&lO&#FF3B2D&lO&#FF362F&lR&#FF3131&l)"
     lore:
-      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&8ᴄᴏʀᴇ ᴍᴇɴᴜ"
+      - ""
+      - "&#FF7D14&l━&#FF7A15&l━&#FF7617&l━&#FF7318&l━&#FF7019&l━&#FF6C1A&l━&#FF691C&l━&#FF661D&l━&#FF631E&l━&#FF5F1F&l━&#FF5C21&l━&#FF5922&l━&#FF5523&l━&#FF5224&l━&#FF4F26&l━&#FF4B27&l━&#FF4828&l━&#FF4529&l━&#FF422B&l━&#FF3E2C&l━&#FF3B2D&l━&#FF382E&l━&#FF3430&l━&#FF3131&l━"
       - "&cYou are too far from your Core."
       - "&7Get within &e{pickup_range} blocks &7to pick it up."
       - ""
       - "&7Your Core: &eX{core_x} Y{core_y} Z{core_z}"
-      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&#FF7D14&l━&#FF7A15&l━&#FF7617&l━&#FF7318&l━&#FF7019&l━&#FF6C1A&l━&#FF691C&l━&#FF661D&l━&#FF631E&l━&#FF5F1F&l━&#FF5C21&l━&#FF5922&l━&#FF5523&l━&#FF5224&l━&#FF4F26&l━&#FF4B27&l━&#FF4828&l━&#FF4529&l━&#FF422B&l━&#FF3E2C&l━&#FF3B2D&l━&#FF382E&l━&#FF3430&l━&#FF3131&l━"
 
   close-button:
     slot: 49
     material: BARRIER
-    name: "&cClose"
-    lore:
-      - "&7Click to close this menu."
+    name: "&#FF3131&lClose"
+    lore: []
 
   upgrade-messages:
     max-level:          "{prefix}&7This upgrade is already at &emax level&7."
@@ -387,10 +409,7 @@ stats:
   placeholder:
     material: GRAY_DYE
     name: "&7???"
-    lore:
-      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
-      - "&8Coming soon..."
-      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+    lore: []
     slots: []
 
   level-item:
@@ -398,62 +417,74 @@ stats:
     material: EXPERIENCE_BOTTLE
     name: "&#5B8DD9◈ &fLevel & XP"
     lore:
-      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&8ꜱᴛᴀᴛꜱ ᴍᴇɴᴜ"
+      - ""
+      - "&#FF7D14&l━&#FF7A15&l━&#FF7617&l━&#FF7318&l━&#FF7019&l━&#FF6C1A&l━&#FF691C&l━&#FF661D&l━&#FF631E&l━&#FF5F1F&l━&#FF5C21&l━&#FF5922&l━&#FF5523&l━&#FF5224&l━&#FF4F26&l━&#FF4B27&l━&#FF4828&l━&#FF4529&l━&#FF422B&l━&#FF3E2C&l━&#FF3B2D&l━&#FF382E&l━&#FF3430&l━&#FF3131&l━"
       - "&7Level:    {level}"
       - "&7XP:       &e{xp_raw} &8/ &e{xp_needed}"
       - "&7Progress: &e{progress}%"
-      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&#FF7D14&l━&#FF7A15&l━&#FF7617&l━&#FF7318&l━&#FF7019&l━&#FF6C1A&l━&#FF691C&l━&#FF661D&l━&#FF631E&l━&#FF5F1F&l━&#FF5C21&l━&#FF5922&l━&#FF5523&l━&#FF5224&l━&#FF4F26&l━&#FF4B27&l━&#FF4828&l━&#FF4529&l━&#FF422B&l━&#FF3E2C&l━&#FF3B2D&l━&#FF382E&l━&#FF3430&l━&#FF3131&l━"
 
   materials-item:
     slot: 13
     material: GOLD_INGOT
     name: "&#5B8DD9◈ &fMaterials"
     lore:
-      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&8ꜱᴛᴀᴛꜱ ᴍᴇɴᴜ"
+      - ""
+      - "&#FF7D14&l━&#FF7A15&l━&#FF7617&l━&#FF7318&l━&#FF7019&l━&#FF6C1A&l━&#FF691C&l━&#FF661D&l━&#FF631E&l━&#FF5F1F&l━&#FF5C21&l━&#FF5922&l━&#FF5523&l━&#FF5224&l━&#FF4F26&l━&#FF4B27&l━&#FF4828&l━&#FF4529&l━&#FF422B&l━&#FF3E2C&l━&#FF3B2D&l━&#FF382E&l━&#FF3430&l━&#FF3131&l━"
       - "&7Scrap:         &e{scrap}"
       - "&7Screws:        &b{screws}"
       - "&7Energy Cells:  &a{energy}"
       - "&7Bio Samples:   &d{bio}"
       - "&7Tech Shards:   &6{tech}"
-      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&#FF7D14&l━&#FF7A15&l━&#FF7617&l━&#FF7318&l━&#FF7019&l━&#FF6C1A&l━&#FF691C&l━&#FF661D&l━&#FF631E&l━&#FF5F1F&l━&#FF5C21&l━&#FF5922&l━&#FF5523&l━&#FF5224&l━&#FF4F26&l━&#FF4B27&l━&#FF4828&l━&#FF4529&l━&#FF422B&l━&#FF3E2C&l━&#FF3B2D&l━&#FF382E&l━&#FF3430&l━&#FF3131&l━"
 
   combat-item:
     slot: 15
     material: DIAMOND_SWORD
     name: "&#5B8DD9◈ &fCombat Stats"
     lore:
-      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&8ꜱᴛᴀᴛꜱ ᴍᴇɴᴜ"
+      - ""
+      - "&#FF7D14&l━&#FF7A15&l━&#FF7617&l━&#FF7318&l━&#FF7019&l━&#FF6C1A&l━&#FF691C&l━&#FF661D&l━&#FF631E&l━&#FF5F1F&l━&#FF5C21&l━&#FF5922&l━&#FF5523&l━&#FF5224&l━&#FF4F26&l━&#FF4B27&l━&#FF4828&l━&#FF4529&l━&#FF422B&l━&#FF3E2C&l━&#FF3B2D&l━&#FF382E&l━&#FF3430&l━&#FF3131&l━"
       - "&7Kills:           &e{kills}"
       - "&7Deaths:          &c{deaths}"
       - "&7K/D Ratio:       &f{kd}"
       - "&7Cores Destroyed: &e{cores_destroyed}"
-      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&#FF7D14&l━&#FF7A15&l━&#FF7617&l━&#FF7318&l━&#FF7019&l━&#FF6C1A&l━&#FF691C&l━&#FF661D&l━&#FF631E&l━&#FF5F1F&l━&#FF5C21&l━&#FF5922&l━&#FF5523&l━&#FF5224&l━&#FF4F26&l━&#FF4B27&l━&#FF4828&l━&#FF4529&l━&#FF422B&l━&#FF3E2C&l━&#FF3B2D&l━&#FF382E&l━&#FF3430&l━&#FF3131&l━"
 
   extraction-item:
     slot: 29
     material: ENDER_CHEST
     name: "&#5B8DD9◈ &fExtraction Stats"
     lore:
-      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&8ꜱᴛᴀᴛꜱ ᴍᴇɴᴜ"
+      - ""
+      - "&#FF7D14&l━&#FF7A15&l━&#FF7617&l━&#FF7318&l━&#FF7019&l━&#FF6C1A&l━&#FF691C&l━&#FF661D&l━&#FF631E&l━&#FF5F1F&l━&#FF5C21&l━&#FF5922&l━&#FF5523&l━&#FF5224&l━&#FF4F26&l━&#FF4B27&l━&#FF4828&l━&#FF4529&l━&#FF422B&l━&#FF3E2C&l━&#FF3B2D&l━&#FF382E&l━&#FF3430&l━&#FF3131&l━"
       - "&7Extractions Done: &e{extractions}"
-      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&#FF7D14&l━&#FF7A15&l━&#FF7617&l━&#FF7318&l━&#FF7019&l━&#FF6C1A&l━&#FF691C&l━&#FF661D&l━&#FF631E&l━&#FF5F1F&l━&#FF5C21&l━&#FF5922&l━&#FF5523&l━&#FF5224&l━&#FF4F26&l━&#FF4B27&l━&#FF4828&l━&#FF4529&l━&#FF422B&l━&#FF3E2C&l━&#FF3B2D&l━&#FF382E&l━&#FF3430&l━&#FF3131&l━"
 
   playtime-item:
     slot: 31
     material: CLOCK
     name: "&#5B8DD9◈ &fPlaytime"
     lore:
-      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&8ꜱᴛᴀᴛꜱ ᴍᴇɴᴜ"
+      - ""
+      - "&#FF7D14&l━&#FF7A15&l━&#FF7617&l━&#FF7318&l━&#FF7019&l━&#FF6C1A&l━&#FF691C&l━&#FF661D&l━&#FF631E&l━&#FF5F1F&l━&#FF5C21&l━&#FF5922&l━&#FF5523&l━&#FF5224&l━&#FF4F26&l━&#FF4B27&l━&#FF4828&l━&#FF4529&l━&#FF422B&l━&#FF3E2C&l━&#FF3B2D&l━&#FF382E&l━&#FF3430&l━&#FF3131&l━"
       - "&7Total:      &e{playtime_h}h {playtime_m}m"
       - "&7Milestones: &e{milestones_done}"
-      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&#FF7D14&l━&#FF7A15&l━&#FF7617&l━&#FF7318&l━&#FF7019&l━&#FF6C1A&l━&#FF691C&l━&#FF661D&l━&#FF631E&l━&#FF5F1F&l━&#FF5C21&l━&#FF5922&l━&#FF5523&l━&#FF5224&l━&#FF4F26&l━&#FF4B27&l━&#FF4828&l━&#FF4529&l━&#FF422B&l━&#FF3E2C&l━&#FF3B2D&l━&#FF382E&l━&#FF3430&l━&#FF3131&l━"
 
   gear-item:
     slot: 33
     material: CHAINMAIL_CHESTPLATE
     name: "&#5B8DD9◈ &fGear Tiers"
     lore:
-      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&8ꜱᴛᴀᴛꜱ ᴍᴇɴᴜ"
+      - ""
+      - "&#FF7D14&l━&#FF7A15&l━&#FF7617&l━&#FF7318&l━&#FF7019&l━&#FF6C1A&l━&#FF691C&l━&#FF661D&l━&#FF631E&l━&#FF5F1F&l━&#FF5C21&l━&#FF5922&l━&#FF5523&l━&#FF5224&l━&#FF4F26&l━&#FF4B27&l━&#FF4828&l━&#FF4529&l━&#FF422B&l━&#FF3E2C&l━&#FF3B2D&l━&#FF382E&l━&#FF3430&l━&#FF3131&l━"
       - "&7Sword:      &eT{sword_t}"
       - "&7Pickaxe:    &eT{pickaxe_t}"
       - "&7Axe:        &eT{axe_t}"
@@ -461,14 +492,13 @@ stats:
       - "&7Chestplate: &eT{chest_t}"
       - "&7Leggings:   &eT{legs_t}"
       - "&7Boots:      &eT{boots_t}"
-      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&#FF7D14&l━&#FF7A15&l━&#FF7617&l━&#FF7318&l━&#FF7019&l━&#FF6C1A&l━&#FF691C&l━&#FF661D&l━&#FF631E&l━&#FF5F1F&l━&#FF5C21&l━&#FF5922&l━&#FF5523&l━&#FF5224&l━&#FF4F26&l━&#FF4B27&l━&#FF4828&l━&#FF4529&l━&#FF422B&l━&#FF3E2C&l━&#FF3B2D&l━&#FF382E&l━&#FF3430&l━&#FF3131&l━"
 
   close-button:
     slot: 40
     material: BARRIER
-    name: "&cClose"
-    lore:
-      - "&7Click to close."
+    name: "&#FF3131&lClose"
+    lore: []
 
 # ── EXCHANGE (/exchange) ─────────────────────────────────────────
 exchange:
@@ -487,10 +517,7 @@ exchange:
   placeholder:
     material: GRAY_DYE
     name: "&7???"
-    lore:
-      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
-      - "&8Coming soon..."
-      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+    lore: []
     slots: []
 
   info-item:
@@ -498,7 +525,9 @@ exchange:
     material: EMERALD
     name: "&#5B8DD9◈ &fExchange Info"
     lore:
-      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&8ᴇxᴄʜᴀɴɢᴇ ᴍᴇɴᴜ"
+      - ""
+      - "&#FF7D14&l━&#FF7A15&l━&#FF7617&l━&#FF7318&l━&#FF7019&l━&#FF6C1A&l━&#FF691C&l━&#FF661D&l━&#FF631E&l━&#FF5F1F&l━&#FF5C21&l━&#FF5922&l━&#FF5523&l━&#FF5224&l━&#FF4F26&l━&#FF4B27&l━&#FF4828&l━&#FF4529&l━&#FF422B&l━&#FF3E2C&l━&#FF3B2D&l━&#FF382E&l━&#FF3430&l━&#FF3131&l━"
       - "&7Your Scrap: &e{scrap}"
       - ""
       - "&7Buy materials with Scrap."
@@ -508,7 +537,7 @@ exchange:
       - "&8→ &7Left Click:   &f×1"
       - "&8→ &7Right Click:  &f×10"
       - "&8→ &7Shift+Click:  &f×64"
-      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&#FF7D14&l━&#FF7A15&l━&#FF7617&l━&#FF7318&l━&#FF7019&l━&#FF6C1A&l━&#FF691C&l━&#FF661D&l━&#FF631E&l━&#FF5F1F&l━&#FF5C21&l━&#FF5922&l━&#FF5523&l━&#FF5224&l━&#FF4F26&l━&#FF4B27&l━&#FF4828&l━&#FF4529&l━&#FF422B&l━&#FF3E2C&l━&#FF3B2D&l━&#FF382E&l━&#FF3430&l━&#FF3131&l━"
 
   materials:
     screws:
@@ -516,7 +545,9 @@ exchange:
       material: IRON_NUGGET
       name: "&b◈ Screws"
       lore:
-        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&8ᴇxᴄʜᴀɴɢᴇ ᴍᴇɴᴜ"
+        - ""
+        - "&#FF7D14&l━&#FF7A15&l━&#FF7617&l━&#FF7318&l━&#FF7019&l━&#FF6C1A&l━&#FF691C&l━&#FF661D&l━&#FF631E&l━&#FF5F1F&l━&#FF5C21&l━&#FF5922&l━&#FF5523&l━&#FF5224&l━&#FF4F26&l━&#FF4B27&l━&#FF4828&l━&#FF4529&l━&#FF422B&l━&#FF3E2C&l━&#FF3B2D&l━&#FF382E&l━&#FF3430&l━&#FF3131&l━"
         - "&7Cost ×1:   &e{cost_1} Scrap"
         - "&7Cost ×10:  &e{cost_10} Scrap"
         - "&7Cost ×64:  &e{cost_64} Scrap"
@@ -524,13 +555,15 @@ exchange:
         - "&8→ &7Left Click:  &aBuy ×1"
         - "&8→ &7Right Click: &aBuy ×10"
         - "&8→ &7Shift+Click: &aBuy ×64"
-        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&#FF7D14&l━&#FF7A15&l━&#FF7617&l━&#FF7318&l━&#FF7019&l━&#FF6C1A&l━&#FF691C&l━&#FF661D&l━&#FF631E&l━&#FF5F1F&l━&#FF5C21&l━&#FF5922&l━&#FF5523&l━&#FF5224&l━&#FF4F26&l━&#FF4B27&l━&#FF4828&l━&#FF4529&l━&#FF422B&l━&#FF3E2C&l━&#FF3B2D&l━&#FF382E&l━&#FF3430&l━&#FF3131&l━"
     energy-cells:
       slot: 22
       material: GLOWSTONE_DUST
       name: "&a◈ Energy Cells"
       lore:
-        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&8ᴇxᴄʜᴀɴɢᴇ ᴍᴇɴᴜ"
+        - ""
+        - "&#FF7D14&l━&#FF7A15&l━&#FF7617&l━&#FF7318&l━&#FF7019&l━&#FF6C1A&l━&#FF691C&l━&#FF661D&l━&#FF631E&l━&#FF5F1F&l━&#FF5C21&l━&#FF5922&l━&#FF5523&l━&#FF5224&l━&#FF4F26&l━&#FF4B27&l━&#FF4828&l━&#FF4529&l━&#FF422B&l━&#FF3E2C&l━&#FF3B2D&l━&#FF382E&l━&#FF3430&l━&#FF3131&l━"
         - "&7Cost ×1:   &e{cost_1} Scrap"
         - "&7Cost ×10:  &e{cost_10} Scrap"
         - "&7Cost ×64:  &e{cost_64} Scrap"
@@ -538,13 +571,15 @@ exchange:
         - "&8→ &7Left Click:  &aBuy ×1"
         - "&8→ &7Right Click: &aBuy ×10"
         - "&8→ &7Shift+Click: &aBuy ×64"
-        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&#FF7D14&l━&#FF7A15&l━&#FF7617&l━&#FF7318&l━&#FF7019&l━&#FF6C1A&l━&#FF691C&l━&#FF661D&l━&#FF631E&l━&#FF5F1F&l━&#FF5C21&l━&#FF5922&l━&#FF5523&l━&#FF5224&l━&#FF4F26&l━&#FF4B27&l━&#FF4828&l━&#FF4529&l━&#FF422B&l━&#FF3E2C&l━&#FF3B2D&l━&#FF382E&l━&#FF3430&l━&#FF3131&l━"
     bio-samples:
       slot: 24
       material: SLIME_BALL
       name: "&d◈ Bio Samples"
       lore:
-        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&8ᴇxᴄʜᴀɴɢᴇ ᴍᴇɴᴜ"
+        - ""
+        - "&#FF7D14&l━&#FF7A15&l━&#FF7617&l━&#FF7318&l━&#FF7019&l━&#FF6C1A&l━&#FF691C&l━&#FF661D&l━&#FF631E&l━&#FF5F1F&l━&#FF5C21&l━&#FF5922&l━&#FF5523&l━&#FF5224&l━&#FF4F26&l━&#FF4B27&l━&#FF4828&l━&#FF4529&l━&#FF422B&l━&#FF3E2C&l━&#FF3B2D&l━&#FF382E&l━&#FF3430&l━&#FF3131&l━"
         - "&7Cost ×1:   &e{cost_1} Scrap"
         - "&7Cost ×10:  &e{cost_10} Scrap"
         - "&7Cost ×64:  &e{cost_64} Scrap"
@@ -552,13 +587,15 @@ exchange:
         - "&8→ &7Left Click:  &aBuy ×1"
         - "&8→ &7Right Click: &aBuy ×10"
         - "&8→ &7Shift+Click: &aBuy ×64"
-        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&#FF7D14&l━&#FF7A15&l━&#FF7617&l━&#FF7318&l━&#FF7019&l━&#FF6C1A&l━&#FF691C&l━&#FF661D&l━&#FF631E&l━&#FF5F1F&l━&#FF5C21&l━&#FF5922&l━&#FF5523&l━&#FF5224&l━&#FF4F26&l━&#FF4B27&l━&#FF4828&l━&#FF4529&l━&#FF422B&l━&#FF3E2C&l━&#FF3B2D&l━&#FF382E&l━&#FF3430&l━&#FF3131&l━"
     tech-shards:
       slot: 31
       material: BLAZE_POWDER
       name: "&6◈ Tech Shards"
       lore:
-        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&8ᴇxᴄʜᴀɴɢᴇ ᴍᴇɴᴜ"
+        - ""
+        - "&#FF7D14&l━&#FF7A15&l━&#FF7617&l━&#FF7318&l━&#FF7019&l━&#FF6C1A&l━&#FF691C&l━&#FF661D&l━&#FF631E&l━&#FF5F1F&l━&#FF5C21&l━&#FF5922&l━&#FF5523&l━&#FF5224&l━&#FF4F26&l━&#FF4B27&l━&#FF4828&l━&#FF4529&l━&#FF422B&l━&#FF3E2C&l━&#FF3B2D&l━&#FF382E&l━&#FF3430&l━&#FF3131&l━"
         - "&7Cost ×1:   &e{cost_1} Scrap"
         - "&7Cost ×10:  &e{cost_10} Scrap"
         - "&7Cost ×64:  &e{cost_64} Scrap"
@@ -566,14 +603,13 @@ exchange:
         - "&8→ &7Left Click:  &aBuy ×1"
         - "&8→ &7Right Click: &aBuy ×10"
         - "&8→ &7Shift+Click: &aBuy ×64"
-        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&#FF7D14&l━&#FF7A15&l━&#FF7617&l━&#FF7318&l━&#FF7019&l━&#FF6C1A&l━&#FF691C&l━&#FF661D&l━&#FF631E&l━&#FF5F1F&l━&#FF5C21&l━&#FF5922&l━&#FF5523&l━&#FF5224&l━&#FF4F26&l━&#FF4B27&l━&#FF4828&l━&#FF4529&l━&#FF422B&l━&#FF3E2C&l━&#FF3B2D&l━&#FF382E&l━&#FF3430&l━&#FF3131&l━"
 
   close-button:
     slot: 40
     material: BARRIER
-    name: "&cClose"
-    lore:
-      - "&7Click to close."
+    name: "&#FF3131&lClose"
+    lore: []
 
 # ── MILESTONES (/milestones) ─────────────────────────────────────
 milestones:
@@ -592,10 +628,7 @@ milestones:
   placeholder:
     material: GRAY_DYE
     name: "&7???"
-    lore:
-      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
-      - "&8Coming soon..."
-      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+    lore: []
     slots: []
 
   category-slots: [10, 12, 14, 16, 13]
@@ -612,27 +645,33 @@ milestones:
     material: NETHER_STAR
     name: "&#FFD700★ &fMilestone Progress"
     lore:
-      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&8ᴍɪʟᴇꜱᴛᴏɴᴇꜱ ᴍᴇɴᴜ"
+      - ""
+      - "&#FF7D14&l━&#FF7A15&l━&#FF7617&l━&#FF7318&l━&#FF7019&l━&#FF6C1A&l━&#FF691C&l━&#FF661D&l━&#FF631E&l━&#FF5F1F&l━&#FF5C21&l━&#FF5922&l━&#FF5523&l━&#FF5224&l━&#FF4F26&l━&#FF4B27&l━&#FF4828&l━&#FF4529&l━&#FF422B&l━&#FF3E2C&l━&#FF3B2D&l━&#FF382E&l━&#FF3430&l━&#FF3131&l━"
       - "&7Completed: &e{milestones_done} &8/ &e{milestones_total}"
       - "&7Claimable: &#FFD700{claimable_count}"
-      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&#FF7D14&l━&#FF7A15&l━&#FF7617&l━&#FF7318&l━&#FF7019&l━&#FF6C1A&l━&#FF691C&l━&#FF661D&l━&#FF631E&l━&#FF5F1F&l━&#FF5C21&l━&#FF5922&l━&#FF5523&l━&#FF5224&l━&#FF4F26&l━&#FF4B27&l━&#FF4828&l━&#FF4529&l━&#FF422B&l━&#FF3E2C&l━&#FF3B2D&l━&#FF382E&l━&#FF3430&l━&#FF3131&l━"
 
   category-complete:
     material: LIME_STAINED_GLASS_PANE
     name: "&#5B8DD9✔ &a{category} Complete"
     lore:
-      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&8ᴍɪʟᴇꜱᴛᴏɴᴇꜱ ᴍᴇɴᴜ"
+      - ""
+      - "&#FF7D14&l━&#FF7A15&l━&#FF7617&l━&#FF7318&l━&#FF7019&l━&#FF6C1A&l━&#FF691C&l━&#FF661D&l━&#FF631E&l━&#FF5F1F&l━&#FF5C21&l━&#FF5922&l━&#FF5523&l━&#FF5224&l━&#FF4F26&l━&#FF4B27&l━&#FF4828&l━&#FF4529&l━&#FF422B&l━&#FF3E2C&l━&#FF3B2D&l━&#FF382E&l━&#FF3430&l━&#FF3131&l━"
       - "&8◈ &7{category}"
       - ""
       - "&#5B8DD9✔ &aAll {total} milestones completed!"
       - "&7You've mastered this category."
-      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&#FF7D14&l━&#FF7A15&l━&#FF7617&l━&#FF7318&l━&#FF7019&l━&#FF6C1A&l━&#FF691C&l━&#FF661D&l━&#FF631E&l━&#FF5F1F&l━&#FF5C21&l━&#FF5922&l━&#FF5523&l━&#FF5224&l━&#FF4F26&l━&#FF4B27&l━&#FF4828&l━&#FF4529&l━&#FF422B&l━&#FF3E2C&l━&#FF3B2D&l━&#FF382E&l━&#FF3430&l━&#FF3131&l━"
 
   milestone-claimable-prefix:  "&#FFD700★ "
   milestone-incomplete-prefix: "&8◈ "
 
   milestone-lore-header:
-    - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+    - "&8ᴍɪʟᴇꜱᴛᴏɴᴇꜱ ᴍᴇɴᴜ"
+    - ""
+    - "&#FF7D14&l━&#FF7A15&l━&#FF7617&l━&#FF7318&l━&#FF7019&l━&#FF6C1A&l━&#FF691C&l━&#FF661D&l━&#FF631E&l━&#FF5F1F&l━&#FF5C21&l━&#FF5922&l━&#FF5523&l━&#FF5224&l━&#FF4F26&l━&#FF4B27&l━&#FF4828&l━&#FF4529&l━&#FF422B&l━&#FF3E2C&l━&#FF3B2D&l━&#FF382E&l━&#FF3430&l━&#FF3131&l━"
     - "&8◈ &7{category}  &8|  &7{done} &8/ &7{total}"
     - ""
   milestone-lore-progress:
@@ -641,27 +680,26 @@ milestones:
     - ""
   milestone-lore-rewards-header:
     - "&8◈ &7Rewards:"
-  milestone-lore-reward-scrap:  "  &8◆ &eScrap:        &f{reward_scrap}"
-  milestone-lore-reward-screws: "  &8◆ &bScrews:       &f{reward_screws}"
-  milestone-lore-reward-energy: "  &8◆ &aEnergy Cells: &f{reward_energy}"
-  milestone-lore-reward-bio:    "  &8◆ &dBio Samples:  &f{reward_bio}"
-  milestone-lore-reward-tech:   "  &8◆ &6Tech Shards:  &f{reward_tech}"
-  milestone-lore-reward-points: "  &8◆ &fPoints:       &f{reward_points}"
+  milestone-lore-reward-scrap:  "  &#FF7D14◆ &7Scrap:        &f{reward_scrap}"
+  milestone-lore-reward-screws: "  &#FF7D14◆ &7Screws:       &f{reward_screws}"
+  milestone-lore-reward-energy: "  &#FF7D14◆ &7Energy Cells: &f{reward_energy}"
+  milestone-lore-reward-bio:    "  &#FF7D14◆ &7Bio Samples:  &f{reward_bio}"
+  milestone-lore-reward-tech:   "  &#FF7D14◆ &7Tech Shards:  &f{reward_tech}"
+  milestone-lore-reward-points: "  &#FF7D14◆ &7Points:       &f{reward_points}"
   milestone-lore-footer-claimable:
     - ""
-    - "&#FFD700★ &aReady to claim! Click to collect."
-    - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+    - "&#FF7D14★ &7Ready to Claim!"
+    - "&#FF7D14&l━&#FF7A15&l━&#FF7617&l━&#FF7318&l━&#FF7019&l━&#FF6C1A&l━&#FF691C&l━&#FF661D&l━&#FF631E&l━&#FF5F1F&l━&#FF5C21&l━&#FF5922&l━&#FF5523&l━&#FF5224&l━&#FF4F26&l━&#FF4B27&l━&#FF4828&l━&#FF4529&l━&#FF422B&l━&#FF3E2C&l━&#FF3B2D&l━&#FF382E&l━&#FF3430&l━&#FF3131&l━"
   milestone-lore-footer-locked:
     - ""
     - "&8▸ &7Keep going to unlock this reward."
-    - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+    - "&#FF7D14&l━&#FF7A15&l━&#FF7617&l━&#FF7318&l━&#FF7019&l━&#FF6C1A&l━&#FF691C&l━&#FF661D&l━&#FF631E&l━&#FF5F1F&l━&#FF5C21&l━&#FF5922&l━&#FF5523&l━&#FF5224&l━&#FF4F26&l━&#FF4B27&l━&#FF4828&l━&#FF4529&l━&#FF422B&l━&#FF3E2C&l━&#FF3B2D&l━&#FF382E&l━&#FF3430&l━&#FF3131&l━"
 
   close-button:
     slot: 26
     material: BARRIER
-    name: "&cClose"
-    lore:
-      - "&7Click to close."
+    name: "&#FF3131&lClose"
+    lore: []
 
 # ── RESET CONFIRM (admin GUI) ─────────────────────────────────────
 reset-confirm:
@@ -675,10 +713,7 @@ reset-confirm:
   placeholder:
     material: GRAY_DYE
     name: "&7???"
-    lore:
-      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
-      - "&8Coming soon..."
-      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+    lore: []
     slots: []
 
   confirm-button:
@@ -686,22 +721,20 @@ reset-confirm:
     material: LIME_DYE
     name: "&a✔ Confirm Reset"
     lore:
-      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&#FF7D14&l━&#FF7A15&l━&#FF7617&l━&#FF7318&l━&#FF7019&l━&#FF6C1A&l━&#FF691C&l━&#FF661D&l━&#FF631E&l━&#FF5F1F&l━&#FF5C21&l━&#FF5922&l━&#FF5523&l━&#FF5224&l━&#FF4F26&l━&#FF4B27&l━&#FF4828&l━&#FF4529&l━&#FF422B&l━&#FF3E2C&l━&#FF3B2D&l━&#FF382E&l━&#FF3430&l━&#FF3131&l━"
       - "&7Player: &e{player}"
       - "&7Type:   &c{reset_type}"
       - ""
       - "&cThis action is irreversible!"
-      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
-      - "&a→ Click to confirm."
+      - "&#FF7D14&l━&#FF7A15&l━&#FF7617&l━&#FF7318&l━&#FF7019&l━&#FF6C1A&l━&#FF691C&l━&#FF661D&l━&#FF631E&l━&#FF5F1F&l━&#FF5C21&l━&#FF5922&l━&#FF5523&l━&#FF5224&l━&#FF4F26&l━&#FF4B27&l━&#FF4828&l━&#FF4529&l━&#FF422B&l━&#FF3E2C&l━&#FF3B2D&l━&#FF382E&l━&#FF3430&l━&#FF3131&l━"
+      - "&#FF7D14➠ &7Click to Confirm"
 
   cancel-button:
     slot: 15
     material: RED_DYE
     name: "&c✘ Cancel"
     lore:
-      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
-      - "&7Click to cancel the reset."
-      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&#FF7D14➠ &7Click to Cancel"
 
 # ── ADMIN COMMAND (/ex) ───────────────────────────────────────────
 admin:
@@ -739,41 +772,44 @@ shop:
   placeholder:
     material: GRAY_DYE
     name: "&7???"
-    lore:
-      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
-      - "&8Coming soon..."
-      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+    lore: []
     slots: []
 
   scrap-display:
     slot: 4
     material: SUNFLOWER
-    name: "&#FFD700◈ &fYour Scrap"
+    name: "&#5B8DD9&lYOUR SCRAP"
     lore:
-      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&8ꜱʜᴏᴘ ᴍᴇɴᴜ"
+      - ""
+      - "&#FF7D14&l━&#FF7A15&l━&#FF7617&l━&#FF7318&l━&#FF7019&l━&#FF6C1A&l━&#FF691C&l━&#FF661D&l━&#FF631E&l━&#FF5F1F&l━&#FF5C21&l━&#FF5922&l━&#FF5523&l━&#FF5224&l━&#FF4F26&l━&#FF4B27&l━&#FF4828&l━&#FF4529&l━&#FF422B&l━&#FF3E2C&l━&#FF3B2D&l━&#FF382E&l━&#FF3430&l━&#FF3131&l━"
       - "&7Balance: &e{scrap} Scrap"
-      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&#FF7D14&l━&#FF7A15&l━&#FF7617&l━&#FF7318&l━&#FF7019&l━&#FF6C1A&l━&#FF691C&l━&#FF661D&l━&#FF631E&l━&#FF5F1F&l━&#FF5C21&l━&#FF5922&l━&#FF5523&l━&#FF5224&l━&#FF4F26&l━&#FF4B27&l━&#FF4828&l━&#FF4529&l━&#FF422B&l━&#FF3E2C&l━&#FF3B2D&l━&#FF382E&l━&#FF3430&l━&#FF3131&l━"
 
   normal-blocks-button:
     slot: 11
     material: COBBLESTONE
-    name: "&7◈ &fNormal Blocks"
+    name: "&#5B8DD9&lNORMAL BLOCKS"
     lore:
-      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&8ꜱʜᴏᴘ ᴍᴇɴᴜ"
+      - ""
+      - "&#FF7D14&l━&#FF7A15&l━&#FF7617&l━&#FF7318&l━&#FF7019&l━&#FF6C1A&l━&#FF691C&l━&#FF661D&l━&#FF631E&l━&#FF5F1F&l━&#FF5C21&l━&#FF5922&l━&#FF5523&l━&#FF5224&l━&#FF4F26&l━&#FF4B27&l━&#FF4828&l━&#FF4529&l━&#FF422B&l━&#FF3E2C&l━&#FF3B2D&l━&#FF382E&l━&#FF3430&l━&#FF3131&l━"
       - "&7Buy standard building blocks."
       - "&7These auto-despawn after a few hours."
       - ""
       - "&8→ &7Cobblestone, Stairs, Walls, Slabs"
       - "&8→ &7Ladders, Scaffolding"
-      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
-      - "&#5B8DD9→ &7Click to browse."
+      - "&#FF7D14&l━&#FF7A15&l━&#FF7617&l━&#FF7318&l━&#FF7019&l━&#FF6C1A&l━&#FF691C&l━&#FF661D&l━&#FF631E&l━&#FF5F1F&l━&#FF5C21&l━&#FF5922&l━&#FF5523&l━&#FF5224&l━&#FF4F26&l━&#FF4B27&l━&#FF4828&l━&#FF4529&l━&#FF422B&l━&#FF3E2C&l━&#FF3B2D&l━&#FF382E&l━&#FF3430&l━&#FF3131&l━"
+      - "&#FF7D14➠ &7Click to Browse"
 
   defense-blocks-button:
     slot: 15
     material: GILDED_BLACKSTONE
-    name: "&#5B8DD9⬡ &fDefense Blocks"
+    name: "&#5B8DD9&lDEFENSE BLOCKS"
     lore:
-      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&8ꜱʜᴏᴘ ᴍᴇɴᴜ"
+      - ""
+      - "&#FF7D14&l━&#FF7A15&l━&#FF7617&l━&#FF7318&l━&#FF7019&l━&#FF6C1A&l━&#FF691C&l━&#FF661D&l━&#FF631E&l━&#FF5F1F&l━&#FF5C21&l━&#FF5922&l━&#FF5523&l━&#FF5224&l━&#FF4F26&l━&#FF4B27&l━&#FF4828&l━&#FF4529&l━&#FF422B&l━&#FF3E2C&l━&#FF3B2D&l━&#FF382E&l━&#FF3430&l━&#FF3131&l━"
       - "&7Fortify your base with blocks"
       - "&7that require many hits to destroy."
       - ""
@@ -783,19 +819,18 @@ shop:
       - "&8→ &7T4 Deepslate    &8(&f100 HP&8)"
       - "&8→ &7T5 Tiles        &8(&f150 HP&8)"
       - "&8→ &7T6 Gilded       &8(&f250 HP&8)"
-      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
-      - "&#5B8DD9→ &7Click to browse."
+      - "&#FF7D14&l━&#FF7A15&l━&#FF7617&l━&#FF7318&l━&#FF7019&l━&#FF6C1A&l━&#FF691C&l━&#FF661D&l━&#FF631E&l━&#FF5F1F&l━&#FF5C21&l━&#FF5922&l━&#FF5523&l━&#FF5224&l━&#FF4F26&l━&#FF4B27&l━&#FF4828&l━&#FF4529&l━&#FF422B&l━&#FF3E2C&l━&#FF3B2D&l━&#FF382E&l━&#FF3430&l━&#FF3131&l━"
+      - "&#FF7D14➠ &7Click to Browse"
 
   close-button:
     slot: 31
     material: BARRIER
-    name: "&cClose"
-    lore:
-      - "&7Click to close."
+    name: "&#FF3131&lClose"
+    lore: []
 
 # ── SHOP: NORMAL BLOCKS ──────────────────────────────────────────
 shop-normal:
-  title: "&#5B8DD9&lShop &8➠ Building Blocks"
+  title: "&#5B8DD9&lShop &8➠ Normal Blocks"
   rows: 5
 
   filler:
@@ -810,10 +845,7 @@ shop-normal:
   placeholder:
     material: GRAY_DYE
     name: "&7???"
-    lore:
-      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
-      - "&8Coming soon..."
-      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+    lore: []
     slots: []
 
   sounds:
@@ -827,25 +859,26 @@ shop-normal:
   scrap-display:
     slot: 4
     material: SUNFLOWER
-    name: "&#FFD700◈ &fYour Scrap"
+    name: "&#5B8DD9&lYOUR SCRAP"
     lore:
-      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&8ꜱʜᴏᴘ ᴍᴇɴᴜ"
+      - ""
+      - "&#FF7D14&l━&#FF7A15&l━&#FF7617&l━&#FF7318&l━&#FF7019&l━&#FF6C1A&l━&#FF691C&l━&#FF661D&l━&#FF631E&l━&#FF5F1F&l━&#FF5C21&l━&#FF5922&l━&#FF5523&l━&#FF5224&l━&#FF4F26&l━&#FF4B27&l━&#FF4828&l━&#FF4529&l━&#FF422B&l━&#FF3E2C&l━&#FF3B2D&l━&#FF382E&l━&#FF3430&l━&#FF3131&l━"
       - "&7Balance: &e{scrap} Scrap"
-      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&#FF7D14&l━&#FF7A15&l━&#FF7617&l━&#FF7318&l━&#FF7019&l━&#FF6C1A&l━&#FF691C&l━&#FF661D&l━&#FF631E&l━&#FF5F1F&l━&#FF5C21&l━&#FF5922&l━&#FF5523&l━&#FF5224&l━&#FF4F26&l━&#FF4B27&l━&#FF4828&l━&#FF4529&l━&#FF422B&l━&#FF3E2C&l━&#FF3B2D&l━&#FF382E&l━&#FF3430&l━&#FF3131&l━"
 
   back-button:
     slot: 36
     material: ARROW
-    name: "&7← &fBack"
+    name: "&#FF7D14← &7Back"
     lore:
-      - "&7Return to shop categories."
+      - "&#FF7D14➠ &7Click to Return"
 
   close-button:
     slot: 44
     material: BARRIER
-    name: "&cClose"
-    lore:
-      - "&7Click to close."
+    name: "&#FF3131&lClose"
+    lore: []
 
   item-slots: [10, 12, 14, 16, 28, 30]
 
@@ -854,9 +887,9 @@ shop-normal:
     - "&8→ &7Left Click:  &aBuy ×1  &8(&e{cost_1} Scrap&8)"
     - "&8→ &7Right Click: &aBuy ×8  &8(&e{cost_8} Scrap&8)"
     - "&8→ &7Shift+Click: &aBuy ×64 &8(&e{cost_64} Scrap&8)"
-    - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+    - "&#FF7D14&l━&#FF7A15&l━&#FF7617&l━&#FF7318&l━&#FF7019&l━&#FF6C1A&l━&#FF691C&l━&#FF661D&l━&#FF631E&l━&#FF5F1F&l━&#FF5C21&l━&#FF5922&l━&#FF5523&l━&#FF5224&l━&#FF4F26&l━&#FF4B27&l━&#FF4828&l━&#FF4529&l━&#FF422B&l━&#FF3E2C&l━&#FF3B2D&l━&#FF382E&l━&#FF3430&l━&#FF3131&l━"
 
-  can-afford:  "&#5B8DD9→ &aClick to purchase!"
+  can-afford:  "&#FF7D14➠ &7Click to Purchase"
   cant-afford: "&c✘ Not enough Scrap."
 
 # ── SHOP: DEFENSE BLOCKS ─────────────────────────────────────────
@@ -876,10 +909,7 @@ shop-defense:
   placeholder:
     material: GRAY_DYE
     name: "&7???"
-    lore:
-      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
-      - "&8Coming soon..."
-      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+    lore: []
     slots: []
 
   sounds:
@@ -895,30 +925,31 @@ shop-defense:
     material: SUNFLOWER
     name: "&#FFD700◈ &fYour Scrap"
     lore:
-      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&8ꜱʜᴏᴘ ᴍᴇɴᴜ"
+      - ""
+      - "&#FF7D14&l━&#FF7A15&l━&#FF7617&l━&#FF7318&l━&#FF7019&l━&#FF6C1A&l━&#FF691C&l━&#FF661D&l━&#FF631E&l━&#FF5F1F&l━&#FF5C21&l━&#FF5922&l━&#FF5523&l━&#FF5224&l━&#FF4F26&l━&#FF4B27&l━&#FF4828&l━&#FF4529&l━&#FF422B&l━&#FF3E2C&l━&#FF3B2D&l━&#FF382E&l━&#FF3430&l━&#FF3131&l━"
       - "&7Balance: &e{scrap} Scrap"
-      - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+      - "&#FF7D14&l━&#FF7A15&l━&#FF7617&l━&#FF7318&l━&#FF7019&l━&#FF6C1A&l━&#FF691C&l━&#FF661D&l━&#FF631E&l━&#FF5F1F&l━&#FF5C21&l━&#FF5922&l━&#FF5523&l━&#FF5224&l━&#FF4F26&l━&#FF4B27&l━&#FF4828&l━&#FF4529&l━&#FF422B&l━&#FF3E2C&l━&#FF3B2D&l━&#FF382E&l━&#FF3430&l━&#FF3131&l━"
 
   back-button:
     slot: 36
     material: ARROW
-    name: "&7← &fBack"
+    name: "&#FF7D14← &7Back"
     lore:
-      - "&7Return to shop categories."
+      - "&#FF7D14➠ &7Click to Return"
 
   close-button:
     slot: 44
     material: BARRIER
-    name: "&cClose"
-    lore:
-      - "&7Click to close."
+    name: "&#FF3131&lClose"
+    lore: []
 
   item-slots: [10, 12, 14, 16, 28, 30]
 
   buy-hint-lore:
     - ""
     - "&8→ &7Click: &aBuy ×1  &8(&e{cost_1} Scrap&8)"
-    - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+    - "&#FF7D14&l━&#FF7A15&l━&#FF7617&l━&#FF7318&l━&#FF7019&l━&#FF6C1A&l━&#FF691C&l━&#FF661D&l━&#FF631E&l━&#FF5F1F&l━&#FF5C21&l━&#FF5922&l━&#FF5523&l━&#FF5224&l━&#FF4F26&l━&#FF4B27&l━&#FF4828&l━&#FF4529&l━&#FF422B&l━&#FF3E2C&l━&#FF3B2D&l━&#FF382E&l━&#FF3430&l━&#FF3131&l━"
 
-  can-afford:  "&#5B8DD9→ &aClick to purchase!"
+  can-afford:  "&#FF7D14➠ &7Click to Purchase"
   cant-afford: "&c✘ Not enough Scrap."

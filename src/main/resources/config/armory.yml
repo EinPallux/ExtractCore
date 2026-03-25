@@ -26,18 +26,15 @@ sword:
   tiers:
     1:
       material: WOODEN_SWORD
-      display-name: "&#8B8B8B⚔ Wooden Blade &8[&7T1&8]"
+      display-name: "&#FF7D14Wooden Blade &8[&#FF7D14T1&8]"
       lore:
-        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
-        - "&8✦ &7Weapon  &8|  &7Common"
-        - "&8✦ &7Tier &f1 &7of &f10"
+        - "&8ɢᴇᴀʀ ᴍᴇɴᴜ"
         - ""
-        - "&8◈ &7Material:  &#8B8B8BWood"
-        - "&8◈ &7Enchantments: &8None"
+        - "&#FF7D14&l︳ &7Common"
+        - "&#FF7D14&l︳ &7Tier &#FF7D141 &7of &#FF7D1410"
         - ""
-        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
-        - "&8&o(Starter gear — free)"
-        - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+        - "&#FF7D14&l︳ &7Material:  &#8B8B8BWood"
+        - "&#FF7D14&l︳ &7Enchantments: &8None"
       enchants: {}
       unbreakable: true
     2:

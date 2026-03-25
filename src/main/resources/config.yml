@@ -10,14 +10,6 @@ settings:
   autosave-interval: 300
   # Date format used in GUIs and messages
   date-format: "dd/MM/yyyy HH:mm"
-  # Server spawn location (set automatically on first run, or configure manually)
-  spawn:
-    world: "world"
-    x: 0.5
-    y: 64.0
-    z: 0.5
-    yaw: 0.0
-    pitch: 0.0
 
 # Core Settings
 core:

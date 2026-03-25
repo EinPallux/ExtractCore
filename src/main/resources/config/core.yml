@@ -15,14 +15,14 @@ core:
   raid-reward-percent: 10
 
   # The display name of the Core item
-  item-name: "&#5B8DD9◈ &fExtract Core"
+  item-name: "&#FF7D14&lY&#FF7418&lO&#FF6A1B&lU&#FF611F&lR &#FF4E26&lC&#FF442A&lO&#FF3B2D&lR&#FF3131&lE"
   item-lore:
-    - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+    - "&#FF7D14&l━&#FF7A15&l━&#FF7617&l━&#FF7318&l━&#FF7019&l━&#FF6C1A&l━&#FF691C&l━&#FF661D&l━&#FF631E&l━&#FF5F1F&l━&#FF5C21&l━&#FF5922&l━&#FF5523&l━&#FF5224&l━&#FF4F26&l━&#FF4B27&l━&#FF4828&l━&#FF4529&l━&#FF422B&l━&#FF3E2C&l━&#FF3B2D&l━&#FF382E&l━&#FF3430&l━&#FF3131&l━"
     - "&7Place this down to begin"
-    - "&7generating &eScrap&7."
+    - "&7generating &#FF7D14Scrap&7."
     - ""
-    - "&#5B8DD9◆ &7Your base&8, &7your power."
-    - "&8━━━━━━━━━━━━━━━━━━━━━━━━"
+    - "&#FF7D14&l︳ &7Your Core acts as your Base."
+    - "&#FF7D14&l━&#FF7A15&l━&#FF7617&l━&#FF7318&l━&#FF7019&l━&#FF6C1A&l━&#FF691C&l━&#FF661D&l━&#FF631E&l━&#FF5F1F&l━&#FF5C21&l━&#FF5922&l━&#FF5523&l━&#FF5224&l━&#FF4F26&l━&#FF4B27&l━&#FF4828&l━&#FF4529&l━&#FF422B&l━&#FF3E2C&l━&#FF3B2D&l━&#FF382E&l━&#FF3430&l━&#FF3131&l━"
 
   # PDC key used to mark the core item (do not change after deployment)
   nbt-key: "extractcore_beacon"
@@ -35,7 +35,7 @@ core:
     # How many ticks between hologram text refreshes (20 = 1s, 40 = 2s)
     refresh-ticks: 40
     # Y offset above the beacon block (beacon is 1 block tall)
-    y-offset: 2.6
+    y-offset: 2.0
     # Scale of the text (1.0 = default MC text size)
     scale: 1.0
     # Drop shadow behind text
@@ -56,11 +56,11 @@ core:
     #   {speed_max}  — max speed upgrade level
     #   {prod_max}   — max production upgrade level
     lines:
-      - "&#5B8DD9&l{owner}'s Core"
+      - "&#FF7D14&l{owner}'s Core"
       - "&8▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔"
-      - "&#FFD700⬡ &7Stored:  &#FFD700{stored} Scrap"
-      - "&#5B8DD9⚡ &7Output:  &e+{rate} &7/ &e{interval}s"
-      - "&8◈ &7Speed &fLvl {speed_lvl}&8/{speed_max}  &8◈ &7Prod &fLvl {prod_lvl}&8/{prod_max}"
+      - "&#FF7D14⬡ &7Stored:  &#FF7D14{stored} Scrap"
+      - "&#FF7D14⚡ &7Output:  &#FF7D14+{rate} &7/ &#FF7D14{interval}s"
+      - "&#FF7D14&l︳ &7Speed Lvl {speed_lvl}&8/{speed_max}  &#FF7D14&l︳ &7Prod Lvl {prod_lvl}&8/{prod_max}"
 
   # ── Core Upgrade Levels (100 levels each) ────────────────────────────
   # Speed: reduces the generation interval (how often Scrap is produced)
